@@ -1,0 +1,22 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* 画面の高さいっぱいに表示 */
+    margin: 0;
+}
+.circle-icon {
+    width: 100px; /* アイコンの幅を調整 */
+    height: 100px; /* アイコンの高さを調整 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* 画像を丸く切り取るために必要 */
+}
+
+.icon-img {
+    width: 100%; /* 画像の幅を100%に設定 */
+    height: 100%; /* 画像の高さを100%に設定 */
+    object-fit: cover; /* 画像を中央に配置してクリッピング */
+    border-radius: 50%; /* 丸い形状を指定 */
+}
