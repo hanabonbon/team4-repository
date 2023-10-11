@@ -4,6 +4,7 @@ body {
     align-items: center;
     height: 100vh; /* 画面の高さいっぱいに表示 */
     margin: 0;
+    flex-direction: column; /* コンテンツを縦に配置 */
 }
 .circle-icon {
     width: 100px; /* アイコンの幅を調整 */
@@ -19,4 +20,9 @@ body {
     height: 100%; /* 画像の高さを100%に設定 */
     object-fit: cover; /* 画像を中央に配置してクリッピング */
     border-radius: 50%; /* 丸い形状を指定 */
+}
+
+.horizontal-line {
+    border-bottom: 2px solid #000; /* 黒色の実線を表示 */
+    margin-bottom: 10px; /* 横線とテキストの間隔を調整 */
 }
