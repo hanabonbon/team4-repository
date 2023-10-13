@@ -40,11 +40,14 @@
   ?>
 
   <button type="submit" form="signup-validation-form">登録する</button>
+
+  <!--入力画面へ戻るフォーム-->
   <form action="signup.php" method="post">
     <input type="hidden" name="nickname" value="<?php echo $_POST['nickname']; ?>">
     <input type="hidden" name="mailaddress" value="<?php echo $_POST['mailaddress']; ?>">
     <input type="hidden" name="password" value="<?php echo $_POST['password']; ?>">
-  <button type="submit">戻る</button>
+    <button type="submit">戻る</button>
+  </form>
 
 </body>
 </html>
