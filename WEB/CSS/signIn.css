@@ -1,12 +1,32 @@
 h1{
-    text-align: center;
+    width: px; 
+font-size: 45px;
+line-height: 100px;
+text-align: center;
+ position: relative;
+top:40px;
+
 }
 p{
-    text-align: center;
+text-align: center;
+ position: relative;
+top:50px;
 }
 .textbox{
-    margin: auto;
+text-align: center;
+position: relative;
+top:65px;
+width:100%;
 }
 .button{
-    margin-bottom: auto;
+text-align: center;
+ position: relative;
+top:75px;
+
+}
+body{
+background-color: #FFEED5;
+}
+.container{
+    background-color: #968067;
 }
