@@ -6,6 +6,11 @@
   <title>新規登録</title>
 </head>
 <body>
+  <?php
+    if(isset($_POST)){
+      
+    }
+  ?>
   <form action="signup_process.php" method="post">
     <p>名前：<input type="text" name="nickname"></p>
     <p>メールアドレス：<input type="email" name="mailaddress"></p>
