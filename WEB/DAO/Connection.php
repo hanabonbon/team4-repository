@@ -2,7 +2,7 @@
   class Connection{
     
     private $pdo;
-    private $dsn = 'mysql:dbname=asoda;host=localhost';
+    private $dsn = 'mysql:dbname=task_game;host=localhost';
     private $username = 'webuser';
     private $password = 'abccsd2';
     private $dbname = 'task_game';

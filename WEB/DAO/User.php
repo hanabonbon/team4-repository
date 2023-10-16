@@ -14,7 +14,8 @@
       $ps = $this->pdo->prepare($sql);
       $ps->bindValue(1, $userData['nickname'], PDO::PARAM_STR);
       $ps->bindValue(2, $userData['mailaddress'], PDO::PARAM_STR);
-      $ps->bindValue(3, $userData['password'], PDO::PARAM_STR);
+      $ps->bindValue(3, password_hash($userData['password'], PASSWORD_DEFAULT), 
+        PDO::PARAM_STR);
       $ps->execute();
     }
 
