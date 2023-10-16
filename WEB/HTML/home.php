@@ -1,3 +1,7 @@
+<?php
+  require_once('../DAO/Task.php');
+  $task = new Task();
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -7,21 +11,42 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="../css/home.css?<?php echo date('YmdHis'); ?>"/>
     <title>ホーム</title>
   </head>
-  <body>
-    <h1>2023/9/27</h1>
+  <body style="background-color:#FFEED5;">
+    <h1><?= $date = date("Y/m/d"); echo $dayOfWeek = date("l"); ?></h1>
     <div class="container-fluid">
         <div class="row">
             <h2 class="pt-5">今日のタスク</h2>
         </div>
-        <div>
-            <img src="../SVG/textBox.svg">
-            <input type="text">
+        <div class="row">
+          <div class="offset-10 col-2">
+            <p class="text-center">今日の完了数</p>
+            <h5 class="text-center">3/5</h5>
+          </div>
         </div>
-            <input type="text" value="掃除をする"><br>
-            <input type="text" value="課題をやる">
+        <?php //foreach ?>
+        <div class="card task-style">
+            <h6 class="text-style ml-2 mt-2">
+            <input type="checkbox">
+              <?= $task->getUserIdByTaskTitle(1);?>
+            </h6>
+        </div>
+        <?php //ここまで ?>
+        <div class="row">
+          <div class="offset-10 col-2">
+            <p class="text-center">順位</p>
+            <h5 class="text-center">12</h5>
+          </div>
+        </div>
+        <h2 class="mt-5">期限が近づいています！</h2>
+        <div class="card task-style">
+            <h6 class="text-style ml-2 mt-2">
+            <input type="checkbox">
+              <?= $task->getUserIdByTaskTitle(1);?>
+            </h6>
+        </div>
     </div>
 
 
