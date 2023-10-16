@@ -7,21 +7,22 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="../css/home.css?<?php echo date('YmdHis'); ?>"/>
     <title>ホーム</title>
   </head>
-  <body>
+  <body style="background-color:#FFEED5;">
     <h1>2023/9/27</h1>
     <div class="container-fluid">
         <div class="row">
             <h2 class="pt-5">今日のタスク</h2>
         </div>
-        <div>
-            <img src="../SVG/textBox.svg">
-            <input type="text">
+        <div class="card task-style">
+          
+            <h6 class="text-style ml-2 mt-2">
+            <input type="checkbox">
+              掃除をする
+            </h6>
         </div>
-            <input type="text" value="掃除をする"><br>
-            <input type="text" value="課題をやる">
     </div>
 
 
