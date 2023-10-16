@@ -1,4 +1,4 @@
-h1{
+.title{
     width: px; 
 font-size: 45px;
 line-height: 100px;
@@ -15,14 +15,14 @@ top:65px;
 .textbox{
 text-align: center;
 position: relative;
-top:65px;
+top:75px;
 width:100%;
 
 }
 .button{
 text-align: center;
  position: relative;
-top:85px;
+top:100px;
 }
 input{
     background-color: #818181;

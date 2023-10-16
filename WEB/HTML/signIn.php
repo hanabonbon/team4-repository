@@ -11,12 +11,11 @@
     <title>サインイン</title>
   </head>
   <body>
-    <h1>タイトル</h1>
-   
+  <img src="images/icon.png">
     <p>ログイン</p>
     <div class="textbox">
-      <input type="text" placeholder="メールアドレス" name="mail"><br><br>
-      <input type="text" placeholder="パスワード" name="password"><br><br>
+      <input type="text" placeholder="メールアドレス" style="width:35%;" name="mail"><br><br>
+      <input type="text" placeholder="パスワード" style="width:35%;" name="password"><br><br>
     </div>
     <div class="button">
       <input type="button" value="ログイン"><br><br>
