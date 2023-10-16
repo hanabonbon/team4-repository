@@ -1,3 +1,7 @@
+<?php
+  require_once('../DAO/Task.php');
+  $task = new Task();
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,16 +15,36 @@
     <title>ホーム</title>
   </head>
   <body style="background-color:#FFEED5;">
-    <h1>2023/9/27</h1>
+    <h1><?= $date = date("Y/m/d"); echo $dayOfWeek = date("l"); ?></h1>
     <div class="container-fluid">
         <div class="row">
             <h2 class="pt-5">今日のタスク</h2>
         </div>
+        <div class="row">
+          <div class="offset-10 col-2">
+            <p class="text-center">今日の完了数</p>
+            <h5 class="text-center">3/5</h5>
+          </div>
+        </div>
+        <?php //foreach ?>
         <div class="card task-style">
-          
             <h6 class="text-style ml-2 mt-2">
             <input type="checkbox">
-              掃除をする
+              <?= $task->getUserIdByTaskTitle(1);?>
+            </h6>
+        </div>
+        <?php //ここまで ?>
+        <div class="row">
+          <div class="offset-10 col-2">
+            <p class="text-center">順位</p>
+            <h5 class="text-center">12</h5>
+          </div>
+        </div>
+        <h2 class="mt-5">期限が近づいています！</h2>
+        <div class="card task-style">
+            <h6 class="text-style ml-2 mt-2">
+            <input type="checkbox">
+              <?= $task->getUserIdByTaskTitle(1);?>
             </h6>
         </div>
     </div>
