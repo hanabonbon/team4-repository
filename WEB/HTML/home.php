@@ -15,23 +15,27 @@
     <title>ホーム</title>
   </head>
   <body style="background-color:#FFEED5;">
-    <h1><?= $date = date("Y/m/d"); echo $dayOfWeek = date("l"); ?></h1>
     <div class="container-fluid">
-        <div class="row">
-            <h2 class="pt-5">今日のタスク</h2>
-        </div>
+      <div class="row">
+        <h1><?= $date = date("Y/m/d"); echo " " . $dayOfWeek = date("l"); ?></h1>
+      </div>
         <div class="row">
           <div class="offset-10 col-2">
             <p class="text-center">今日の完了数</p>
             <h5 class="text-center">3/5</h5>
           </div>
         </div>
+        <div class="row">
+            <h2 class="">今日のタスク</h2>
+        </div>
+        <div class="row">
         <?php //foreach ?>
-        <div class="card task-style">
-            <h6 class="text-style ml-2 mt-2">
-            <input type="checkbox">
-              <?= $task->getUserIdByTaskTitle(1);?>
-            </h6>
+          <div class="card task-style col-12 mx-5 my-2">
+              <h6 class="text-style ml-2 mt-2">
+              <input type="checkbox">
+                <?= $task->getUserIdByTaskTitle(1);?>
+              </h6>
+          </div>
         </div>
         <?php //ここまで ?>
         <div class="row">
@@ -40,12 +44,22 @@
             <h5 class="text-center">12</h5>
           </div>
         </div>
-        <h2 class="mt-5">期限が近づいています！</h2>
-        <div class="card task-style">
+        <h2 class="">期限が近づいています！</h2>
+        <div class="row">
+        <?php //foreach ?>
+        <div class="card task-style col-12 mx-5 my-2">
             <h6 class="text-style ml-2 mt-2">
             <input type="checkbox">
               <?= $task->getUserIdByTaskTitle(1);?>
             </h6>
+        </div>
+        </div>
+        <?php //ここまで ?>
+        <div class="row">
+          <div class="offset-10 col-2">
+            <p class="text-center">未使用のスキルポイント</p>
+            <h5 class="text-center">3</h5>
+          </div>
         </div>
     </div>
 
