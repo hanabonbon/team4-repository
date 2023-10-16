@@ -4,24 +4,25 @@ font-size: 45px;
 line-height: 100px;
 text-align: center;
  position: relative;
-top:40px;
+top:30px;
 
 }
 p{
 text-align: center;
  position: relative;
-top:50px;
+top:65px;
 }
 .textbox{
 text-align: center;
 position: relative;
 top:65px;
 width:100%;
+
 }
 .button{
 text-align: center;
  position: relative;
-top:75px;
+top:85px;
 
 }
 body{
@@ -29,4 +30,12 @@ background-color: #FFEED5;
 }
 .container{
     background-color: #968067;
+}
+input{
+    background-color: #818181;
+    color: #FFFFFF;
+}
+::placeholder{
+    color: #FFFFFF;
+    font-size: 15px;
 }

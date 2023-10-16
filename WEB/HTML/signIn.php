@@ -16,7 +16,7 @@
     <p>ログイン</p>
     <div class="textbox">
       <input type="text" placeholder="メールアドレス" name="mail"><br><br>
-      <input type="text" placeholder="ログイン" name="password"><br><br>
+      <input type="text" placeholder="パスワード" name="password"><br><br>
     </div>
     <div class="button">
       <input type="button" value="ログイン"><br><br>
