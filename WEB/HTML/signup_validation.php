@@ -6,7 +6,9 @@
   <title>登録内容の確認</title>
 </head>
 <body>
-  <form action="user_regist.php" method="post" id="singnup-validation-form"></form>
+  <form action="user_regist.php" method="post" id="signup-validation-form"></form>
+  <input type="hidden" value="<?=$_POST['nickname']?>" form="signup-validation-form" name="nickname">
+
   <?php 
     //メールアドレスのバリデーションチェック
     if (!$mail = filter_var($_POST['mailaddress'], FILTER_VALIDATE_EMAIL)) {
@@ -38,6 +40,10 @@
     if(!preg_match('/\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,100}+\z/i', $_POST['password']) && 
         !$mail = filter_var($_POST['mailaddress'], FILTER_VALIDATE_EMAIL)) 
   ?>
+  <h3>入力内容</h3>
+  <p><?=$_POST['nickname']?></p>
+  <p><?=$_POST['mailaddress']?></p>
+  <p><?=$_POST['password']?></p>
   <button type="submit" form="signup-validation-form">登録する</button>
 
   <!--入力画面へ戻るフォーム-->
