@@ -23,13 +23,6 @@ width:100%;
 text-align: center;
  position: relative;
 top:85px;
-
-}
-body{
-background-color: #FFEED5;
-}
-.container{
-    background-color: #968067;
 }
 input{
     background-color: #818181;
@@ -38,4 +31,7 @@ input{
 ::placeholder{
     color: #FFFFFF;
     font-size: 15px;
+}
+body{
+    background-color: #FFEED5;
 }
