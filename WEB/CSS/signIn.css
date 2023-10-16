@@ -1,11 +1,8 @@
-.title{
-    width: px; 
-font-size: 45px;
-line-height: 100px;
-text-align: center;
- position: relative;
-top:30px;
-
+.icon{
+    margin: auto;
+    text-align: center;
+    width: 90px;
+    height: 70px;
 }
 p{
 text-align: center;
@@ -33,5 +30,5 @@ input{
     font-size: 15px;
 }
 body{
-    background-color: #FFEED5;
+    background-color: #968067;
 }

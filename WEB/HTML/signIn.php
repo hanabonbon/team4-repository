@@ -11,7 +11,7 @@
     <title>サインイン</title>
   </head>
   <body>
-  <img src="images/icon.png">
+  <img src="../images/icon.png" alt="アイコン" wigth="90" height=""65>
     <p>ログイン</p>
     <div class="textbox">
       <input type="text" placeholder="メールアドレス" style="width:35%;" name="mail"><br><br>
