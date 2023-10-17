@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -6,12 +7,16 @@
   <title>タスク一覧</title>
 </head>
 <?php
+  $user_id = 1; //セッションから取得してください
   require_once('../DAO/Task.php');
+  $task = new Task();
+  $tasks = $task->getAllTaskByUserId($user_id);
 ?>
 <body>
   <h1>タスク一覧画面</h1>
   <a href="./task_edit.php?task_id=1">デバッグ用リンク：タスクID＝１</a><br>
-  <button><a href="task_edit.php">タスク登録</a></button>
+  <button><a href="task_edit.php">タスク登録</a></button><br>
+  <hr>
 
   <!-- タスクの一覧表示処理 -->
   <?php foreach($tasks as $taskData) :?>
@@ -23,6 +28,7 @@
     <p><?=$taskData['title']?></p>
     <!-- 単純な実装 -->
     <a href="./task_edit.php?task_id=<?=$taskData['task_id']?>">編集する</a>
+    <hr>
   <?php endforeach; ?>
 
 </body>
