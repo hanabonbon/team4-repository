@@ -18,15 +18,15 @@
       return $result;
     }
 
-    //useridからtaskidを取得
-    public function getUserIdByTaskTitle($user_id){
+    //useridからタスクを全件取得
+    public function getAllTaskByUserId($user_id){
       $sql = "SELECT * FROM task WHERE user_id = ?";
       $ps = $this->pdo->prepare($sql);
       $ps->bindValue(1,$user_id,PDO::PARAM_INT);
       $ps->execute();
-      $result = $ps->fetch(PDO::FETCH_ASSOC);
+      $result = $ps->fetchAll(PDO::FETCH_ASSOC);
       
-      return $result['title'];
+      return $result;
     }
 
     public function insertTask($user_id, $newTaskData) {
