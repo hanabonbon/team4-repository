@@ -1,4 +1,5 @@
 <?php
+  session_start();
   require_once('../DAO/Task.php');
   $task = new Task();
   $user_id = 1; //セッションから取得する

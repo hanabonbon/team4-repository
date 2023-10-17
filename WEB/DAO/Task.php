@@ -8,6 +8,7 @@
       $this->pdo = $connection->getPdo();
     }
     
+    //task_idからタスクを1件取得
     public function getTaskById($task_id) {
       $sql = "SELECT * FROM task WHERE task_id = ?";
       $ps = $this->pdo->prepare($sql);
@@ -29,6 +30,7 @@
       return $result;
     }
 
+    //タスクの新規作成
     public function insertTask($user_id, $newTaskData) {
       $sql = "INSERT INTO task (title, detail, period, created_time, user_id) 
               VALUES (:title, :detail, :period, :created_time, :user_id)";
@@ -41,7 +43,7 @@
       $ps->execute();
     }
 
-    //完了状況の更新は別で行う
+    //タスクの編集
     public function updateTask($newTaskData) {
       $sql = "UPDATE task SET 
               title = :title, 
@@ -58,7 +60,7 @@
       $ps->execute();
     }
 
-    //完了状況の更新
+    //タスク状況の更新
     public function updateTaskState($task_id, $is_complete) {
       $sql = "UPDATE task SET 
               is_complete = :is_complete, 
@@ -66,7 +68,12 @@
               WHERE task_id = :task_id";
       $ps = $this->pdo->prepare($sql);
       $ps->bindValue(':is_complete', $is_complete, PDO::PARAM_INT);
-      $ps->bindValue(':completion_time', date('Y-m-d H:i:s') ,PDO::PARAM_STR);
+      if($is_complete) {
+        $ps->bindValue(':completion_time', date('Y-m-d H:i:s') ,PDO::PARAM_STR);
+      } else {
+        $ps->bindValue(':completion_time', null ,PDO::PARAM_STR);
+      }
+      
       $ps->bindValue(':task_id', $task_id, PDO::PARAM_INT);
       $ps->execute();
     }
