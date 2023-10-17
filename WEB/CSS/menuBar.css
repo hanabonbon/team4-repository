@@ -1,0 +1,107 @@
+/* サイドバーの高さを100%に設定 */
+.sidebar {
+  height: 100vh;
+  background-color: #968067;/* 背景色を指定 */
+}
+
+/* サイドバー内のリンクテキストを中央に配置 */
+.nav-link {
+  text-align: left;
+  color: white; /* テキストの色を白に設定 */
+  text-decoration: none; /* デフォルトの下線を削除 */
+  display: block;
+  padding: 10px 0; /* 上下の余白を追加 */
+  position: relative;
+  letter-spacing: 2px;
+  font-size: 2.5vh;
+  padding-left: 2vw; /* 左からのスペースを追加 */
+}
+
+/* テキストの前後に線を追加 */
+.nav-link::before,
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid white; /* 下に横線を追加 */
+}
+
+/*タスクの上に線を追加*/
+.nav-item.active::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-top: 1px solid white; /* 上に白線を追加 */
+}
+.nav-link::before {
+  top: 0;
+}
+
+/*アイコンとユーザー名*/
+.icon-name{
+  display: flex;
+  align-items: center;
+  justify-content:left;
+  margin-top: 3vh;
+  margin-bottom: 7vh;
+}
+
+/*アイコンを表示する場所*/
+.img-area{
+  width: 50px;/* 写真の幅 */
+  height: 50px; /* 写真の高さ */
+  border-radius: 50%; /* 円形の形状 */
+  background-color: silver; 
+  text-align: left;
+}
+
+/*アイコン画像*/
+.img-icon{
+  width: 50px;/* 写真の幅 */
+  height: 50px; /* 写真の高さ */
+  border-radius: 50%; /* 円形の形状 */
+}
+
+/*ユーザー名を表示する場所*/
+.username-area{
+  font-size: 3vh;
+  padding-left: 1.0vw;
+}
+
+/*ongoingボタン*/
+.ongoing{
+  text-align:left;
+  padding-left: 2vw; /* 左からのスペースを追加 */
+  margin-top: 5vh;
+}
+.nowlist-btn{
+  font-size: 2.5vh;
+  color: #FFFFFF;
+  border: none;
+  background: transparent;
+}
+/*タスク一覧表示*/
+.menu-task{
+  text-align:left;
+  padding-left: 3vw; /* 左からのスペースを追加 */
+}
+
+
+/*newlistボタン*/
+.newlist{
+  text-align:left;
+  padding-left: 2vw; /* 左からのスペースを追加 */
+  position: fixed;
+  bottom: 3vh;
+}
+.newlist-btn{
+  font-size: 2.5vh;
+  color: #FFFFFF;
+  border: none;
+  background: transparent;
+}
+
