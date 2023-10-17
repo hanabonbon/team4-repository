@@ -1,10 +1,20 @@
-.task-style{
+/* ページ全体に対して */
+body {
+    overflow-x: hidden;
+}
+.task-style {
     width: 503px;
     height: 43px;
     flex-shrink: 0;
     background-color:#818181;
     border-radius: 7px;
 }
-.text-style{
+.text-style {
     color:white;
+}
+.inputText-style {
+    width: 604px;
+    height: 45px;
+    flex-shrink: 0;
+    background: #898989;
 }

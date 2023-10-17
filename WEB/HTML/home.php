@@ -21,8 +21,8 @@
       </div>
         <div class="row">
           <div class="offset-10 col-2">
-            <p class="text-center">今日の完了数</p>
-            <h5 class="text-center">3/5</h5>
+            <h3 class="text-center">今日の完了数</h3>
+            <h3 class="text-center">3/5</h3>
           </div>
         </div>
         <div class="row">
@@ -36,12 +36,18 @@
                 <?= $task->getUserIdByTaskTitle(1);?>
               </h6>
           </div>
+          <div class="card task-style col-12 mx-5 my-2">
+              <h6 class="text-style ml-2 mt-2">
+              <input type="checkbox">
+                <?= $task->getUserIdByTaskTitle(1);?>
+              </h6>
+          </div>
         </div>
         <?php //ここまで ?>
         <div class="row">
           <div class="offset-10 col-2">
-            <p class="text-center">順位</p>
-            <h5 class="text-center">12</h5>
+            <h3 class="text-center">順位</h3>
+            <h3 class="text-center">12</h3>
           </div>
         </div>
         <h2 class="">期限が近づいています！</h2>
@@ -57,8 +63,13 @@
         <?php //ここまで ?>
         <div class="row">
           <div class="offset-10 col-2">
-            <p class="text-center">未使用のスキルポイント</p>
-            <h5 class="text-center">3</h5>
+            <h3 class="text-center">未使用のSP</h3>
+            <h3 class="text-center">3</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 ms-5">
+            <input type="text" name="task" class="inputText-style">
           </div>
         </div>
     </div>
