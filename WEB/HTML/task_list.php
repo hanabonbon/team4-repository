@@ -7,6 +7,7 @@
 </head>
 <body>
   <h1>タスク一覧画面</h1>
+  <a href="./task_edit.php?task_id=1">デバッグ用リンク：タスクID＝１</a><br>
   <button><a href="task_edit.php">タスク登録</a></button>
   
 </body>
