@@ -1,0 +1,10 @@
+.task-style{
+    width: 503px;
+    height: 43px;
+    flex-shrink: 0;
+    background-color:#818181;
+    border-radius: 7px;
+}
+.text-style{
+    color:white;
+}
