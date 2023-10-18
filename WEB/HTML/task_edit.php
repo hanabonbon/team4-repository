@@ -45,7 +45,8 @@
   console.log(<?= json_encode($taskData) ?>)
 </script>
 
-<body>
+<body id="app">
+  <div id="app">
   <form action="./task_regist.php" method="POST" id="task-edit-form"></form>
   <?php
     if(isset($_GET['task_id'])) {
@@ -60,16 +61,12 @@
   <br><input type="date" value="<?=$period?>" name="period" form="task-edit-form"><br>
 
   <!-- TODO: 入力内容の保存処理 -->
-  
-  <!-- 完了ボタン URL以外は変更できます 。 注意！Ln63, Col83で改行するとバグります！　　↓この辺り-->
-  <a href="./task_state_update.php?task_id=<?=$taskData['task_id']?>
-                                        &is_complete=<?=$taskData['is_complete']?>&fromTaskEdit=true">
-    <?php if($taskData['is_complete']) { ?>
-      <button class="btn-success">完了</button>
-    <?php } else { ?>
-      <button class="btn-secondry">未完了</button>
-    <?php } ?><!--end if-->
-  </a>
+  <!-- 完了ボタン -->
+  <!-- 同じフォームで、パラメータを用意して完了処理と作成処理を分岐できないか？ -->
+  <form action="task_state_update.php" method="GET" id="task-state-update-form"></form>
+  <input type="hidden" value="<?=$task_id?>" name="task_id" form="task-state-update-form">
+  <input type="hidden" value="<?=$is_complete?>" name="is_complete" form="task-state-update-form">
+  <input type="hidden" value="true" name="fromTaskEdit" form="task-state-update-form">
 
   <p>完了日：<?=$completion_time?></p>
   <p>最終更新日:<?=$last_edit_time?></p>
@@ -79,6 +76,9 @@
   <br><textarea name="detail" autocomplete="off" form="task-edit-form"><?=$detail?></textarea>
   <br><button type="submit" form="task-edit-form">作成する</button>
   <br><button><a href="./task_list.php">キャンセル</a></button>
+  </div>
+
+  <!-- Vue.js CDN -->
   <!-- BootStrap CDN-->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
