@@ -1,25 +1,25 @@
-.icon{
-    margin: auto;
+.icon img{
+   
     text-align: center;
-    width: 90px;
-    height: 70px;
-}
-p{
-text-align: center;
- position: relative;
-top:65px;
-}
+     width: 300px;
+     height: 200px;
+     position: relative;
+     top: 0px;
+     left:350px;
+ }
+ 
 .textbox{
 text-align: center;
 position: relative;
-top:75px;
+top: 10px;
+
 width:100%;
 
 }
 .button{
 text-align: center;
  position: relative;
-top:100px;
+top: 40px;
 }
 input{
     background-color: #818181;
@@ -31,4 +31,10 @@ input{
 }
 body{
     background-color: #968067;
+}
+body{
+    background-color: #FFEED5;
+    
+    padding-left: 10px;
+    padding-right:10px;
 }

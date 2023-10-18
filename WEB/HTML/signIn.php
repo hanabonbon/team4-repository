@@ -11,8 +11,10 @@
     <title>サインイン</title>
   </head>
   <body>
-  <img src="../images/icon.png" alt="アイコン" wigth="90" height=""65>
-    <p>ログイン</p>
+    <div class="icon">
+    <img src="../images/icon.png" alt="アイコン">
+    </div>
+  
     <div class="textbox">
       <input type="text" placeholder="メールアドレス" style="width:35%;" name="mail"><br><br>
       <input type="text" placeholder="パスワード" style="width:35%;" name="password"><br><br>
