@@ -5,45 +5,51 @@
      height: 200px;
      position: relative;
      top: 0px;
-
+     left:350px;
  }
- 
-.textbox{
-text-align: center;
-position: relative;
-top: 10px;
-
-width:100%;
-
-}
-.button{
-    border-top-right-radius:5px;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius:5px;
-    border-bottom-right-radius: 5px;
-text-align: center;
- position: relative;
-top: 40px;
-    color : #FFEED5
-}
-input{
+ .nickname{
+    text-align: center;
+    position: relative;
+    top: 0px;
+ }
+ .email{
+    text-align: center;
+    position: relative;
+    top: 20px;
+ }
+ .password{
+    text-align: center;
+    position: relative;
+    top: 40px;
+ }
+ .button{
+    text-align: center;
+    position: relative;
+    top: 100px;
+ }
+ input{
     border-top-right-radius:5px;
     border-top-left-radius: 5px;
     border-bottom-left-radius:5px;
     border-bottom-right-radius: 5px;
     background-color: #818181;
-    color: #FFFFFF;
+    height: 20px;
+}
+button{
+    border-top-right-radius:5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius: 5px;
+    background-color: #818181;
+    color: #FFEED5;
+    height: 30px;
 }
 ::placeholder{
     color: #FFFFFF;
-    font-size: 15px;
 }
 body{
     background-color: #968067;
 }
 body{
     background-color: #FFEED5;
-    
-    padding-left: 10px;
-    padding-right:10px;
 }
