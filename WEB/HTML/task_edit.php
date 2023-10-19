@@ -61,12 +61,12 @@
   <br><input type="date" value="<?=$period?>" name="period" form="task-edit-form"><br>
 
   <!-- TODO: 入力内容の保存処理 -->
-  <!-- 完了ボタン -->
-  <!-- 同じフォームで、パラメータを用意して完了処理と作成処理を分岐できないか？ -->
-  <form action="task_state_update.php" method="GET" id="task-state-update-form"></form>
-  <input type="hidden" value="<?=$task_id?>" name="task_id" form="task-state-update-form">
-  <input type="hidden" value="<?=$is_complete?>" name="is_complete" form="task-state-update-form">
-  <input type="hidden" value="true" name="fromTaskEdit" form="task-state-update-form">
+  <!-- タスク完了の入力 -->
+  <select name="is_complete" form="task-edit-form">
+    <option value="1" <?= $is_complete ? "selected": "" ?>>完了済み</option>
+    <option value="0" <?= $is_complete ? "": "selected" ?>>未完了</option>
+  </select>
+  
 
   <p>完了日：<?=$completion_time?></p>
   <p>最終更新日:<?=$last_edit_time?></p>

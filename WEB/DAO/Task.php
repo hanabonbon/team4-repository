@@ -32,12 +32,19 @@
 
     //タスクの新規作成
     public function insertTask($user_id, $newTaskData) {
-      $sql = "INSERT INTO task (title, detail, period, created_time, user_id) 
-              VALUES (:title, :detail, :period, :created_time, :user_id)";
+      $sql = "INSERT INTO task (title, detail, period, is_complete, completion_time, created_time, user_id) 
+              VALUES (:title, :detail, :period, :is_complete, :completion_time, :created_time, :user_id)";
       $ps = $this->pdo->prepare($sql);
       $ps->bindValue(':title', $newTaskData['title'], PDO::PARAM_STR);
       $ps->bindValue(':detail', $newTaskData['detail'], PDO::PARAM_STR);
       $ps->bindValue(':period', $newTaskData['period'], PDO::PARAM_STR);
+      $ps->bindValue(':is_complete', $newTaskData['is_complete'], PDO::PARAM_INT);
+
+      if($newTaskData['is_complete']) {
+        $ps->bindValue(':completion_time', date('Y-m-d H:i:s') ,PDO::PARAM_STR);
+      } else {
+        $ps->bindValue(':completion_time', null ,PDO::PARAM_STR);
+      }
       $ps->bindValue('created_time', date('Y-m-d H:i:s'), PDO::PARAM_STR);
       $ps->bindValue(':user_id', $user_id, PDO::PARAM_INT);
       $ps->execute();
@@ -49,12 +56,20 @@
               title = :title, 
               detail = :detail, 
               period = :period, 
+              is_complete = :is_complete,
+              completion_time = :completion_time,
               last_edit_time = :last_edit_time 
               WHERE task_id = :task_id";
       $ps = $this->pdo->prepare($sql);
       $ps->bindValue(':title', $newTaskData['title'], PDO::PARAM_STR);
       $ps->bindValue(':detail', $newTaskData['detail'], PDO::PARAM_STR);
       $ps->bindValue(':period', $newTaskData['period'], PDO::PARAM_STR);
+      $ps->bindValue(':is_complete', $newTaskData['is_complete'], PDO::PARAM_INT);
+      if($newTaskData['is_complete']) {
+        $ps->bindValue(':completion_time', date('Y-m-d H:i:s') ,PDO::PARAM_STR);
+      } else {
+        $ps->bindValue(':completion_time', null ,PDO::PARAM_STR);
+      }
       $ps->bindvalue(':last_edit_time', date('Y-m-d H:i:s') ,PDO::PARAM_STR);
       $ps->bindValue(':task_id', $newTaskData['task_id'], PDO::PARAM_INT);
       $ps->execute();
