@@ -4,7 +4,7 @@
      width: 300px;
      height: 200px;
      position: relative;
-     top: 20px;
+     top: 30px;
     left:410px;
  }
  .nickname{
@@ -45,7 +45,7 @@ button{
     height: 30px;
 }
 ::placeholder{
-    color: #FFFFFF;
+    color: rgba(255, 255, 255, 0.56);
 }
 body{
     background-color: #968067;

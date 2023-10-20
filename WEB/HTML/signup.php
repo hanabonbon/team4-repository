@@ -22,7 +22,6 @@
     <img src="../images/icon.png" alt="アイコン">
     </div>
   <form action="signup_validation.php" method="post">
-  <div class="textbox">
     <div class="nickname">
     <input type="text" placeholder="ニックネーム" style="width:35%;" name="nickname" value="<?=$nickname?>"><br>
   </div>
@@ -32,10 +31,9 @@
   <div class="password">
     <input type="password" placeholder="パスワード" style="width:35%;" name="password" value="<?=$password?>"><br>
     </div>
-  </div>
     <div class="button">
     <button type="submit" name="cancel">キャンセル</button>　　　　
-    <button type="submit" name="singup">新規登録</button>
+    <button type="submit" name="singup">確認画面へ</button>
   </div>
   </from>
 </body>
