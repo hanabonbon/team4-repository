@@ -1,6 +1,9 @@
 <?php
   //タスクの完了処理
   session_start();
+  if(!isset($_SESSION['user_id'])){
+    header('location: ./login.php');
+  }
   require_once('../DAO/Task.php');
   $task = new Task();
   //var_dump($_GET);

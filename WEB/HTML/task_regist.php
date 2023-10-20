@@ -1,8 +1,11 @@
 <?php
   session_start();
+  if(!isset($_SESSION['user_id'])){
+    header('location: ./login.php');
+  }
   require_once('../DAO/Task.php');
   $task = new Task();
-  $user_id = 1; //セッションから取得する
+  $user_id = $_SESSION['user_id']; //セッションから取得する
 
   //task_idの有無で新規登録か更新かを判断する  
 

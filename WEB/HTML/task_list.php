@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php 
+  session_start(); 
+  if(!isset($_SESSION['user_id'])){
+    header('location: ./login.php');
+  }
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -17,7 +22,7 @@
   <title>タスク一覧</title>
 </head>
 <?php
-  $user_id = 1; //セッションから取得してください
+  $user_id = $_SESSION['user_id']; //セッションから取得してください
   require_once('../DAO/Task.php');
   $task = new Task();
   $tasks = $task->getAllTaskByUserId($user_id);

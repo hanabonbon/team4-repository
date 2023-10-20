@@ -1,6 +1,6 @@
 <?php 
   session_start();
-  if(isset($_SESSION['mailaddress'])){
+  if(isset($_SESSION['user_id'])){
     header('location: ./task_list.php');
   }
 ?>
@@ -17,13 +17,14 @@
     
     <label for="">メールアドレス</label>
     <input type="text" name="mailaddress" id="mailaddress">
-  
+    <br>
     <label for="password">パスワード</label>
     <input type="password" name="password" id="password">
-  
+    <br>
     <button type="submit">ログイン</button>
     
   </form>
+  <a href="./signup.php">新規登録はこちら</a>
 </body>
 </html>
 <?php

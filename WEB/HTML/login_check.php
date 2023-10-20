@@ -1,6 +1,6 @@
 <?php 
   session_start();
-  if(isset($_SESSION['mailaddress'])){
+  if(isset($_SESSION['user_id'])){
     header('location: ./task_list.php');
   }
 ?>
@@ -17,7 +17,7 @@
     $user = new User();
 
     //メールアドレスの入力形式が正しいか判定
-    if (!filter_var($_POST['email_address'], FILTER_VALIDATE_EMAIL)) {//入力形式が不正
+    if (!filter_var($_POST['mailaddress'], FILTER_VALIDATE_EMAIL)) {//入力形式が不正
       echo '<b>正しいメールアドレスの形式で入力してください</b>';
       exit;
     }
@@ -30,7 +30,7 @@
       //パスワードが一致するか確認
       if(password_verify($_POST['password'],$userData['password'])) {//パスワード一致
         //セッションにメールアドレスを入力（ログイン済みの証明とする）
-        $_SESSION['mailaddress'] = $userData['mailaddress'];
+        $_SESSION['user_id'] = $userData['user_id'];
         //ホームに遷移
         header('location: ./task_list.php');
       } else {//パスワードが一致しない
