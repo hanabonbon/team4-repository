@@ -55,7 +55,6 @@
   width: 50px;/* 写真の幅 */
   height: 50px; /* 写真の高さ */
   border-radius: 50%; /* 円形の形状 */
-  background-color: silver; 
   text-align: left;
 }
 

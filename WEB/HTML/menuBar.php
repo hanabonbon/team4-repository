@@ -1,3 +1,9 @@
+<?php
+  require_once('../DAO/User.php');
+  $user = new User();
+  $user_id = 1; // 取得したいユーザーのIDに置き換えてください
+  $user_name = $user->getUserName($user_id);
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -7,7 +13,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="../CSS/MenuBar.css">
+    <link rel="stylesheet" href="../CSS/menuBar.css">
     <title>メニューバー</title>
   </head>
   <body>
@@ -20,29 +26,29 @@
                   <!--アイコンとユーザー名-->
                   <div class="icon-name">
                     <div class="img-area">
-                      <img src="" class="img-icon">
+                      <img src="../images/default_icon.png" class="img-icon">
                     </div>
                     <div class="name-area">
-                      <label class="username-area">〇〇〇〇〇</label>
+                      <label class="username-area"><?php echo $user_name; ?></label>
                     </div>
                   </div>
 
                     <li class="nav-item active">
                       <!-- タスク上の白線 -->
                       <div class="nav-link"></div>
-                        <a class="nav-link" href="#">タスク</a>
+                        <a class="nav-link" href="task.html">タスク</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">マイページ</a>
+                        <a class="nav-link" href="mypage.html">マイページ</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">対戦</a>
+                        <a class="nav-link" href="battle.html">対戦</a>
                     </li>
 
                     <li class="nav-item">
-                      <a class="nav-link" href="#">ランキング</a>
+                      <a class="nav-link" href="ranking.html">ランキング</a>
                     </li>
                 </ul>
 
