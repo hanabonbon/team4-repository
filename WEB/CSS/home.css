@@ -8,13 +8,14 @@ body {
     flex-shrink: 0;
     background-color:#818181;
     border-radius: 7px;
+    margin-bottom: 1vh;/*タスクの下にスペースを開ける*/
 }
 .text-style {
     color:white;
 }
-.inputText-style {
-    width: 604px;
-    height: 45px;
-    flex-shrink: 0;
-    background: #898989;
+
+.task-list{
+    height:25vh;
+    width: 550px;
+    overflow-y: scroll;
 }
