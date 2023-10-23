@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php 
+  session_start(); 
+  if(!isset($_SESSION['user_id'])){
+    header('location: ./login.php');
+  }
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -17,7 +22,7 @@
   <title>タスク一覧</title>
 </head>
 <?php
-  $user_id = 1; //セッションから取得してください
+  $user_id = $_SESSION['user_id']; //セッションから取得してください
   require_once('../DAO/Task.php');
   $task = new Task();
   $tasks = $task->getAllTaskByUserId($user_id);
@@ -28,6 +33,8 @@
 <body>
   <h1>タスク一覧画面</h1>
   <!-- <a href="./task_edit.php?task_id=1">デバッグ用リンク：タスクID＝１</a><br> -->
+  <a href="./logout.php">デバッグ用ログアウト</a><br>
+
   <button><a href="task_edit.php">新規作成</a></button><br>
   <hr>
 
