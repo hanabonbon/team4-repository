@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -7,24 +7,25 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-    <title>ホーム</title>
+    <link rel="stylesheet" href="../CSS/signIn.css?<?php echo date('YmdHis'); ?>"/>
+    <title>サインイン</title>
   </head>
   <body>
-    <h1>2023/9/27</h1>
-    <div class="container-fluid">
-        <div class="row">
-            <h2 class="pt-5">今日のタスク</h2>
-        </div>
-        <div>
-            <img src="../SVG/textBox.svg">
-            <input type="text">
-        </div>
-            <input type="text" value="掃除をする"><br>
-            <input type="text" value="課題をやる">
+    <div class="icon">
+    <img src="../images/icon.png" alt="アイコン">
     </div>
-
-
+  
+    <div class="textbox">
+      <input type="text" placeholder="メールアドレス" style="width:35%;" name="mail"><br><br>
+      <input type="text" placeholder="パスワード" style="width:35%;" name="password"><br><br>
+    </div>
+    <div class="button">
+      <input type="button" value="ログイン"><br><br>
+      <input type="button" value="新規登録">
+    </div>
+    <div class="container">
+      
+    </div>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
