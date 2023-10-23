@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -7,12 +7,25 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="../CSS/signIn.css?<?php echo date('YmdHis'); ?>"/>
     <title>サインイン</title>
   </head>
   <body>
-    <h1>Hello, world!</h1>
-
+    <div class="icon">
+    <img src="../images/icon.png" alt="アイコン">
+    </div>
+  
+    <div class="textbox">
+      <input type="text" placeholder="メールアドレス" style="width:35%;" name="mail"><br><br>
+      <input type="text" placeholder="パスワード" style="width:35%;" name="password"><br><br>
+    </div>
+    <div class="button">
+      <input type="button" value="ログイン"><br><br>
+      <input type="button" value="新規登録">
+    </div>
+    <div class="container">
+      
+    </div>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
