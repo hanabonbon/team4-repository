@@ -41,7 +41,7 @@
   ?>
 
   <!--入力画面へ戻るフォーム-->
-  <form action="signup.php" method="post">
+  <form action="./login.php" method="post">
     <input type="hidden" name="mailaddress" value="<?=$_POST['mailaddress']; ?>">
     <input type="hidden" name="password" value="<?=$_POST['password']; ?>">
     <button type="submit">ログインへ戻る</button>
