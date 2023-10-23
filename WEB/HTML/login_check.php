@@ -18,7 +18,8 @@
 
     //メールアドレスの入力形式が正しいか判定
     if (!filter_var($_POST['mailaddress'], FILTER_VALIDATE_EMAIL)) {//入力形式が不正
-      echo '<b>正しいメールアドレスの形式で入力してください</b>';
+      echo '<b>正しいメールアドレスの形式で入力してください</b><br>';
+      echo '<a href="./login.php">ログイン画面へ戻る</a>';
       exit;
     }
 
