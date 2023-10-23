@@ -61,10 +61,14 @@
         </div>
         <div class="row">
           <div class="offset-10 col-2">
-            <p class="text-center">今日の完了数</p>
-            <h5 class="text-center">3/5</h5>
+            <h3 class="text-center">今日の完了数</h3>
+            <h3 class="text-center">3/5</h3>
           </div>
         </div>
+        <div class="row">
+            <h2 class="">今日のタスク</h2>
+        </div>
+        <div class="row">
         <?php //foreach ?>
         <div class="task-list offset-3">
           <div class="card task-style">
@@ -95,8 +99,8 @@
         <?php //ここまで ?>
         <div class="row">
           <div class="offset-10 col-2">
-            <p class="text-center">順位</p>
-            <h5 class="text-center">12</h5>
+            <h3 class="text-center">順位</h3>
+            <h3 class="text-center">12</h3>
           </div>
         </div>
         <h2 class="mt-5 offset-3">期限が近づいています！</h2>
@@ -111,6 +115,19 @@
             <input type="checkbox">
               <?= $task->getUserIdByTaskTitle(1);?>
             </h6>
+        </div>
+        </div>
+        <?php //ここまで ?>
+        <div class="row">
+          <div class="offset-10 col-2">
+            <h3 class="text-center">未使用のSP</h3>
+            <h3 class="text-center">3</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 ms-5">
+            <input type="text" name="task" class="inputText-style">
+          </div>
         </div>
     </div>
 
