@@ -33,7 +33,7 @@
 <body>
   <h1>タスク一覧画面</h1>
   <!-- <a href="./task_edit.php?task_id=1">デバッグ用リンク：タスクID＝１</a><br> -->
-  <a href="./logout.php">ログアウト（仮）</a><br>
+  <a href="./logout.php">デバッグ用ログアウト</a><br>
 
   <button><a href="task_edit.php">新規作成</a></button><br>
   <hr>
