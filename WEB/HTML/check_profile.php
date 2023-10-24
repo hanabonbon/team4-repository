@@ -67,21 +67,18 @@
             </div>
         </div>
         
-            <form action="" method="post">
+            <form action="./change_profile.html" method="get">
                 <div class="row">
                     <div class="col-12 text-center">
                         <p class="text-center">
                             ニックネーム : <?= $users['nickname']; ?>
                         </p>
-                        <input type="hidden" name="nickname" value="<?= $users['nickname']; ?>">
                     </div>
                     <div class="col-12 text-center my-4">
                         <p class="text-center">
                             メールアドレス : <?= $users['mailaddress']; ?>
                         </p>
-                        <input type="hidden" name="mailaddress" value="<?= $users['mailaddress']; ?>">
                     </div>
-                    <input type="hidden" name="user_id" value="<?= $users['user_id']; ?>">
                 </div>
                 <div class="row">
                     <div class="col-6 text-end">
