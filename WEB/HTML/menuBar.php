@@ -1,9 +1,4 @@
-<?php
-  require_once('../DAO/User.php');
-  $user = new User();
-  $user_id = 1; // 取得したいユーザーのIDに置き換えてください
-  $user_name = $user->getUserName($user_id);
-?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -20,7 +15,7 @@
     <div class="container-fluid">
       <div class="row">
           <!-- サイドバー -->
-          <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block  text-white sidebar">
+          <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block  text-white sidebar  fixed-top">
             <div class="position-sticky">
                 <ul class="nav flex-column">
                   <!--アイコンとユーザー名-->
@@ -29,7 +24,7 @@
                       <img src="../images/default_icon.png" class="img-icon">
                     </div>
                     <div class="name-area">
-                      <label class="username-area"><?php echo $user_name; ?></label>
+                      <label class="username-area">〇〇〇〇</label>
                     </div>
                   </div>
 

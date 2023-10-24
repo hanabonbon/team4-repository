@@ -1,3 +1,9 @@
+<?php 
+  session_start();
+  if(isset($_SESSION['user_id'])){
+    header('location: ./task_list.php');
+  }
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -8,6 +14,6 @@
 <body>
   <h2>登録完了</h2>
   <p>登録が完了しました。</p>
-  <a href="/login.php">ログインする</a>
+  <a href="./login.php">ログインする</a>
 </body>
 </html>

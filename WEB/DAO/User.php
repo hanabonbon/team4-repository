@@ -27,13 +27,14 @@
       $result = $ps->fetch(PDO::FETCH_ASSOC);
       return $result['username']; 
     }
-    // public function insertUser() {
-    //   $sql = "INSERT INTO user (nickname, mailaddress, password) VALUES (?, ?, ?)";
-    //   $ps = $this->pdo->prepare($sql);
-    //   $ps->bindValue(1, $_POST['nickname'], PDO::PARAM_STR);
-    //   $ps->bindValue(2, $_POST['mailaddress'], PDO::PARAM_STR);
-    //   $ps->bindValue(3, $_POST['password'], PDO::PARAM_STR);
-    //   $ps->execute();
-    // }
+    
+    public function getUserDataByMail($mailaddress) {
+      $sql = "SELECT * FROM user WHERE mailaddress = :mailaddress";
+      $ps = $this->pdo->prepare($sql);
+      $ps->bindValue(':mailaddress', $mailaddress, PDO::PARAM_STR); 
+      $ps->execute();
+      $result = $ps->fetch(PDO::FETCH_ASSOC);
+      return $result; 
+    }
   }
 ?>
