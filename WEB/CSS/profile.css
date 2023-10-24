@@ -1,0 +1,7 @@
+.button-css{
+    width: 100px;
+    height: auto;
+    flex-shrink: 0;
+    background-color: #818181;
+    color:white;
+}
