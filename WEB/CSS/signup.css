@@ -1,0 +1,55 @@
+.icon img{
+   
+    text-align: center;
+     width: 300px;
+     height: 200px;
+     position: relative;
+     top: 30px;
+    left:410px;
+ }
+ .nickname{
+    text-align: center;
+    position: relative;
+    top: 30px;
+ }
+ .email{
+    text-align: center;
+    position: relative;
+    top: 50px;
+ }
+ .password{
+    text-align: center;
+    position: relative;
+    top: 70px;
+ }
+ .button{
+    text-align: center;
+    position: relative;
+    top: 150px;
+ }
+ input{
+    border-top-right-radius:5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius: 5px;
+    background-color: #818181;
+    height: 20px;
+}
+button{
+    border-top-right-radius:5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius: 5px;
+    background-color: #818181;
+    color: #FFEED5;
+    height: 30px;
+}
+::placeholder{
+    color: rgba(255, 255, 255, 0.56);
+}
+body{
+    background-color: #968067;
+}
+body{
+    background-color: #FFEED5;
+}

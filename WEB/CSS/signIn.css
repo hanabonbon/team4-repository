@@ -4,29 +4,39 @@
      width: 300px;
      height: 200px;
      position: relative;
-     top: 0px;
-     left:350px;
+     top: 40px;
+    left:410px;
+    
  }
  
 .textbox{
 text-align: center;
 position: relative;
-top: 10px;
+top: 50px;
 
 width:100%;
 
 }
 .button{
+    border-top-right-radius:3px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius:3px;
+    border-bottom-right-radius: 3px;
 text-align: center;
  position: relative;
-top: 40px;
+top: 90px;
+    color : #FFEED5
 }
 input{
+    border-top-right-radius:5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius: 5px;
     background-color: #818181;
-    color: #FFFFFF;
+    color : #FFEED5
 }
 ::placeholder{
-    color: #FFFFFF;
+    color: rgba(255, 255, 255, 0.56);
     font-size: 15px;
 }
 body{
