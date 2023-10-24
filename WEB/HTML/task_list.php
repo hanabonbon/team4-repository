@@ -33,9 +33,8 @@
   //TODO: 今日以降のタスクを取得
   //TODO: 期限が近い順に並び替える
   // $ScheduledTaskList = 
-  //   $task->fetchTaskByUserId($user_id, date('Y-m-d', strtotime('+1 day')));
-  //これだと時間の分がずれる
-  echo date('Y-m-d H:i:s', strtotime('+1 day'));
+
+  $task->fetchTaskByUserId($user_id, false);
 
 ?>
 <script>
