@@ -1,10 +1,21 @@
-.task-style{
+/* ページ全体に対して */
+body {
+    overflow-x: hidden;
+}
+.task-style {
     width: 503px;
     height: 43px;
     flex-shrink: 0;
     background-color:#818181;
     border-radius: 7px;
+    margin-bottom: 1vh;/*タスクの下にスペースを開ける*/
 }
-.text-style{
+.text-style {
     color:white;
+}
+
+.task-list{
+    height:25vh;
+    width: 550px;
+    overflow-y: scroll;
 }
