@@ -128,7 +128,7 @@
     //指定したユーザーのタスクを取得。期限(period)を範囲で指定することもできる。
     //日付を指定しなかった場合は全期間のタスクを取得する。  
     public function fetchTaskByUserId($user_id, 
-                                      $is_complete,
+                                      bool $is_complete,
                                       $start='1900-01-01', 
                                       $end='9999-12-31',
                                       $sort='ASC'
