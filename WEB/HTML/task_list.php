@@ -43,9 +43,9 @@
 <body>
   <a href="./logout.php">デバッグ用ログアウト</a><br>
   <h1>タスク一覧画面</h1>
+  <a href="./task_edit.php"><button>新規作成</button></a>
+  <a href="./task_record.php"><button>記録を見る</button></a>
   <h3><?=date('Y-m-d D')?> 今日のタスク</h3>
-  <button><a href="task_edit.php">新規作成</a></button><br>
-  <button><a>記録を</a></button>
   <hr>
   <!-- 今日が期限のタスク一覧 -->
   <?php foreach($todayTaskList as $taskData) :?>
