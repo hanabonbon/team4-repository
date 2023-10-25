@@ -18,8 +18,8 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="../CSS/mypage.css?<?php echo date('YmdHis'); ?>"> <!-- CSSファイルのパスを適切に指定 -->
-    <link rel="stylesheet" href="../CSS/menubar.css?<?php echo date('YmdHis'); ?>"> <!-- CSSファイルのパスを適切に指定 -->
+    <link rel="stylesheet" type="text/css" href="../CSS/mypage.css"> <!-- CSSファイルのパスを適切に指定 -->
+    <link rel="stylesheet" type="text/css" href="../CSS/menubar.css"> <!-- CSSファイルのパスを適切に指定 -->
     <title>マイページ</title>
   </head>
   <body>
@@ -44,7 +44,7 @@
                       <a class="nav-link" href="task.html">タスク</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="mypage.php">マイページ</a>
+                    <a class="nav-link" href="mypage.html">マイページ</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="battle.html">対戦</a>
@@ -98,7 +98,7 @@
         </svg>
       </div>
       <div class="circle-icon">
-        <img class="icon-img" src="../images/DTBBqNQVwAEYiZW.jpg" alt="アイコン画像">
+        <img class="icon-img" src="./img/DTBBqNQVwAEYiZW.jpg" alt="アイコン画像">
       </div>
       <div class="info">
         <p class="text-right">素早さ</p>
