@@ -1,4 +1,5 @@
 body {
+    background-color: #FFEED5;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,6 +7,44 @@ body {
     margin: 0;
     flex-direction: column; /* コンテンツを縦に配置 */
 }
+
+.yoko {
+    display: flex; /* 要素を横に並べる */
+    align-items: center; /* 垂直方向の中央揃え */
+    width: 40%; /* 40%の幅を持つ */
+}
+
+.yoko2 {
+    display: flex; /* 要素を横に並べる */
+    align-items: center; /* 垂直方向の中央揃え */
+    width: 35%; /* 30%の幅を持つ */
+}
+
+.yoko-center {
+    display: flex; /* 要素を横に並べる */
+}
+
+.text-left {
+    text-align: left;
+    margin-left: 10px;
+}
+
+.text-right {
+    text-align: right;
+    margin-right: 10px;
+}
+
+button {
+    border: none;
+    background: transparent;
+}
+
+.info {
+    flex: 1; /* 幅を均等に分割 */
+    text-align: center; /* テキストを中央揃え */
+    padding: 10px; /* 必要に応じて余白を設定 */
+}
+
 .circle-icon {
     width: 100px; /* アイコンの幅を調整 */
     height: 100px; /* アイコンの高さを調整 */
@@ -25,4 +64,8 @@ body {
 .horizontal-line {
     border-bottom: 2px solid #000; /* 黒色の実線を表示 */
     margin-bottom: 10px; /* 横線とテキストの間隔を調整 */
+}
+
+.button {
+    margin-top: 50px;
 }

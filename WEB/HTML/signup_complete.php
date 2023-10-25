@@ -1,8 +1,5 @@
 <?php 
   session_start();
-  if(isset($_SESSION['user_id'])){
-    header('location: ./task_list.php');
-  }
 ?>
 <!DOCTYPE html>
 <html lang="ja">

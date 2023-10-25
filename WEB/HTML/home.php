@@ -138,6 +138,19 @@
           </div>
             </div>
         </div>
+        </div>
+        <?php //ここまで ?>
+        <div class="row">
+          <div class="offset-10 col-2">
+            <h3 class="text-center">未使用のSP</h3>
+            <h3 class="text-center">3</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 ms-5">
+            <input type="text" name="task" class="inputText-style">
+          </div>
+        </div>
     </div>
 
 

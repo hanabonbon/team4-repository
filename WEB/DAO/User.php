@@ -36,5 +36,27 @@
       $result = $ps->fetch(PDO::FETCH_ASSOC);
       return $result; 
     }
+
+    //登録情報変更
+    public function updateUserProfile($userData){
+      $sql = "UPDATE user
+              SET nickname = ?,mailaddress = ?
+              WHERE user_id = ?";
+      $ps = $this->pdo->prepare($sql);
+      $ps->bindValue(1,$userData['nickname'],PDO::PARAM_STR);
+      $ps->bindValue(2,$userData['mailaddress'],PDO::PARAM_STR);
+      $ps->bindValue(3,$userData['user_id'],PDO::PARAM_INT);
+      $ps->execute();
+    }
+
+    //user_idでユーザー情報を取得
+    public function getUserDataByUserId($user_id){
+      $sql = "SELECT * FROM user WHERE user_id = ?";
+      $ps = $this->pdo->prepare($sql);
+      $ps->bindValue(1,$user_id,PDO::PARAM_INT);
+      $ps->execute();
+      $result = $ps->fetch(PDO::FETCH_ASSOC);
+      return $result;
+    }
   }
 ?>
