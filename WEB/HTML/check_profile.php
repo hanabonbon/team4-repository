@@ -82,7 +82,9 @@
                 </div>
                 <div class="row">
                     <div class="col-6 text-end">
-                        <input type="submit" value="戻る" class="button-css">
+                      <a href="mypage.php">
+                        <button type="button" class="button-css">戻る</button>
+                      </a>
                     </div>
                     <div class="col-6 text-strat">
                         <input type="submit" value="変更する" class="button-css">

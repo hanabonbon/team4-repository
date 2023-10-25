@@ -66,13 +66,13 @@
             </div>
         </div>
         
-            <form action="" method="post">
+            <form action="user_update.php" method="post">
                 <div class="row">
                     <div class="col-12 text-center">
                         <p class="text-center">
                             ニックネーム:<?= $users['nickname']; ?> → <span style="color:red;"><?= $_POST['nickname']; ?></span>
                         </p>
-                        <input type="hidden" name="nickname" vaulue="<?= $_POST['nickname']; ?>">
+                        <input type="hidden" name="nickname" value="<?= $_POST['nickname']; ?>">
                     </div>
                     <div class="col-12 text-center my-5">
                         <p class="text-center">
@@ -85,10 +85,12 @@
                 </div>
                 <div class="row">
                     <div class="col-6 text-end">
-                        <input type="submit" value="修正">
+                      <a href="change_profile.php">
+                        <button type="button" class="button-css">戻る</button>
+                      </a>
                     </div>
                     <div class="col-6 text-strat">
-                        <input type="submit" value="確定">
+                        <input type="submit" value="確定" class="button-css">
                     </div>
                 </div>
             </form>

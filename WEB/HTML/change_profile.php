@@ -70,15 +70,17 @@
             <form action="change_confirm.php" method="post">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <input type="text" name="nickname" class="textbox-style" value="<?= $users['nickname']; ?>">
+                        <input type="text" name="nickname" class="textbox-style" value="<?= $users['nickname']; ?>" required>
                     </div>
                     <div class="col-12 text-center my-5">
-                        <input type="text" name="mailaddress" class="textbox-style" value="<?= $users['mailaddress']; ?>">
+                        <input type="email" name="mailaddress" class="textbox-style" value="<?= $users['mailaddress']; ?>" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6 text-end">
-                        <input type="submit" value="キャンセル" class="button-css">
+                      <a href="check_profile.php">
+                        <button type="button" class="button-css">戻る</button>
+                      </a>
                     </div>
                     <div class="col-6 text-strat">
                         <input type="submit" value="登録確認へ" class="button-css">
