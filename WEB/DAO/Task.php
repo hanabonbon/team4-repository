@@ -107,25 +107,11 @@
       $ps->bindValue(':task_id', $task_id, PDO::PARAM_INT);
       $ps->execute();
     }
-    
-    public function fetchTodayTaskList($user_id) {
-      $sql = "SELECT * FROM task 
-              WHERE period BETWEEN :start AND :end 
-              AND user_id = :user_id
-              ORDER BY period ASC";
-      $ps = $this->pdo->prepare($sql);
-      $ps->bindValue(':start', date('Y-m-d').' 00:00:00', PDO::PARAM_STR);
-      $ps->bindValue(':end', date('Y-m-d').' 23:59:59', PDO::PARAM_STR);
-      $ps->bindValue(':user_id', $user_id, PDO::PARAM_INT);
-      $ps->execute();
-      $result = $ps->fetchAll(PDO::FETCH_ASSOC);
-      return $result;
-    }
 
     //完了状況に関わらず取得する関数だけは別で作る必要がある。
     
-    //指定したユーザーのタスクを取得。
-    //期限(period)を範囲で指定することもできる。
+    //ユーザー、完了状況を指定してタスクを取得する
+    //期限(period)を'start','end'の範囲で指定できる
     //日付を指定しなかった場合は全期間のタスクを取得する
     //'start'だけを指定した場合は'start'以降の全期間のタスクを取得する
     //'end'だけを指定した場合は'end'以前の全期間のタスクを取得する
@@ -134,7 +120,7 @@
                                       bool $asc=true, //ソート（指定しなくてもよい）
                                       $start='1900-01-01', //指定しなくてもよい
                                       $end='9999-12-31' //指定しなくてもよい
-                                      ){
+                                     ){
       $sortQuery = $asc ? "ORDER BY period ASC" : "ORDER BY period DESC";
       $sql = "SELECT * FROM task 
               WHERE user_id = :user_id
@@ -144,6 +130,26 @@
       $ps = $this->pdo->prepare($sql);
       $ps->bindValue(':user_id', $user_id, PDO::PARAM_INT);
       $ps->bindValue(':is_complete', $is_complete, PDO::PARAM_INT);
+      $ps->bindValue(':start', $start.' 00:00:00', PDO::PARAM_STR);
+      $ps->bindValue(':end', $end.' 23:59:59', PDO::PARAM_STR);
+      $ps->execute();
+      $result = $ps->fetchAll(PDO::FETCH_ASSOC);
+      return $result;
+    }
+
+    //ユーザーIDを指定して、完了状況に関わらずタスクを取得します。
+    public function fetchAllTask($user_id, //必須
+                                 bool $asc=true, //ソート（指定しなくてもよい）
+                                 $start='1900-01-01', //指定しなくてもよい
+                                 $end='9999-12-31' //指定しなくてもよい
+                                ){
+      $sortQuery = $asc ? "ORDER BY period ASC" : "ORDER BY period DESC";
+      $sql = "SELECT * FROM task 
+              WHERE user_id = :user_id
+              AND period BETWEEN :start AND :end 
+              ".$sortQuery;
+      $ps = $this->pdo->prepare($sql);
+      $ps->bindValue(':user_id', $user_id, PDO::PARAM_INT);
       $ps->bindValue(':start', $start.' 00:00:00', PDO::PARAM_STR);
       $ps->bindValue(':end', $end.' 23:59:59', PDO::PARAM_STR);
       $ps->execute();
@@ -169,6 +175,44 @@
       $ps->execute();
       $result = $ps->fetch(PDO::FETCH_ASSOC);
       return $result['COUNT(*)'];
-    }             
+    }
+
+    //完了数の月平均を取得する
+    //TODO: 名前どうしよう
+    function AverageCompletedCountByMonth($user_id, $start='1900-01-01', $end='9999-12-31') {
+
+      SELECT AVG(count)
+      FROM (
+        SELECT DATE_FORMAT(period, '%Y-%m') AS date, 
+          COUNT(*) AS count
+          FROM task
+          WHERE user_id = 7
+          AND is_complete = true
+          GROUP BY DATE_FORMAT(period, '%Y%m')
+      ) as subquery;
+
+      $sql = "";
+      $ps = $this->pdo->prepare($sql);
+      $ps->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+      $ps->bindValue(':start', $start.' 00:00:00', PDO::PARAM_STR);
+      $ps->bindValue(':end', $end.' 23:59:59', PDO::PARAM_STR);
+      $ps->execute();
+      $result = $ps->fetch(PDO::FETCH_ASSOC);
+      return $result['COUNT(*)'];
+    }
+
+    public function fetchTodayTaskList($user_id) {
+      $sql = "SELECT * FROM task 
+              WHERE period BETWEEN :start AND :end 
+              AND user_id = :user_id
+              ORDER BY period ASC";
+      $ps = $this->pdo->prepare($sql);
+      $ps->bindValue(':start', date('Y-m-d').' 00:00:00', PDO::PARAM_STR);
+      $ps->bindValue(':end', date('Y-m-d').' 23:59:59', PDO::PARAM_STR);
+      $ps->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+      $ps->execute();
+      $result = $ps->fetchAll(PDO::FETCH_ASSOC);
+      return $result;
+    }
   }
 ?>
