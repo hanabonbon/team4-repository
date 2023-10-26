@@ -33,23 +33,7 @@
     $is_complete = $_GET['is_complete'];
   } else {
     $is_complete = 2;
-    //$taskHistory = $task->fetchAllTask($user_id, end: date('Y-m-d'));
   }
-
-  // //条件に合わせてタスクを取得
-  // switch ($is_complete) {
-  //   case 1: //完了済み
-  //     $taskHistory = $task->
-  //       fetchTask($user_id, is_complete: $is_complete, end: date('Y-m-d'));
-  //     break;
-  //   case 0: //未完了
-  //     $taskHistory = $task->
-  //       fetchTask($user_id, is_complete: $is_complete, end: date('Y-m-d'));
-  //     break;
-  //   default: //全て
-  //     $taskHistory = $task->fetchAllTask($user_id, end: date('Y-m-d'));
-  //     break;
-  // }
 
   //タスクがあった月を取得
   $month = $task->fetchMonth($user_id, end: date('Y-m-d'));
@@ -66,8 +50,8 @@
       end: date('Y-m-t', strtotime('-1 month')));
   //1ヶ月の平均完了数
   $average = $task->averageCompletedCountByMonth($user_id);
-
 ?>
+
 <body>
   <a href="./task_list.php"><button>戻る</button></a>
   <h3>完了したタスク</h3>
@@ -88,24 +72,26 @@
 
   <hr>
 
-  <!-- TODO: 月ごとに一覧を出す -->
   <!-- タスクがあった月だけ出力 -->
-  <!-- TODO: 完了ボタンを押すと一覧に戻っちゃう -->
   <?php foreach($month as $row) :?>
     <h4><?=date('Y年 m月' ,strtotime($row['date']))?></h4>
-    <?php 
+    <?php
+      //今いるエリアの年・月
       $tmpYM = date('Y-m', strtotime($row['date']));
-      if($is_complete == 2) {
+
+      //その月のタスクを取得。絞り込み条件で分岐しています。
+      if($is_complete == 2) { //すべて表示の場合
         $taskListByMonth = $task->fetchAllTask($user_id, 
-                           start: date('Y-m-d',strtotime($tmpYM.'-01')), 
-                           end: date('Y-m-t', strtotime($tmpYM)));
-      } else {
-        $taskListByMonth =  $task->
-          fetchTask($user_id, $is_complete, 
-                    start: date('Y-m-d',strtotime($tmpYM.'-01')), 
-                    end: date('Y-m-t', strtotime($tmpYM)));
+          start: date('Y-m-d',strtotime($tmpYM.'-01')), 
+          end: date('Y-m-t', strtotime($tmpYM)));
+      } else { //完了or未完了の場合
+        $taskListByMonth =  $task->fetchTask($user_id, $is_complete, 
+          start: date('Y-m-d',strtotime($tmpYM.'-01')), 
+          end: date('Y-m-t', strtotime($tmpYM)));
       }
     ?>
+
+    <!-- 月ごとのタスクを表示 -->
     <?php foreach($taskListByMonth as $taskData) :?>
       <div class="row">
         <div class="col-3">
@@ -135,6 +121,7 @@
       </div>
       <hr>
     <?php endforeach; ?>
+
   <?php endforeach; ?>
 
 <!-- BootStrap CDN-->

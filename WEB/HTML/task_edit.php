@@ -63,7 +63,7 @@
   <input type="text" value="<?=$title?>" name="title"  form="task-edit-form">
 
   <!--期限-->
-  <br><input type="date" value="<?=$period?>" name="period" form="task-edit-form"><br>
+  <br><input type="date" value="<?=$period?>" name="period" required="required" form="task-edit-form"><br>
 
   <!-- TODO: 入力内容の保存処理 -->
   <!-- タスク完了の入力 -->

@@ -119,7 +119,7 @@
       <input type="text" name="title" form="quick-task-add">
     </div>
     <div class="col-3">
-      <input type="date" name="period" form="quick-task-add">
+      <input type="date" name="period" required="required" form="quick-task-add">
     </div>
     <div class="col-1">
       <button type="submit" form="quick-task-add">追加</button>
