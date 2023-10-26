@@ -38,9 +38,13 @@
   //今月完了したタスク数を取得
   $thisMonthCompletedCount = 
     $task->countCompletedTask($user_id, start: date('Y-m-01'), end: date('Y-m-t'));
+  //先月完了したタスク数を取得
   $lastMonthCompletedCount = 
     $task->countCompletedTask($user_id, start: date('Y-m-01', strtotime('-1 month')), 
       end: date('Y-m-t', strtotime('-1 month')));
+  //1ヶ月の平均完了数
+  $average = $task->averageCompletedCountByMonth($user_id);
+
 ?>
 <body>
   <a href="./task_list.php"><button>戻る</button></a>
@@ -49,7 +53,7 @@
   <p>今日までに完了したタスク数:<?=$completedCount?></p>
   <p>今月のタスク完了数:<?=$thisMonthCompletedCount?></p>
   <p>先月のタスク完了数:<?=$lastMonthCompletedCount?></p>
-  <p>月平均</p>
+  <p>月平均:<?=$average?></p>
 
   <b>（仮）期限が過ぎたタスク一覧</b>
   <hr>

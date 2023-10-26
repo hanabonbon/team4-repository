@@ -178,27 +178,22 @@
     }
 
     //完了数の月平均を取得する
-    //TODO: 名前どうしよう
-    function AverageCompletedCountByMonth($user_id, $start='1900-01-01', $end='9999-12-31') {
-
-      SELECT AVG(count)
-      FROM (
-        SELECT DATE_FORMAT(period, '%Y-%m') AS date, 
-          COUNT(*) AS count
-          FROM task
-          WHERE user_id = 7
-          AND is_complete = true
-          GROUP BY DATE_FORMAT(period, '%Y%m')
-      ) as subquery;
-
-      $sql = "";
+    //良い名前が思いつかない。
+    function averageCompletedCountByMonth($user_id) {
+      $sql = "SELECT ROUND(AVG(count), 2) as 'month_average'
+              FROM (
+                SELECT DATE_FORMAT(period, '%Y-%m') AS date, 
+                  COUNT(*) AS count
+                  FROM task
+                  WHERE user_id = :user_id
+                  AND is_complete = true
+                  GROUP BY DATE_FORMAT(period, '%Y%m')
+              ) as subquery;";
       $ps = $this->pdo->prepare($sql);
       $ps->bindValue(':user_id', $user_id, PDO::PARAM_INT);
-      $ps->bindValue(':start', $start.' 00:00:00', PDO::PARAM_STR);
-      $ps->bindValue(':end', $end.' 23:59:59', PDO::PARAM_STR);
       $ps->execute();
       $result = $ps->fetch(PDO::FETCH_ASSOC);
-      return $result['COUNT(*)'];
+      return $result['month_average'];
     }
 
     public function fetchTodayTaskList($user_id) {
