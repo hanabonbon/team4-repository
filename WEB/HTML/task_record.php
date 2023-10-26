@@ -19,6 +19,7 @@
   <!--BootStrap Icons CDN-->
   <link rel="stylesheet" 
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="../CSS/task_record.css">
   <title>タスクの記録</title>
 </head>
 <?php
@@ -72,57 +73,59 @@
 
   <hr>
 
-  <!-- タスクがあった月だけ出力 -->
-  <?php foreach($month as $row) :?>
-    <h4><?=date('Y年 m月' ,strtotime($row['date']))?></h4>
-    <?php
-      //今いるエリアの年・月
-      $tmpYM = date('Y-m', strtotime($row['date']));
-
-      //その月のタスクを取得。絞り込み条件で分岐しています。
-      if($is_complete == 2) { //すべて表示の場合
-        $taskListByMonth = $task->fetchAllTask($user_id, 
-          start: date('Y-m-d',strtotime($tmpYM.'-01')), 
-          end: date('Y-m-t', strtotime($tmpYM)));
-      } else { //完了or未完了の場合
-        $taskListByMonth =  $task->fetchTask($user_id, $is_complete, 
-          start: date('Y-m-d',strtotime($tmpYM.'-01')), 
-          end: date('Y-m-t', strtotime($tmpYM)));
-      }
-    ?>
-
-    <!-- 月ごとのタスクを表示 -->
-    <?php foreach($taskListByMonth as $taskData) :?>
-      <div class="row">
-        <div class="col-3">
-          <!-- 完了ボタン URL以外は変更できます-->
-          <a href="./task_state_update.php?task_id=<?=$taskData['task_id']?>
-                                          &is_complete=<?=$taskData['is_complete']?>">
-            <?php if($taskData['is_complete']) { ?>
-              <button class="btn-secondry"><i class="bi bi-clipboard-check"></i></button>
-            <?php } else { ?>
-              <button class="btn-secondry"><i class="bi bi-clipboard"></i></button>
-            <?php } ?><!--end if-->
-          </a>
+  <div id="task-list">
+    <!-- タスクがあった月だけ出力 -->
+    <?php foreach($month as $row) :?>
+      <h4><?=date('Y年 m月' ,strtotime($row['date']))?></h4>
+      <?php
+        //今いるエリアの年・月
+        $tmpYM = date('Y-m', strtotime($row['date']));
+  
+        //その月のタスクを取得。絞り込み条件で分岐しています。
+        if($is_complete == 2) { //すべて表示の場合
+          $taskListByMonth = $task->fetchAllTask($user_id, 
+            start: date('Y-m-d',strtotime($tmpYM.'-01')), 
+            end: date('Y-m-t', strtotime($tmpYM)));
+        } else { //完了or未完了の場合
+          $taskListByMonth =  $task->fetchTask($user_id, $is_complete, 
+            start: date('Y-m-d',strtotime($tmpYM.'-01')), 
+            end: date('Y-m-t', strtotime($tmpYM)));
+        }
+      ?>
+  
+      <!-- 月ごとのタスクを表示 -->
+      <?php foreach($taskListByMonth as $taskData) :?>
+        <div class="row" id="task-simple-view">
+          <div class="col-3">
+            <!-- 完了ボタン URL以外は変更できます-->
+            <a href="./task_state_update.php?task_id=<?=$taskData['task_id']?>
+                                            &is_complete=<?=$taskData['is_complete']?>">
+              <?php if($taskData['is_complete']) { ?>
+                <button class="btn-secondry"><i class="bi bi-clipboard-check"></i></button>
+              <?php } else { ?>
+                <button class="btn-secondry"><i class="bi bi-clipboard"></i></button>
+              <?php } ?><!--end if-->
+            </a>
+          </div>
+          <div class="col-4">
+            <!-- タイトル -->
+            <p><?=$taskData['title']?></p>
+          </div>
+          <div class="col-2">
+              <p>期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></p>
+          </div>
+          <div class="col-3">
+            <!-- 編集ボタン URL以外は変更できます -->
+            <a href="./task_edit.php?task_id=<?=$taskData['task_id']?>">
+              <button>編集する</button>
+            </a>
+          </div>
         </div>
-        <div class="col-4">
-          <!-- タイトル -->
-          <p><?=$taskData['title']?></p>
-        </div>
-        <div class="col-2">
-            <p>期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></p>
-        </div>
-        <div class="col-3">
-          <!-- 編集ボタン URL以外は変更できます -->
-          <a href="./task_edit.php?task_id=<?=$taskData['task_id']?>">
-            <button>編集する</button>
-          </a>
-        </div>
-      </div>
-      <hr>
+        <hr>
+      <?php endforeach; ?>
+  
     <?php endforeach; ?>
-
-  <?php endforeach; ?>
+  </div>
 
 <!-- BootStrap CDN-->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
