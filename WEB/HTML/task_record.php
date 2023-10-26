@@ -25,7 +25,7 @@
   $user_id = $_SESSION['user_id']; 
   require_once('../DAO/Task.php');
   $task = new Task();
-
+  $is_complete;
   $taskHistory = array();
 
   //ソートの条件確認
@@ -33,22 +33,26 @@
     $is_complete = $_GET['is_complete'];
   } else {
     $is_complete = 2;
+    //$taskHistory = $task->fetchAllTask($user_id, end: date('Y-m-d'));
   }
 
-  switch ($is_complete) {
-    case 1: //完了済み
-      $taskHistory = $task->
-        fetchTask($user_id, is_complete: true, end: date('Y-m-d'));
-      break;
-    case 0: //未完了
-      $taskHistory = $task->
-        fetchTask($user_id, is_complete: false, end: date('Y-m-d'));
-      break;
-    default: //全て
-      $taskHistory = $task->fetchAllTask($user_id, end: date('Y-m-d'));
-      break;
-  }
+  // //条件に合わせてタスクを取得
+  // switch ($is_complete) {
+  //   case 1: //完了済み
+  //     $taskHistory = $task->
+  //       fetchTask($user_id, is_complete: $is_complete, end: date('Y-m-d'));
+  //     break;
+  //   case 0: //未完了
+  //     $taskHistory = $task->
+  //       fetchTask($user_id, is_complete: $is_complete, end: date('Y-m-d'));
+  //     break;
+  //   default: //全て
+  //     $taskHistory = $task->fetchAllTask($user_id, end: date('Y-m-d'));
+  //     break;
+  // }
 
+  //タスクがあった月を取得
+  $month = $task->fetchMonth($user_id, end: date('Y-m-d'));
 
   //今日までに完了したタスク数を取得
   $completedCount = 
@@ -73,7 +77,7 @@
   <p>先月のタスク完了数:<?=$lastMonthCompletedCount?></p>
   <p>月平均:<?=$average?></p>
 
-  <!-- 完了状況で絞り込み -->
+  <!-- 絞り込みフォーム -->
   <form action="./task_record.php" method="get" id="task-sort-form"></form>
   <select name="is_complete" form="task-sort-form">
     <option value="2" <?=$is_complete == 2 ? 'selected disabled' : ''?>>全て</option>
@@ -83,34 +87,54 @@
   <button type="submit" form="task-sort-form">絞り込み</button>
 
   <hr>
-  <?php foreach($taskHistory as $taskData) :?>
-    <div class="row">
-      <div class="col-3">
-        <!-- 完了ボタン URL以外は変更できます-->
-        <a href="./task_state_update.php?task_id=<?=$taskData['task_id']?>
-                                        &is_complete=<?=$taskData['is_complete']?>">
-          <?php if($taskData['is_complete']) { ?>
-            <button class="btn-secondry"><i class="bi bi-clipboard-check"></i></button>
-          <?php } else { ?>
-            <button class="btn-secondry"><i class="bi bi-clipboard"></i></button>
-          <?php } ?><!--end if-->
-        </a>
+
+  <!-- TODO: 月ごとに一覧を出す -->
+  <!-- タスクがあった月だけ出力 -->
+  <!-- TODO: 完了ボタンを押すと一覧に戻っちゃう -->
+  <?php foreach($month as $row) :?>
+    <h4><?=date('Y年 m月' ,strtotime($row['date']))?></h4>
+    <?php 
+      $tmpYM = date('Y-m', strtotime($row['date']));
+      if($is_complete == 2) {
+        $taskListByMonth = $task->fetchAllTask($user_id, 
+                           start: date('Y-m-d',strtotime($tmpYM.'-01')), 
+                           end: date('Y-m-t', strtotime($tmpYM)));
+      } else {
+        $taskListByMonth =  $task->
+          fetchTask($user_id, $is_complete, 
+                    start: date('Y-m-d',strtotime($tmpYM.'-01')), 
+                    end: date('Y-m-t', strtotime($tmpYM)));
+      }
+    ?>
+    <?php foreach($taskListByMonth as $taskData) :?>
+      <div class="row">
+        <div class="col-3">
+          <!-- 完了ボタン URL以外は変更できます-->
+          <a href="./task_state_update.php?task_id=<?=$taskData['task_id']?>
+                                          &is_complete=<?=$taskData['is_complete']?>">
+            <?php if($taskData['is_complete']) { ?>
+              <button class="btn-secondry"><i class="bi bi-clipboard-check"></i></button>
+            <?php } else { ?>
+              <button class="btn-secondry"><i class="bi bi-clipboard"></i></button>
+            <?php } ?><!--end if-->
+          </a>
+        </div>
+        <div class="col-4">
+          <!-- タイトル -->
+          <p><?=$taskData['title']?></p>
+        </div>
+        <div class="col-2">
+            <p>期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></p>
+        </div>
+        <div class="col-3">
+          <!-- 編集ボタン URL以外は変更できます -->
+          <a href="./task_edit.php?task_id=<?=$taskData['task_id']?>">
+            <button>編集する</button>
+          </a>
+        </div>
       </div>
-      <div class="col-4">
-        <!-- タイトル -->
-        <p><?=$taskData['title']?></p>
-      </div>
-      <div class="col-2">
-          <p>期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></p>
-      </div>
-      <div class="col-3">
-        <!-- 編集ボタン URL以外は変更できます -->
-        <a href="./task_edit.php?task_id=<?=$taskData['task_id']?>">
-          <button>編集する</button>
-        </a>
-      </div>
-    </div>
-    <hr>
+      <hr>
+    <?php endforeach; ?>
   <?php endforeach; ?>
 
 <!-- BootStrap CDN-->

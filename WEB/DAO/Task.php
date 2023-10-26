@@ -107,8 +107,6 @@
       $ps->bindValue(':task_id', $task_id, PDO::PARAM_INT);
       $ps->execute();
     }
-
-    //完了状況に関わらず取得する関数だけは別で作る必要がある。
     
     //ユーザー、完了状況を指定してタスクを取得する
     //期限(period)を'start','end'の範囲で指定できる
@@ -137,7 +135,7 @@
       return $result;
     }
 
-    //ユーザーIDを指定して、完了状況に関わらずタスクを取得します。
+    //完了状況に関わらず、タスクを取得します。
     public function fetchAllTask($user_id, //必須
                                  bool $asc=true, //ソート（指定しなくてもよい）
                                  $start='1900-01-01', //指定しなくてもよい
@@ -179,7 +177,7 @@
 
     //完了数の月平均を取得する
     //良い名前が思いつかない。
-    function averageCompletedCountByMonth($user_id) {
+    public function averageCompletedCountByMonth($user_id) {
       $sql = "SELECT ROUND(AVG(count), 2) as 'month_average'
               FROM (
                 SELECT DATE_FORMAT(period, '%Y-%m') AS date, 
@@ -196,6 +194,27 @@
       return $result['month_average'];
     }
 
+    //タスクがある月を取得
+    public function fetchMonth($user_id, //必須
+                               $start='1900-01-01',
+                               $end='9999-12-31' ) {
+      $sql = "SELECT DATE_FORMAT(period, '%Y-%m') AS date, 
+              COUNT(*) AS count
+              FROM task
+              WHERE user_id = :user_id
+              AND period BETWEEN :start AND :end
+              GROUP BY DATE_FORMAT(period, '%Y-%m')
+              ORDER BY period DESC;";
+      $ps = $this->pdo->prepare($sql);
+      $ps->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+      $ps->bindValue(':start', $start.' 00:00:00', PDO::PARAM_STR);
+      $ps->bindValue(':end', $end.' 23:59:59', PDO::PARAM_STR);
+      $ps->execute();
+      $result = $ps->fetchAll(PDO::FETCH_ASSOC);
+      return $result;
+    }
+
+    //使っていません
     public function fetchTodayTaskList($user_id) {
       $sql = "SELECT * FROM task 
               WHERE period BETWEEN :start AND :end 

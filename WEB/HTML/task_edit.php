@@ -80,7 +80,7 @@
   <!--詳細-->
   <br><textarea name="detail" autocomplete="off" form="task-edit-form"><?=$detail?></textarea>
   <br><button type="submit" form="task-edit-form">作成する</button>
-  <br><button><a href="./task_list.php">キャンセル</a></button>
+  <br><button onclick="history.back()">キャンセル</button>
   </div>
 
   <!-- Vue.js CDN -->
