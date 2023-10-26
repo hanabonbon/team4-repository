@@ -96,7 +96,7 @@
       <!-- 月ごとのタスクを表示 -->
       <?php foreach($taskListByMonth as $taskData) :?>
         <div class="row" id="task-simple-view">
-          <div class="col-3">
+          <div class="col-1">
             <!-- 完了ボタン URL以外は変更できます-->
             <a href="./task_state_update.php?task_id=<?=$taskData['task_id']?>
                                             &is_complete=<?=$taskData['is_complete']?>">
@@ -111,7 +111,7 @@
             <!-- タイトル -->
             <p><?=$taskData['title']?></p>
           </div>
-          <div class="col-2">
+          <div class="col-4">
               <p>期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></p>
           </div>
           <div class="col-3">
