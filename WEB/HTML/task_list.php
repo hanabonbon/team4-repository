@@ -28,10 +28,10 @@
   $task = new Task();
 
   //今日が期限のタスクを取得
-  $todayTaskList = $task->fetchTaskByUserId($user_id,
+  $todayTaskList = $task->fetchTask($user_id,
     is_complete: false, start: date('Y-m-d'), end: date('Y-m-d'));
   //今日以降のタスクを取得
-  $ScheduledTaskList = $task->fetchTaskByUserId($user_id,
+  $ScheduledTaskList = $task->fetchTask($user_id,
     is_complete: false, start: date('Y-m-d', strtotime('+1 day')));
 
   //今日完了したタスクの数を取得

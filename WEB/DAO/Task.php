@@ -115,12 +115,12 @@
     //日付を指定しなかった場合は全期間のタスクを取得する
     //'start'だけを指定した場合は'start'以降の全期間のタスクを取得する
     //'end'だけを指定した場合は'end'以前の全期間のタスクを取得する
-    public function fetchTaskByUserId($user_id, //必須
-                                      bool $is_complete, //完了しているか？（必須）
-                                      bool $asc=true, //ソート（指定しなくてもよい）
-                                      $start='1900-01-01', //指定しなくてもよい
-                                      $end='9999-12-31' //指定しなくてもよい
-                                     ){
+    public function fetchTask($user_id, //必須
+                              bool $is_complete, //完了しているか？（必須）
+                              bool $asc=true, //ソート（指定しなくてもよい）
+                              $start='1900-01-01', //指定しなくてもよい
+                              $end='9999-12-31' //指定しなくてもよい
+                              ){
       $sortQuery = $asc ? "ORDER BY period ASC" : "ORDER BY period DESC";
       $sql = "SELECT * FROM task 
               WHERE user_id = :user_id

@@ -25,12 +25,30 @@
   $user_id = $_SESSION['user_id']; 
   require_once('../DAO/Task.php');
   $task = new Task();
-  
-  //完了したタスク
-  $completedTaskList = 
-    $task->fetchTaskByUserId($user_id, is_complete: true, end: date('Y-m-d'));
-  //期限が過ぎたタスク
-  $over = $task->fetchAllTask($user_id, end: date('Y-m-d'));
+
+  $taskHistory = array();
+
+  //ソートの条件確認
+  if(isset($_GET['is_complete'])) {
+    $is_complete = $_GET['is_complete'];
+  } else {
+    $is_complete = 2;
+  }
+
+  switch ($is_complete) {
+    case 1: //完了済み
+      $taskHistory = $task->
+        fetchTask($user_id, is_complete: true, end: date('Y-m-d'));
+      break;
+    case 0: //未完了
+      $taskHistory = $task->
+        fetchTask($user_id, is_complete: false, end: date('Y-m-d'));
+      break;
+    default: //全て
+      $taskHistory = $task->fetchAllTask($user_id, end: date('Y-m-d'));
+      break;
+  }
+
 
   //今日までに完了したタスク数を取得
   $completedCount = 
@@ -55,9 +73,17 @@
   <p>先月のタスク完了数:<?=$lastMonthCompletedCount?></p>
   <p>月平均:<?=$average?></p>
 
-  <b>（仮）期限が過ぎたタスク一覧</b>
+  <!-- 完了状況で絞り込み -->
+  <form action="./task_record.php" method="get" id="task-sort-form"></form>
+  <select name="is_complete" form="task-sort-form">
+    <option value="2" <?=$is_complete == 2 ? 'selected disabled' : ''?>>全て</option>
+    <option value="1" <?=$is_complete == 1 ? 'selected disabled' : ''?>>完了済み</option>
+    <option value="0" <?=$is_complete == 0 ? 'selected disabled' : ''?>>未完了</option>
+  </select>
+  <button type="submit" form="task-sort-form">絞り込み</button>
+
   <hr>
-  <?php foreach($over as $taskData) :?>
+  <?php foreach($taskHistory as $taskData) :?>
     <div class="row">
       <div class="col-3">
         <!-- 完了ボタン URL以外は変更できます-->
