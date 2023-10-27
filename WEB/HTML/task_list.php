@@ -19,7 +19,8 @@
   <!--BootStrap Icons CDN-->
   <link rel="stylesheet" 
   href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="../CSS/task_list.css">
+  <link rel="stylesheet" href="../CSS/task_list.css?<?php echo date('YmdHis'); ?>">
+  <link rel="stylesheet" href="../CSS/menuBar.css?<?php echo date('YmdHis'); ?>">
   <title>タスク一覧</title>
 </head>
 <?php
@@ -42,89 +43,135 @@
   console.log(<?= json_encode($todayTaskList) ?>)
 </script>
 <body>
-  <a href="./logout.php">デバッグ用ログアウト</a><br>
-  <h1>タスク一覧画面</h1>
-  <a href="./task_edit.php"><button>新規作成</button></a>
-  <a href="./task_record.php"><button>記録を見る</button></a>
-  <h3><?=date('Y-m-d D')?> 今日のタスク</h3>
-  <hr>
-  <!-- 今日が期限のタスク一覧 -->
-  <?php foreach($todayTaskList as $taskData) :?>
-    <div class="row">
-      <div class="col-3">
-        <!-- 完了ボタン URL以外は変更できます-->
-        <a href="./task_state_update.php?task_id=<?=$taskData['task_id']?>
-                                        &is_complete=<?=$taskData['is_complete']?>">
-          <?php if($taskData['is_complete']) { ?>
-            <button class="btn-secondry"><i class="bi bi-clipboard-check"></i></button>
-          <?php } else { ?>
-            <button class="btn-secondry"><i class="bi bi-clipboard"></i></button>
-          <?php } ?><!--end if-->
-        </a>
-      </div>
-      <div class="col-4">
-        <!-- タイトル -->
-        <p><?=$taskData['title']?></p>
-      </div>
-      <div class="col-2">
-          <p>期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></p>
-      </div>
-      <div class="col-3">
-        <!-- 編集ボタン URL以外は変更できます -->
-        <a href="./task_edit.php?task_id=<?=$taskData['task_id']?>">
-          <button>編集する</button>
-        </a>
-      </div>
-    </div>
-    <hr>
-  <?php endforeach; ?>
-  
-  <h3>今後の予定</h3>
-  <?php foreach($ScheduledTaskList as $taskData) :?>
-    <div class="row">
-      <div class="col-3">
-        <!-- 完了ボタン URL以外は変更できます-->
-        <a href="./task_state_update.php?task_id=<?=$taskData['task_id']?>
-                                        &is_complete=<?=$taskData['is_complete']?>">
-          <?php if($taskData['is_complete']) { ?>
-            <button class="btn-secondry"><i class="bi bi-clipboard-check"></i></button>
-          <?php } else { ?>
-            <button class="btn-secondry"><i class="bi bi-clipboard"></i></button>
-          <?php } ?><!--end if-->
-        </a>
-      </div>
-      <div class="col-4">
-        <!-- タイトル -->
-        <p><?=$taskData['title']?></p>
-      </div>
-      <div class="col-2">
-          <p>期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></p>
-      </div>
-      <div class="col-3">
-        <!-- 編集ボタン URL以外は変更できます -->
-        <a href="./task_edit.php?task_id=<?=$taskData['task_id']?>">
-          <button>編集する</button>
-        </a>
-      </div>
-    </div>
-    <hr>
-  <?php endforeach; ?>
-
-  <p>今日は<?=$todaysCompletedCount?>件のタスクを完了しました。</p>
-
-  <!-- 簡易タスク追加 -->
-  <form action="./task_regist.php" method="post" id="quick-task-add"></form>
   <div class="row">
-    <div class="col-4">
-      <input type="text" name="title" form="quick-task-add">
-    </div>
-    <div class="col-3">
-      <input type="date" name="period" required="required" form="quick-task-add">
-    </div>
-    <div class="col-1">
-      <button type="submit" form="quick-task-add">追加</button>
-    </div> 
+    <!-- サイドバー -->
+    <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block  text-white sidebar  fixed-top">
+      <div class="position-sticky">
+        <ul class="nav flex-column">
+          <!--アイコンとユーザー名-->
+          <div class="icon-name">
+            <div class="img-area">
+              <img src="../images/default_icon.png" class="img-icon">
+            </div>
+            <div class="name-area">
+              <label class="username-area">〇〇〇〇</label>
+            </div>
+          </div>
+          <li class="nav-item active">
+            <!-- タスク上の白線 -->
+            <div class="nav-link"></div>
+            <a class="nav-link" href="task.html">タスク</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="mypage.html">マイページ</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="battle.html">対戦</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="ranking.html">ランキング</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
   </div>
+  <!-- コンテンツ -->
+  <div class="container-fluid" id="task-list-contents">
+
+    <a href="./logout.php">デバッグ用ログアウト</a><br>
+    <div id="button-area">
+      <a href="./task_edit.php"><button>新規作成</button></a>
+      <a href="./task_record.php"><button>記録を見る</button></a>
+    </div>
+    <h3><?=date('Y-m-d D')?> 今日のタスク</h3>
+    <hr>
+
+    <div id="task-list-area">
+      <!-- 今日が期限のタスク一覧 -->
+      <?php foreach($todayTaskList as $taskData) :?>
+        <div class="row">
+          <div class="col-3">
+            <!-- 完了ボタン URL以外は変更できます-->
+            <a href="./task_state_update.php?task_id=<?=$taskData['task_id']?>
+                                            &is_complete=<?=$taskData['is_complete']?>">
+              <?php if($taskData['is_complete']) { ?>
+                <button class="btn-secondry"><i class="bi bi-clipboard-check"></i></button>
+              <?php } else { ?>
+                <button class="btn-secondry"><i class="bi bi-clipboard"></i></button>
+              <?php } ?><!--end if-->
+            </a>
+          </div>
+          <div class="col-4">
+            <!-- タイトル -->
+            <p><?=$taskData['title']?></p>
+          </div>
+          <div class="col-2">
+              <p>期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></p>
+          </div>
+          <div class="col-3">
+            <!-- 編集ボタン URL以外は変更できます -->
+            <a href="./task_edit.php?task_id=<?=$taskData['task_id']?>">
+              <button>編集する</button>
+            </a>
+          </div>
+        </div>
+        <hr>
+      <?php endforeach; ?>
+      
+      <h3>今後の予定</h3>
+      <?php foreach($ScheduledTaskList as $taskData) :?>
+        <div class="row">
+          <div class="col-3">
+            <!-- 完了ボタン URL以外は変更できます-->
+            <a href="./task_state_update.php?task_id=<?=$taskData['task_id']?>
+                                            &is_complete=<?=$taskData['is_complete']?>">
+              <?php if($taskData['is_complete']) { ?>
+                <button class="btn-secondry"><i class="bi bi-clipboard-check"></i></button>
+              <?php } else { ?>
+                <button class="btn-secondry"><i class="bi bi-clipboard"></i></button>
+              <?php } ?><!--end if-->
+            </a>
+          </div>
+          <div class="col-4">
+            <!-- タイトル -->
+            <p><?=$taskData['title']?></p>
+          </div>
+          <div class="col-2">
+              <p>期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></p>
+          </div>
+          <div class="col-3">
+            <!-- 編集ボタン URL以外は変更できます -->
+            <a href="./task_edit.php?task_id=<?=$taskData['task_id']?>">
+              <button>編集する</button>
+            </a>
+          </div>
+        </div>
+        <hr>
+      <?php endforeach; ?>
+    </div>
+  
+    <p>今日は<?=$todaysCompletedCount?>件のタスクを完了しました。</p>
+    
+    <div id="quick-task-area">
+      <!-- 簡易タスク追加 -->
+      <div class="row">
+        <div class="col-4">
+          <input type="text" name="title" form="quick-task-add">
+        </div>
+        <div class="col-3">
+          <input type="date" name="period" required="required" form="quick-task-add">
+        </div>
+        <div class="col-1">
+          <button type="submit" form="quick-task-add">追加</button>
+        </div> 
+        <form action="./task_regist.php" method="post" id="quick-task-add"></form>
+      </div>
+    </div>
+
+  </div><!-- task-list-contents -->
   
   <!-- BootStrap CDN-->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

@@ -1,0 +1,29 @@
+#task-list-contents {
+  width: 85%;
+  /* 左寄せ */
+  margin-left: 15%;
+}
+
+#button-area {
+  text-align: right;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#button-area button {
+  margin: 10px;
+}
+
+#task-list-area {
+  height: auto;
+}
+
+#quick-task-area {
+  
+}
+
+
+
+
+
+
