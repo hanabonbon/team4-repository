@@ -63,7 +63,7 @@
   <input type="text" value="<?=$title?>" name="title"  form="task-edit-form">
 
   <!--期限-->
-  <br><input type="date" value="<?=$period?>" name="period" form="task-edit-form"><br>
+  <br><input type="date" value="<?=$period?>" name="period" required="required" form="task-edit-form"><br>
 
   <!-- TODO: 入力内容の保存処理 -->
   <!-- タスク完了の入力 -->
@@ -80,7 +80,7 @@
   <!--詳細-->
   <br><textarea name="detail" autocomplete="off" form="task-edit-form"><?=$detail?></textarea>
   <br><button type="submit" form="task-edit-form">作成する</button>
-  <br><button><a href="./task_list.php">キャンセル</a></button>
+  <br><button onclick="history.back()">キャンセル</button>
   </div>
 
   <!-- Vue.js CDN -->
