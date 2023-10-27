@@ -138,7 +138,7 @@
         }
     ?>
     <div class="button">
-      <a href="information.php" class="btn btn-primary">登録情報</a>
+      <a href="mypage.php" class="btn btn-primary">戻る</a>
       <a href="logout.php" class="btn btn-primary">ログアウト</a>
     </div>
     <!-- Optional JavaScript; choose one of the two! -->

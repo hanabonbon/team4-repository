@@ -1,10 +1,15 @@
 <?php
+  session_start(); 
+  if(!isset($_SESSION['user_id'])){
+    header('location: ./login.php');
+  }
+  $user_id = $_SESSION['user_id'];
   require_once('../DAO/dao.php'); // Include the dao.php file
 
   // Create an instance of the DAO class
   $dao = new DAO();
   $pdo = $dao->dbConnect();
-  $sql = "SELECT nickname,skill_point,hitpoint,attack,agility,defence,luck FROM user WHERE user_id = 1";
+  $sql = "SELECT nickname,icon_path,skill_point,hitpoint,attack,agility,defence,luck FROM user WHERE user_id = $user_id";
   $ps = $pdo->prepare($sql);
   $ps->execute();
   $result = $ps->fetchAll(PDO::FETCH_ASSOC);
@@ -32,16 +37,16 @@
                   <!--アイコンとユーザー名-->
                   <div class="icon-name">
                     <div class="img-area">
-                      <img src="../images/default_icon.png" class="img-icon">
+                      <img src="../images/<?PHP foreach ($result as $row) { echo $row['icon_path'];?>" class="img-icon">
                     </div>
                     <div class="name-area">
-                      <label class="username-area">〇〇〇〇</label>
+                      <label class="username-area"><?php echo $row['nickname']; ?></label>
                     </div>
                   </div>
                   <li class="nav-item active">
                     <!-- タスク上の白線 -->
                     <div class="nav-link"></div>
-                      <a class="nav-link" href="task.html">タスク</a>
+                      <a class="nav-link" href="task_list.php">タスク</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="mypage.php">マイページ</a>
@@ -59,7 +64,7 @@
     </div>
     <h2>スキルポイント</h2>
     <h2><?php
-      foreach ($result as $row) {
+      
         echo $row['skill_point']; // ユーザーIDを配列に追加
     ?></h2>
     <p>体力</p>
