@@ -8,9 +8,8 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../CSS/menuBar.css">
-    <link rel="stylesheet" href="../CSS/profile.css">
-
-    <title>登録情報確認</title>
+    <link rel="stylesheet" href="../CSS/profile.css?<?php echo date('YmdHis'); ?>"/>
+    <title>変更確認</title>
   </head>
   <?php
   $user_id = 1; //セッションから取得してください
@@ -19,7 +18,7 @@
   $users = $user->getUserDataByUserId($user_id);
   ?>
   <body style="background-color:#FFEED5;">
-    <div class="container-fluid">
+  <div class="container-fluid">
         <div class="row">
             <!-- サイドバー -->
             <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block  text-white sidebar  fixed-top">
@@ -59,7 +58,7 @@
       <!-- メニューバーここまで -->
     <div class="container-fluid">
         <div class="row">
-            <h1 class="col-12 text-center mt-5">登録情報</h1>
+            <h1 class="col-12 text-center mt-5">登録情報の変更</h1>
         </div>
         <div class="row">
             <div class="col-12 text-center my-5">
@@ -67,27 +66,31 @@
             </div>
         </div>
         
-            <form action="./change_profile.php" method="get">
+            <form action="user_update.php" method="post">
                 <div class="row">
                     <div class="col-12 text-center">
                         <p class="text-center">
-                            ニックネーム : <?= $users['nickname']; ?>
+                            ニックネーム:<?= $users['nickname']; ?> → <span style="color:red;"><?= $_POST['nickname']; ?></span>
                         </p>
+                        <input type="hidden" name="nickname" value="<?= $_POST['nickname']; ?>">
                     </div>
-                    <div class="col-12 text-center my-4">
+                    <div class="col-12 text-center my-5">
                         <p class="text-center">
-                            メールアドレス : <?= $users['mailaddress']; ?>
+                            メールアドレス:<?= $users['mailaddress']; ?> → <span style="color:red;"><?= $_POST['mailaddress']; ?></span>
                         </p>
+                        <input type="hidden" name="mailaddress" value="<?= $_POST['mailaddress']; ?>">
                     </div>
+                    <!-- セッションの値を渡す -->
+                    <input type="hidden" name="user_id" value="1">
                 </div>
                 <div class="row">
                     <div class="col-6 text-end">
-                      <a href="mypage.php">
+                      <a href="change_profile.php">
                         <button type="button" class="button-css">戻る</button>
                       </a>
                     </div>
                     <div class="col-6 text-strat">
-                        <input type="submit" value="変更する" class="button-css">
+                        <input type="submit" value="確定" class="button-css">
                     </div>
                 </div>
             </form>

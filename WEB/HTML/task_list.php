@@ -28,14 +28,14 @@
   $task = new Task();
   $tasks = $task->getAllTaskByUserId($user_id);
 
-  //TODO: 今日が期限のタスクを取得
-  $todayTaskList = $task->fetchTodayTaskList($user_id);
-  //TODO: 今日以降のタスクを取得
-  //TODO: 期限が近い順に並び替える
-  // $ScheduledTaskList = 
-
-  $task->fetchTaskByUserId($user_id, false);
-
+  //今日が期限のタスクを取得
+  $todayTaskList = $task->fetchTaskByUserId($user_id,
+    is_complete: false, start: date('Y-m-d'), end: date('Y-m-d'));
+  //今日以降のタスクを取得
+  $ScheduledTaskList = $task->fetchTaskByUserId($user_id,
+    is_complete: false, start: date('Y-m-d', strtotime('+1 day')));
+  //TODO: 今日完了したタスクの数を取得
+  $completeTaskCount = $task->countCompletedTask($user_id, date('Y-m-d'), date('Y-m-d'));
 ?>
 <script>
   console.log(<?= json_encode($tasks) ?>)
@@ -43,8 +43,9 @@
 <body>
   <a href="./logout.php">デバッグ用ログアウト</a><br>
   <h1>タスク一覧画面</h1>
+  <a href="./task_edit.php"><button>新規作成</button></a>
+  <a href="./task_record.php"><button>記録を見る</button></a>
   <h3><?=date('Y-m-d D')?> 今日のタスク</h3>
-  <button><a href="task_edit.php">新規作成</a></button><br>
   <hr>
   <!-- 今日が期限のタスク一覧 -->
   <?php foreach($todayTaskList as $taskData) :?>
@@ -76,10 +77,39 @@
     </div>
     <hr>
   <?php endforeach; ?>
-
-  <h3>今後の予定</h3>
-  <!-- TODO: 今日以降のタスクを期限が近い順で表示 -->
   
+  <h3>今後の予定</h3>
+  <?php foreach($ScheduledTaskList as $taskData) :?>
+    <div class="row">
+      <div class="col-3">
+        <!-- 完了ボタン URL以外は変更できます-->
+        <a href="./task_state_update.php?task_id=<?=$taskData['task_id']?>
+                                        &is_complete=<?=$taskData['is_complete']?>">
+          <?php if($taskData['is_complete']) { ?>
+            <button class="btn-secondry"><i class="bi bi-clipboard-check"></i></button>
+          <?php } else { ?>
+            <button class="btn-secondry"><i class="bi bi-clipboard"></i></button>
+          <?php } ?><!--end if-->
+        </a>
+      </div>
+      <div class="col-4">
+        <!-- タイトル -->
+        <p><?=$taskData['title']?></p>
+      </div>
+      <div class="col-2">
+          <p>期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></p>
+      </div>
+      <div class="col-3">
+        <!-- 編集ボタン URL以外は変更できます -->
+        <a href="./task_edit.php?task_id=<?=$taskData['task_id']?>">
+          <button>編集する</button>
+        </a>
+      </div>
+    </div>
+    <hr>
+  <?php endforeach; ?>
+
+  <p>今日は<?=$completeTaskCount?>件のタスクを完了しました。</p>
 
   <!-- 簡易タスク追加 -->
   <form action="./task_regist.php" method="post" id="quick-task-add"></form>
