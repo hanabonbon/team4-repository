@@ -1,8 +1,5 @@
 <?php 
   session_start();
-  if(isset($_SESSION['user_id'])){
-    header('location: ./task_list.php');
-  }
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -43,14 +40,17 @@
     }
 
     //メールアドレス、パスワードが正しく入力されている場合のみ登録ボタンを表示
-    if(!preg_match('/\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,100}+\z/i', $_POST['password']) && 
-        !$mail = filter_var($_POST['mailaddress'], FILTER_VALIDATE_EMAIL)) 
+    if(preg_match('/\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,100}+\z/i', $_POST['password']) && 
+        $mail = filter_var($_POST['mailaddress'], FILTER_VALIDATE_EMAIL)) {
+      echo '
+        <h3>入力内容</h3>
+        <p>'.$_POST['nickname'].'</p>
+        <p>'.$_POST['mailaddress'].'</p>
+        <p>'.$_POST['password'].'</p>
+        <button type="submit" form="signup-validation-form">登録する</button>
+      ';
+    }
   ?>
-  <h3>入力内容</h3>
-  <p><?=$_POST['nickname']?></p>
-  <p><?=$_POST['mailaddress']?></p>
-  <p><?=$_POST['password']?></p>
-  <button type="submit" form="signup-validation-form">登録する</button>
 
   <!--入力画面へ戻るフォーム-->
   <form action="signup.php" method="post">
