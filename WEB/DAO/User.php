@@ -45,7 +45,7 @@
       $ps = $this->pdo->prepare($sql);
       $ps->bindValue(1,$userData['nickname'],PDO::PARAM_STR);
       $ps->bindValue(2,$userData['mailaddress'],PDO::PARAM_STR);
-      $ps->bindValue(3,$userData['user_id'],PDO::PARAM_STR);
+      $ps->bindValue(3,$userData['user_id'],PDO::PARAM_INT);
       $ps->execute();
     }
 
