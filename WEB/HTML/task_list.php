@@ -81,79 +81,85 @@
   <!-- コンテンツ -->
   <div class="container-fluid" id="task-list-contents">
 
-    <a href="./logout.php">デバッグ用ログアウト</a><br>
-    <div id="button-area">
-      <a href="./task_edit.php"><button>新規作成</button></a>
-      <a href="./task_record.php"><button>記録を見る</button></a>
+    <div id="top-area"><!-- 20% -->
+      <!-- <a href="./logout.php">デバッグ用ログアウト</a> -->
+      <div id="button-area">
+        <a href="./task_edit.php"><button>新規作成</button></a>
+        <a href="./task_record.php"><button>記録を見る</button></a>
+      </div>
+      <h3><?=date('Y-m-d D')?> 今日のタスク</h3>
+      <hr>
     </div>
-    <h3><?=date('Y-m-d D')?> 今日のタスク</h3>
-    <hr>
 
-    <div id="task-list-area">
-      <!-- 今日が期限のタスク一覧 -->
-      <?php foreach($todayTaskList as $taskData) :?>
-        <div class="row">
-          <div class="col-3">
-            <!-- 完了ボタン URL以外は変更できます-->
-            <a href="./task_state_update.php?task_id=<?=$taskData['task_id']?>
-                                            &is_complete=<?=$taskData['is_complete']?>">
-              <?php if($taskData['is_complete']) { ?>
-                <button class="btn-secondry"><i class="bi bi-clipboard-check"></i></button>
-              <?php } else { ?>
-                <button class="btn-secondry"><i class="bi bi-clipboard"></i></button>
-              <?php } ?><!--end if-->
-            </a>
+    <div id="task-area"><!-- 60% -->
+      <div id="today-task-area" class="container-fluid">
+        <!-- 今日が期限のタスク一覧 -->
+        <?php foreach($todayTaskList as $taskData) :?>
+          <div class="row">
+            <div class="col-3">
+              <!-- 完了ボタン URL以外は変更できます-->
+              <a href="./task_state_update.php?task_id=<?=$taskData['task_id']?>
+                                              &is_complete=<?=$taskData['is_complete']?>">
+                <?php if($taskData['is_complete']) { ?>
+                  <button class="btn-secondry"><i class="bi bi-clipboard-check"></i></button>
+                <?php } else { ?>
+                  <button class="btn-secondry"><i class="bi bi-clipboard"></i></button>
+                <?php } ?><!--end if-->
+              </a>
+            </div>
+            <div class="col-4">
+              <!-- タイトル -->
+              <p><?=$taskData['title']?></p>
+            </div>
+            <div class="col-2">
+                <p>期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></p>
+            </div>
+            <div class="col-3">
+              <!-- 編集ボタン URL以外は変更できます -->
+              <a href="./task_edit.php?task_id=<?=$taskData['task_id']?>">
+                <button>編集する</button>
+              </a>
+            </div>
           </div>
-          <div class="col-4">
-            <!-- タイトル -->
-            <p><?=$taskData['title']?></p>
-          </div>
-          <div class="col-2">
-              <p>期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></p>
-          </div>
-          <div class="col-3">
-            <!-- 編集ボタン URL以外は変更できます -->
-            <a href="./task_edit.php?task_id=<?=$taskData['task_id']?>">
-              <button>編集する</button>
-            </a>
-          </div>
-        </div>
-        <hr>
-      <?php endforeach; ?>
-      
-      <h3>今後の予定</h3>
-      <?php foreach($ScheduledTaskList as $taskData) :?>
-        <div class="row">
-          <div class="col-3">
-            <!-- 完了ボタン URL以外は変更できます-->
-            <a href="./task_state_update.php?task_id=<?=$taskData['task_id']?>
-                                            &is_complete=<?=$taskData['is_complete']?>">
-              <?php if($taskData['is_complete']) { ?>
-                <button class="btn-secondry"><i class="bi bi-clipboard-check"></i></button>
-              <?php } else { ?>
-                <button class="btn-secondry"><i class="bi bi-clipboard"></i></button>
-              <?php } ?><!--end if-->
-            </a>
-          </div>
-          <div class="col-4">
-            <!-- タイトル -->
-            <p><?=$taskData['title']?></p>
-          </div>
-          <div class="col-2">
-              <p>期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></p>
-          </div>
-          <div class="col-3">
-            <!-- 編集ボタン URL以外は変更できます -->
-            <a href="./task_edit.php?task_id=<?=$taskData['task_id']?>">
-              <button>編集する</button>
-            </a>
-          </div>
-        </div>
-        <hr>
-      <?php endforeach; ?>
-    </div>
+          <hr>
+        <?php endforeach; ?>
+      </div>
   
-    <p>今日は<?=$todaysCompletedCount?>件のタスクを完了しました。</p>
+      <h3>今後の予定</h3>
+      <div id="scheduled-task-area" class="container-fluid">
+        <?php foreach($ScheduledTaskList as $taskData) :?>
+          <div class="row">
+            <div class="col-3">
+              <!-- 完了ボタン URL以外は変更できます-->
+              <a href="./task_state_update.php?task_id=<?=$taskData['task_id']?>
+                                              &is_complete=<?=$taskData['is_complete']?>">
+                <?php if($taskData['is_complete']) { ?>
+                  <button class="btn-secondry"><i class="bi bi-clipboard-check"></i></button>
+                <?php } else { ?>
+                  <button class="btn-secondry"><i class="bi bi-clipboard"></i></button>
+                <?php } ?><!--end if-->
+              </a>
+            </div>
+            <div class="col-4">
+              <!-- タイトル -->
+              <p><?=$taskData['title']?></p>
+            </div>
+            <div class="col-2">
+                <p>期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></p>
+            </div>
+            <div class="col-3">
+              <!-- 編集ボタン URL以外は変更できます -->
+              <a href="./task_edit.php?task_id=<?=$taskData['task_id']?>">
+                <button>編集する</button>
+              </a>
+            </div>
+          </div>
+          <hr>
+        <?php endforeach; ?>
+      </div>
+    </div>
+      
+    <p id="task-message">今日は<?=$todaysCompletedCount?>件のタスクを完了しました。</p>
     
     <div id="quick-task-area">
       <!-- 簡易タスク追加 -->
