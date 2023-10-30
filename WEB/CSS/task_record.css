@@ -1,0 +1,9 @@
+#task-list {
+  height: 500px;
+  /*スクロールする*/
+  overflow: scroll;
+}
+
+#task-simple-view {
+  width: 900px;
+}
