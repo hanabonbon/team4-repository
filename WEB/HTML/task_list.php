@@ -95,8 +95,8 @@
       <div id="today-task-area" class="container-fluid">
         <!-- 今日が期限のタスク一覧 -->
         <?php foreach($todayTaskList as $taskData) :?>
-          <div class="row">
-            <div class="col-3">
+          <div class="row"><!--  align-items-center -->
+            <div class="col-3 complete-button">
               <!-- 完了ボタン URL以外は変更できます-->
               <a href="./task_state_update.php?task_id=<?=$taskData['task_id']?>
                                               &is_complete=<?=$taskData['is_complete']?>">
@@ -112,16 +112,16 @@
               <p><?=$taskData['title']?></p>
             </div>
             <div class="col-2">
-                <p>期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></p>
+                <p class="task-period">期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></p>
             </div>
-            <div class="col-3">
+            <div class="col-3 edit-button">
               <!-- 編集ボタン URL以外は変更できます -->
               <a href="./task_edit.php?task_id=<?=$taskData['task_id']?>">
                 <button>編集する</button>
               </a>
             </div>
           </div>
-          <hr>
+          
         <?php endforeach; ?>
       </div>
   
@@ -129,7 +129,7 @@
       <div id="scheduled-task-area" class="container-fluid">
         <?php foreach($ScheduledTaskList as $taskData) :?>
           <div class="row">
-            <div class="col-3">
+            <div class="col-3 complete-button">
               <!-- 完了ボタン URL以外は変更できます-->
               <a href="./task_state_update.php?task_id=<?=$taskData['task_id']?>
                                               &is_complete=<?=$taskData['is_complete']?>">
@@ -142,19 +142,19 @@
             </div>
             <div class="col-4">
               <!-- タイトル -->
-              <p><?=$taskData['title']?></p>
+              <p class="task-title"><?=$taskData['title']?></p>
             </div>
             <div class="col-2">
-                <p>期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></p>
+                <p class=" task-period">期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></p>
             </div>
-            <div class="col-3">
+            <div class="col-3 edit-button">
               <!-- 編集ボタン URL以外は変更できます -->
               <a href="./task_edit.php?task_id=<?=$taskData['task_id']?>">
                 <button>編集する</button>
               </a>
             </div>
           </div>
-          <hr>
+          
         <?php endforeach; ?>
       </div>
     </div>

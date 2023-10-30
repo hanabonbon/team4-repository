@@ -32,6 +32,32 @@ body {
   height: 10%;
 }
 
+/* 表示してあるタスクのスタイル */
+#task-area .row {
+  height: 20%;
+  border: solid 1px;
+  border-radius: 7px;
+  margin-top: 25px;
+}
+
+.task-title {
+  margin-top: 8px;
+  text-decoration: none;
+}
+
+.task-period {
+  margin-top: 8px;
+}
+
+.complete-button {
+  margin-top: 7px;
+}
+
+.edit-button {
+  margin-top: 7px;
+}
+
+/* 「今日のタスク」エリア */
 #today-task-area {
   overflow-y: scroll;
   height: 43%;
@@ -39,6 +65,7 @@ body {
   margin-bottom: 1%;
 }
 
+/* 「予定されたタスク」エリア */
 #scheduled-task-area {
   overflow-y: scroll;
   height: 43%;
@@ -46,6 +73,7 @@ body {
   margin-bottom: 1%;
 }
 
+/* 達成したタスク数など */
 #task-message {
   margin-top: 2%;
   height: 5%;
@@ -55,6 +83,7 @@ body {
   height: 5%;
 }
 
+/* 以下、スクロールバーのスタイル */
 ::-webkit-scrollbar{
   width: 10px;
 }
