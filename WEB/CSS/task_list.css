@@ -32,31 +32,6 @@ body {
   height: 10%;
 }
 
-/* 表示してあるタスクのスタイル */
-#task-area .row {
-  height: 20%;
-  border: solid 1px;
-  border-radius: 7px;
-  margin-top: 25px;
-}
-
-.task-title {
-  margin-top: 8px;
-  text-decoration: none;
-}
-
-.task-period {
-  margin-top: 8px;
-}
-
-.complete-button {
-  margin-top: 7px;
-}
-
-.edit-button {
-  margin-top: 7px;
-}
-
 /* 「今日のタスク」エリア */
 #today-task-area {
   overflow-y: scroll;
@@ -71,6 +46,34 @@ body {
   height: 43%;
   margin-top: 1%;
   margin-bottom: 1%;
+}
+
+/* タスクカードのスタイル */
+.task-card {
+  
+}
+
+.task-card-body {
+  border: 1px solid;
+  border-radius: 5px;
+  text-decoration: none;
+  color: black;
+}
+
+.task-title {
+  margin-top: 8px;
+}
+
+.task-period {
+  margin-top: 8px;
+}
+
+.complete-button {
+  margin-top: 7px;
+}
+
+.edit-button {
+  margin-top: 7px;
 }
 
 /* 達成したタスク数など */

@@ -93,36 +93,30 @@
 
     <div id="task-area"><!-- 60% -->
       <div id="today-task-area" class="container-fluid">
+
         <!-- 今日が期限のタスク一覧 -->
         <?php foreach($todayTaskList as $taskData) :?>
-          <div class="row"><!--  align-items-center -->
-            <div class="col-3 complete-button">
-              <!-- 完了ボタン URL以外は変更できます-->
-              <a href="./task_state_update.php?task_id=<?=$taskData['task_id']?>
-                                              &is_complete=<?=$taskData['is_complete']?>">
-                <?php if($taskData['is_complete']) { ?>
-                  <button class="btn-secondry"><i class="bi bi-clipboard-check"></i></button>
-                <?php } else { ?>
-                  <button class="btn-secondry"><i class="bi bi-clipboard"></i></button>
-                <?php } ?><!--end if-->
-              </a>
-            </div>
-            <div class="col-4">
-              <!-- タイトル -->
-              <p><?=$taskData['title']?></p>
-            </div>
-            <div class="col-2">
-                <p class="task-period">期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></p>
-            </div>
-            <div class="col-3 edit-button">
-              <!-- 編集ボタン URL以外は変更できます -->
-              <a href="./task_edit.php?task_id=<?=$taskData['task_id']?>">
-                <button>編集する</button>
-              </a>
-            </div>
+
+          <div class="task-card">
+            <!-- 完了ボタン URL以外は変更できます-->
+            <a href="./task_state_update.php?task_id=<?=$taskData['task_id']?>
+                                                &is_complete=<?=$taskData['is_complete']?>">
+              <?php if($taskData['is_complete']) { ?>
+                <button class="btn-secondry"><i class="bi bi-clipboard-check"></i></button>
+              <?php } else { ?>
+                <button class="btn-secondry"><i class="bi bi-clipboard"></i></button>
+              <?php } ?><!--end if-->
+            </a>
+
+            <!-- タスクカード -->
+            <a href="./task_edit.php?task_id=<?=$taskData['task_id']?>" class="task-card-body">
+              <span><?=$taskData['title']?></span>
+              <span>期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></span>
+            </a>
           </div>
-          
+
         <?php endforeach; ?>
+
       </div>
   
       <h3>今後の予定</h3>
