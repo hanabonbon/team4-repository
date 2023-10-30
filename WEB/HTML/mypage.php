@@ -13,6 +13,12 @@
   $ps = $pdo->prepare($sql);
   $ps->execute();
   $result = $ps->fetchAll(PDO::FETCH_ASSOC);
+  foreach ($result as $row) {
+    $H = $row['hitpoint'];
+    $A = $row['attack'];
+    $S = $row['agility'];
+    $D = $row['defence'];
+    $L = $row['luck'];
 ?>
 <!doctype html>
 <html lang="en">
@@ -37,7 +43,7 @@
                   <!--アイコンとユーザー名-->
                   <div class="icon-name">
                     <div class="img-area">
-                      <img src="../images/<?PHP foreach ($result as $row) { echo $row['icon_path'];?>" class="img-icon">
+                      <img src="../images/<?PHP echo $row['icon_path'];?>" class="img-icon">
                     </div>
                     <div class="name-area">
                       <label class="username-area"><?php echo $row['nickname']; ?></label>
@@ -70,7 +76,7 @@
     <p>体力</p>
     <div class="yoko-center">
       <?php
-        echo $row['hitpoint']; // ユーザーIDを配列に追加
+        echo $H; // ユーザーIDを配列に追加
       ?> <!-- 横線を追加 -->
       <button type="submit">+</button>
     </div>
@@ -95,7 +101,7 @@
       <div class="info">
         <p class="text-left">攻撃力</p>
         <?php
-          echo $row['attack']; // ユーザーIDを配列に追加
+          echo $A; // ユーザーIDを配列に追加
         ?>
         <button type="submit">+</button>
         <svg xmlns="http://www.w3.org/2000/svg" width="230" height="23" viewBox="0 0 230 23" fill="none">
@@ -108,7 +114,7 @@
       <div class="info">
         <p class="text-right">素早さ</p>
         <?php
-          echo $row['agility']; // ユーザーIDを配列に追加
+          echo $S; // ユーザーIDを配列に追加
         ?>
         <button type="submit">+</button>
         <svg xmlns="http://www.w3.org/2000/svg" width="230" height="24" viewBox="0 0 230 24" fill="none">
@@ -120,7 +126,7 @@
       <div class="info">
         <p class="text-left">防御力</p>
         <?php
-          echo $row['defence']; // ユーザーIDを配列に追加
+          echo $D; // ユーザーIDを配列に追加
         ?>
         <button type="submit">+</button>
         <svg xmlns="http://www.w3.org/2000/svg" width="230" height="23" viewBox="0 0 230 23" fill="none">
@@ -130,7 +136,7 @@
       <div class="info">
         <p class="text-right">幸運</p>
         <?php
-          echo $row['luck']; // ユーザーIDを配列に追加
+          echo $L; // ユーザーIDを配列に追加
         ?>
         <button type="submit">+</button>
         <svg xmlns="http://www.w3.org/2000/svg" width="230" height="24" viewBox="0 0 230 24" fill="none">
@@ -143,6 +149,7 @@
         }
     ?>
     <div class="button">
+      <a href="mypage.php" class="btn btn-primary">更新</a>
       <a href="information.php" class="btn btn-primary">登録情報</a>
       <a href="logout.php" class="btn btn-primary">ログアウト</a>
     </div>
