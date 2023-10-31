@@ -69,7 +69,10 @@
         </div>
         <div class="row">
             <div class="col-12 text-center my-5">
-                <img src="../images/default_icon.png" width="200" height="auto">
+                <label for="profile-icon-style" style="cursor: pointer;">
+                  <img src="../images/default_icon.png" width="200" height="auto">
+                </label>
+                <input type="file" name="profile_icon" id="profile-icon-style">
             </div>
         </div>
         
