@@ -19,13 +19,13 @@
   $tasks = $task->getAllTaskByUserId($user_id);
 
   //今日が期限のタスクを取得
-  $todayTaskList = $task->fetchTaskByUserId($user_id,
+  $todayTaskList = $task->fetchTask($user_id,
     is_complete: false, start: date('Y-m-d'), end: date('Y-m-d'));
   //今日以降のタスクを取得
-  $ScheduledTaskList = $task->fetchTaskByUserId($user_id,
+  $ScheduledTaskList = $task->fetchTask($user_id,
     is_complete: false, start: date('Y-m-d', strtotime('+1 day')));
   //明日と明後日のタスクを取得
-  $NearTaskList = $task->fetchTaskByUserId($user_id,
+  $NearTaskList = $task->fetchTask($user_id,
     is_complete: false, start: date('Y-m-d', strtotime('+1 day')),end: date('Y-m-d', strtotime('+2 day')));
   //今日のタスク数を取得
   $TaskCount = $task->counttodayTask($user_id, date('Y-m-d'), date('Y-m-d'));
