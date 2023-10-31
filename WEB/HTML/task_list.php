@@ -23,29 +23,30 @@
   <title>タスク一覧</title>
 </head>
 <?php
-  $user_id = $_SESSION['user_id']; //セッションから取得してください
+  $user_id = $_SESSION['user_id']; 
   require_once('../DAO/Task.php');
   $task = new Task();
-  $tasks = $task->getAllTaskByUserId($user_id);
 
   //今日が期限のタスクを取得
-  $todayTaskList = $task->fetchTaskByUserId($user_id,
+  $todayTaskList = $task->fetchTask($user_id,
     is_complete: false, start: date('Y-m-d'), end: date('Y-m-d'));
   //今日以降のタスクを取得
-  $ScheduledTaskList = $task->fetchTaskByUserId($user_id,
+  $ScheduledTaskList = $task->fetchTask($user_id,
     is_complete: false, start: date('Y-m-d', strtotime('+1 day')));
-  //TODO: 今日完了したタスクの数を取得
-  $completeTaskCount = $task->countCompletedTask($user_id, date('Y-m-d'), date('Y-m-d'));
+
+  //今日完了したタスクの数を取得
+  $todaysCompletedCount = 
+    $task->countCompletedTask($user_id, date('Y-m-d'), date('Y-m-d'));
 ?>
 <script>
-  console.log(<?= json_encode($tasks) ?>)
+  console.log(<?= json_encode($todayTaskList) ?>)
 </script>
 <body>
   <a href="./logout.php">デバッグ用ログアウト</a><br>
   <h1>タスク一覧画面</h1>
+  <a href="./task_edit.php"><button>新規作成</button></a>
+  <a href="./task_record.php"><button>記録を見る</button></a>
   <h3><?=date('Y-m-d D')?> 今日のタスク</h3>
-  <button><a href="task_edit.php">新規作成</a></button><br>
-  <button><a>記録を</a></button>
   <hr>
   <!-- 今日が期限のタスク一覧 -->
   <?php foreach($todayTaskList as $taskData) :?>
@@ -109,7 +110,7 @@
     <hr>
   <?php endforeach; ?>
 
-  <p>今日は<?=$completeTaskCount?>件のタスクを完了しました。</p>
+  <p>今日は<?=$todaysCompletedCount?>件のタスクを完了しました。</p>
 
   <!-- 簡易タスク追加 -->
   <form action="./task_regist.php" method="post" id="quick-task-add"></form>
@@ -118,7 +119,7 @@
       <input type="text" name="title" form="quick-task-add">
     </div>
     <div class="col-3">
-      <input type="date" name="period" form="quick-task-add">
+      <input type="date" name="period" required="required" form="quick-task-add">
     </div>
     <div class="col-1">
       <button type="submit" form="quick-task-add">追加</button>

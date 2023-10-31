@@ -108,33 +108,17 @@
       $ps->execute();
     }
     
-    public function fetchTodayTaskList($user_id) {
-      $sql = "SELECT * FROM task 
-              WHERE period BETWEEN :start AND :end 
-              AND user_id = :user_id
-              ORDER BY period ASC";
-      $ps = $this->pdo->prepare($sql);
-      $ps->bindValue(':start', date('Y-m-d').' 00:00:00', PDO::PARAM_STR);
-      $ps->bindValue(':end', date('Y-m-d').' 23:59:59', PDO::PARAM_STR);
-      $ps->bindValue(':user_id', $user_id, PDO::PARAM_INT);
-      $ps->execute();
-      $result = $ps->fetchAll(PDO::FETCH_ASSOC);
-      return $result;
-    }
-
-    //完了状況に関わらず取得する関数だけは別で作る必要がある。
-    
-    //指定したユーザーのタスクを取得。
-    //期限(period)を範囲で指定することもできる。
+    //ユーザー、完了状況を指定してタスクを取得する
+    //期限(period)を'start','end'の範囲で指定できる
     //日付を指定しなかった場合は全期間のタスクを取得する
     //'start'だけを指定した場合は'start'以降の全期間のタスクを取得する
     //'end'だけを指定した場合は'end'以前の全期間のタスクを取得する
-    public function fetchTaskByUserId($user_id, //必須
-                                      bool $is_complete, //完了しているか？（必須）
-                                      bool $asc=true, //ソート（指定しなくてもよい）
-                                      $start='1900-01-01', //指定しなくてもよい
-                                      $end='9999-12-31' //指定しなくてもよい
-                                      ){
+    public function fetchTask($user_id, //必須
+                              bool $is_complete, //完了しているか？（必須）
+                              bool $asc=true, //ソート（指定しなくてもよい）
+                              $start='1900-01-01', //指定しなくてもよい
+                              $end='9999-12-31' //指定しなくてもよい
+                              ){
       $sortQuery = $asc ? "ORDER BY period ASC" : "ORDER BY period DESC";
       $sql = "SELECT * FROM task 
               WHERE user_id = :user_id
@@ -144,6 +128,26 @@
       $ps = $this->pdo->prepare($sql);
       $ps->bindValue(':user_id', $user_id, PDO::PARAM_INT);
       $ps->bindValue(':is_complete', $is_complete, PDO::PARAM_INT);
+      $ps->bindValue(':start', $start.' 00:00:00', PDO::PARAM_STR);
+      $ps->bindValue(':end', $end.' 23:59:59', PDO::PARAM_STR);
+      $ps->execute();
+      $result = $ps->fetchAll(PDO::FETCH_ASSOC);
+      return $result;
+    }
+
+    //完了状況に関わらず、タスクを取得します。
+    public function fetchAllTask($user_id, //必須
+                                 bool $asc=true, //ソート（指定しなくてもよい）
+                                 $start='1900-01-01', //指定しなくてもよい
+                                 $end='9999-12-31' //指定しなくてもよい
+                                ){
+      $sortQuery = $asc ? "ORDER BY period ASC" : "ORDER BY period DESC";
+      $sql = "SELECT * FROM task 
+              WHERE user_id = :user_id
+              AND period BETWEEN :start AND :end 
+              ".$sortQuery;
+      $ps = $this->pdo->prepare($sql);
+      $ps->bindValue(':user_id', $user_id, PDO::PARAM_INT);
       $ps->bindValue(':start', $start.' 00:00:00', PDO::PARAM_STR);
       $ps->bindValue(':end', $end.' 23:59:59', PDO::PARAM_STR);
       $ps->execute();
@@ -171,13 +175,67 @@
       return $result['COUNT(*)'];
     }
 
-    //今日のタスク件数を取得する
-    public function counttodayTask($user_id,  
-                                       $start='1900-01-01', 
-                                       $end='9999-12-31') {
-      $sql = "SELECT COUNT(*) FROM task 
+    //完了数の月平均を取得する
+    //良い名前が思いつかない。
+    public function averageCompletedCountByMonth($user_id) {
+      $sql = "SELECT ROUND(AVG(count), 2) as 'month_average'
+              FROM (
+                SELECT DATE_FORMAT(period, '%Y-%m') AS date, 
+                  COUNT(*) AS count
+                  FROM task
+                  WHERE user_id = :user_id
+                  AND is_complete = true
+                  GROUP BY DATE_FORMAT(period, '%Y%m')
+              ) as subquery;";
+      $ps = $this->pdo->prepare($sql);
+      $ps->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+      $ps->execute();
+      $result = $ps->fetch(PDO::FETCH_ASSOC);
+      return $result['month_average'];
+    }
+
+    //タスクがある月を取得
+    public function fetchMonth($user_id, //必須
+                               $start='1900-01-01',
+                               $end='9999-12-31' ) {
+      $sql = "SELECT DATE_FORMAT(period, '%Y-%m') AS date, 
+              COUNT(*) AS count
+              FROM task
               WHERE user_id = :user_id
-              AND period BETWEEN :start AND :end";
+              AND period BETWEEN :start AND :end
+              GROUP BY DATE_FORMAT(period, '%Y-%m')
+              ORDER BY period DESC;";
+      $ps = $this->pdo->prepare($sql);
+      $ps->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+      $ps->bindValue(':start', $start.' 00:00:00', PDO::PARAM_STR);
+      $ps->bindValue(':end', $end.' 23:59:59', PDO::PARAM_STR);
+      $ps->execute();
+      $result = $ps->fetchAll(PDO::FETCH_ASSOC);
+      return $result;
+    }
+
+    //使っていません
+    public function fetchTodayTaskList($user_id) {
+      $sql = "SELECT * FROM task 
+              WHERE period BETWEEN :start AND :end 
+              AND user_id = :user_id
+              ORDER BY period ASC";
+      $ps = $this->pdo->prepare($sql);
+      $ps->bindValue(':start', date('Y-m-d').' 00:00:00', PDO::PARAM_STR);
+      $ps->bindValue(':end', date('Y-m-d').' 23:59:59', PDO::PARAM_STR);
+      $ps->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+      $ps->execute();
+      $result = $ps->fetchAll(PDO::FETCH_ASSOC);
+      return $result;
+    }
+
+   //今日のタスク件数を取得する
+   public function counttodayTask($user_id,  
+   $start='1900-01-01', 
+   $end='9999-12-31') {
+      $sql = "SELECT COUNT(*) FROM task 
+      WHERE user_id = :user_id
+      AND period BETWEEN :start AND :end";
       $ps = $this->pdo->prepare($sql);
       $ps->bindValue(':user_id', $user_id, PDO::PARAM_INT);
       $ps->bindValue(':start', $start.' 00:00:00', PDO::PARAM_STR);

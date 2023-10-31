@@ -74,7 +74,7 @@
                         </p>
                         <input type="hidden" name="nickname" value="<?= $_POST['nickname']; ?>">
                     </div>
-                    <div class="col-12 text-center my-5">
+                    <div class="col-12 text-center my-4">
                         <p class="text-center">
                             メールアドレス:<?= $users['mailaddress']; ?> → <span style="color:red;"><?= $_POST['mailaddress']; ?></span>
                         </p>
@@ -82,6 +82,9 @@
                     </div>
                     <!-- セッションの値を渡す -->
                     <input type="hidden" name="user_id" value="1">
+                    <div class="row">
+                      <div class="col-12 text-center mb-3">この情報で変更します</div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-6 text-end">
