@@ -1,0 +1,16 @@
+.icon{
+    text-align: center;
+}
+img{
+   
+    
+     width: 300px;
+     height: 200px;
+     position: relative;
+     top: 40px;
+    
+    
+ }
+ .text{
+    text-align: center;
+ }

@@ -24,6 +24,8 @@ img{
  }
  .button{
     text-align: center;
+    position: relative;
+    top: 80px;
  }
  body{
     background-color: #968067;

@@ -11,3 +11,24 @@ img{
     
     
  }
+ .error{
+    text-align: center;
+    position: relative;
+    top: 70px;
+ }
+ .button{
+    text-align: center;
+    position: relative;
+    top: 180px;
+ }
+ .enter{
+    text-align: center;
+    position: relative;
+    top: 30px;
+ }
+ body{
+    background-color: 968067;
+ }
+ body{
+    background-color: #FFEED5;
+ }
