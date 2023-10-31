@@ -228,5 +228,21 @@
       $result = $ps->fetchAll(PDO::FETCH_ASSOC);
       return $result;
     }
+
+   //今日のタスク件数を取得する
+   public function counttodayTask($user_id,  
+   $start='1900-01-01', 
+   $end='9999-12-31') {
+      $sql = "SELECT COUNT(*) FROM task 
+      WHERE user_id = :user_id
+      AND period BETWEEN :start AND :end";
+      $ps = $this->pdo->prepare($sql);
+      $ps->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+      $ps->bindValue(':start', $start.' 00:00:00', PDO::PARAM_STR);
+      $ps->bindValue(':end', $end.' 23:59:59', PDO::PARAM_STR);
+      $ps->execute();
+      $result = $ps->fetch(PDO::FETCH_ASSOC);
+      return $result['COUNT(*)'];
+    }                          
   }
 ?>
