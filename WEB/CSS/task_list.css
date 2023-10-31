@@ -24,7 +24,7 @@ body {
 }
 
 #task-area {
-  margin-top: 2%;
+  /* margin-top: 2%; */
   height: 63%;
 }
 
@@ -35,37 +35,45 @@ body {
 /* 「今日のタスク」エリア */
 #today-task-area {
   overflow-y: scroll;
-  height: 43%;
-  margin-top: 1%;
+  height: 44%;
+  margin-top: 0%;
   margin-bottom: 1%;
 }
 
 /* 「予定されたタスク」エリア */
 #scheduled-task-area {
   overflow-y: scroll;
-  height: 43%;
-  margin-top: 1%;
+  height: 42%;
+  margin-top: 2%;
   margin-bottom: 1%;
 }
 
 /* タスクカードのスタイル */
 .task-card {
-  
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.complete-button {
+  text-decoration: none;
 }
 
 .task-card-body {
+  margin-left: 5px;
   border: 1px solid;
   border-radius: 5px;
   text-decoration: none;
   color: black;
+  padding: 5px;
+  width: 500px;
 }
 
 .task-title {
-  margin-top: 8px;
+  font-size: 14px;
 }
 
 .task-period {
-  margin-top: 8px;
+  font-size: 14px;
 }
 
 .complete-button {

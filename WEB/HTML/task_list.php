@@ -97,10 +97,12 @@
         <!-- 今日が期限のタスク一覧 -->
         <?php foreach($todayTaskList as $taskData) :?>
 
+          
           <div class="task-card">
             <!-- 完了ボタン URL以外は変更できます-->
             <a href="./task_state_update.php?task_id=<?=$taskData['task_id']?>
-                                                &is_complete=<?=$taskData['is_complete']?>">
+                                                &is_complete=<?=$taskData['is_complete']?>" 
+                                                class="complete-button">
               <?php if($taskData['is_complete']) { ?>
                 <button class="btn-secondry"><i class="bi bi-clipboard-check"></i></button>
               <?php } else { ?>
@@ -110,11 +112,10 @@
 
             <!-- タスクカード -->
             <a href="./task_edit.php?task_id=<?=$taskData['task_id']?>" class="task-card-body">
-              <span><?=$taskData['title']?></span>
-              <span>期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></span>
+              <span class="task-title"><?=$taskData['title']?></span>
+              <span class="task-period">期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></span>
             </a>
           </div>
-
         <?php endforeach; ?>
 
       </div>
