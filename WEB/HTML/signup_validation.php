@@ -6,9 +6,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../CSS/signup_validation.css?<?php echo date('YmdHis'); ?>"/>
   <title>登録内容の確認</title>
 </head>
 <body>
+<div class="icon">
+    <img src="../images/icon.png" alt="アイコン">
+    </div>
   <form action="user_regist.php" method="post" id="signup-validation-form"></form>
   <input type="hidden" value="<?=$_POST['nickname']?>" form="signup-validation-form" name="nickname">
 

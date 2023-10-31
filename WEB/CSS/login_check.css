@@ -1,0 +1,33 @@
+.icon{
+    text-align: center;
+}
+img{
+   
+    
+     width: 300px;
+     height: 200px;
+     position: relative;
+     top: 40px;
+    
+    
+ }
+ .error-message{
+    text-align: center;
+    position: relative;
+    top: 40px;
+ }
+ .login_link{
+    text-align: center;
+    text-decoration: none;
+    position: relative;
+    top:40px;
+ }
+ .button{
+    text-align: center;
+ }
+ body{
+    background-color: #968067;
+ }
+ body{
+    background-color: #FFEED5;
+ }
