@@ -95,8 +95,10 @@
                         </p>
                         <input type="hidden" name="mailaddress" value="<?= $_POST['mailaddress']; ?>">
                     </div>
+                    <!-- アイコンパスを渡す -->
+                    <input type="hidden" name="icon_path" value="<?= $newFileName ?>">
                     <!-- セッションの値を渡す -->
-                    <input type="hidden" name="user_id" value="1">
+                    <input type="hidden" name="user_id" value="<?= $_SESSION['user_id']; ?>">
                     <div class="row">
                       <div class="col-12 text-center mb-3">この情報で変更します</div>
                     </div>
