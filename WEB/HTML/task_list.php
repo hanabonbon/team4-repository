@@ -95,6 +95,37 @@
       <div id="today-task-area" class="container-fluid">
         <!-- 今日が期限のタスク一覧 -->
         <?php foreach($todayTaskList as $taskData) :?>
+          <!-- フォーム設定 -->
+          <form action="./task_edit.php" method="get">
+          <input type="hidden" name="task_id" value="<?=$taskData['task_id']?>">
+
+          <div class="row"><!--  align-items-center -->
+            <div class="col-1 complete-button">
+              <!-- 完了ボタン URL以外は変更できます-->
+              <a href="./task_state_update.php?task_id=<?=
+                $taskData['task_id']?>&is_complete=<?=$taskData['is_complete']?>">
+                <i class="<?=$taskData['is_complete'] ? "bi bi-clipboard-check" : "bi bi-clipboard"?>"></i>
+              </a>
+            </div>
+
+            <button type="submit" class="task-card col-4">
+              <!-- タイトル -->
+              <span class="task-title"><?=$taskData['title']?></span>
+              <span class="task-period">期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></span> 
+            </button>
+          </div>
+          </form>
+        <?php endforeach; ?>
+      </div>
+  
+      <h3>今後の予定</h3>
+      <div id="scheduled-task-area" class="container-fluid">
+        <?php foreach($ScheduledTaskList as $taskData) :?>
+          
+          <!-- フォーム設定 -->
+          <form action="./task_edit.php" method="get"></form>
+          <input type="hidden" name="task_id" value="<?=$taskData['task_id']?>">
+
           <div class="row"><!--  align-items-center -->
             <div class="col-3 complete-button">
               <!-- 完了ボタン URL以外は変更できます-->
@@ -107,52 +138,12 @@
                 <?php } ?><!--end if-->
               </a>
             </div>
-            <div class="col-4">
+
+            <button type="submit" class="task-card col-4">
               <!-- タイトル -->
-              <p><?=$taskData['title']?></p>
-            </div>
-            <div class="col-2">
-                <p class="task-period">期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></p>
-            </div>
-            <div class="col-3 edit-button">
-              <!-- 編集ボタン URL以外は変更できます -->
-              <a href="./task_edit.php?task_id=<?=$taskData['task_id']?>">
-                <button>編集する</button>
-              </a>
-            </div>
-          </div>
-          
-        <?php endforeach; ?>
-      </div>
-  
-      <h3>今後の予定</h3>
-      <div id="scheduled-task-area" class="container-fluid">
-        <?php foreach($ScheduledTaskList as $taskData) :?>
-          <div class="row">
-            <div class="col-3 complete-button">
-              <!-- 完了ボタン URL以外は変更できます-->
-              <a href="./task_state_update.php?task_id=<?=$taskData['task_id']?>
-                                              &is_complete=<?=$taskData['is_complete']?>">
-                <?php if($taskData['is_complete']) { ?>
-                  <button class="btn-secondry"><i class="bi bi-clipboard-check"></i></button>
-                <?php } else { ?>
-                  <button class="btn-secondry"><i class="bi bi-clipboard"></i></button>
-                <?php } ?><!--end if-->
-              </a>
-            </div>
-            <div class="col-4">
-              <!-- タイトル -->
-              <p class="task-title"><?=$taskData['title']?></p>
-            </div>
-            <div class="col-2">
-                <p class=" task-period">期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></p>
-            </div>
-            <div class="col-3 edit-button">
-              <!-- 編集ボタン URL以外は変更できます -->
-              <a href="./task_edit.php?task_id=<?=$taskData['task_id']?>">
-                <button>編集する</button>
-              </a>
-            </div>
+              <span class="task-title"><?=$taskData['title']?></span>
+              <span class="task-period">期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></span> 
+            </button>
           </div>
           
         <?php endforeach; ?>
