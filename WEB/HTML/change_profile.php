@@ -67,16 +67,15 @@
         <div class="row">
             <h1 class="col-12 text-center mt-5">登録情報の変更</h1>
         </div>
-        <div class="row">
-            <div class="col-12 text-center my-5">
-                <label for="profile-icon-style" style="cursor: pointer;">
-                  <img src="../images/default_icon.png" width="200" height="auto">
-                </label>
-                <input type="file" name="profile_icon" id="profile-icon-style">
-            </div>
-        </div>
-        
-            <form action="change_confirm.php" method="post">
+            <form action="change_confirm.php" enctype="multipart/form-data" method="post">
+                <div class="row">
+                  <div class="col-12 text-center my-5">
+                    <label for="profile-icon-style" style="cursor: pointer;">
+                      <img src="../images/default_icon.png" width="200" height="auto">
+                    </label>
+                    <input type="file" name="profile_icon" id="profile-icon-style">
+                  </div>
+                </div>
                 <div class="row">
                     <div class="col-12 text-center">
                         <input type="text" name="nickname" class="textbox-style" value="<?= $users['nickname']; ?>" required>

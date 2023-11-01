@@ -3,6 +3,15 @@
   if(!isset($_SESSION['user_id'])){
     header('location: ./login.php');
   }
+  //ファイル名を変更
+  $newFileName = date("YmdHis"). "-". $_FILES['profile_icon']['name'];
+  //ファイルの保存先
+  $upload_dir = '../images/'. $newFileName;
+  if(move_uploaded_file($_FILES['profile_icon']['tmp_name'], $upload_dir)){
+    echo 'アップロード完了';
+  }else{
+    echo 'アップロード失敗';
+  }
 ?>
 <!doctype html>
 <html lang="en">
