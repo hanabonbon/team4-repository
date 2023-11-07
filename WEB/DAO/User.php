@@ -58,5 +58,14 @@
       $result = $ps->fetch(PDO::FETCH_ASSOC);
       return $result;
     }
+
+    public function getUserskilpointlByUserId($user_id){
+      $sql = "SELECT * FROM user WHERE user_id = ?";
+      $ps = $this->pdo->prepare($sql);
+      $ps->bindValue(1, $user_id, PDO::PARAM_INT); 
+      $ps->execute();
+      $result = $ps->fetch(PDO::FETCH_ASSOC);
+      return $result['skill_point']; 
+    }
   }
 ?>

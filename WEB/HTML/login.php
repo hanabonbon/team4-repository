@@ -21,7 +21,7 @@
   <form action="./login_check.php" method="post">
 
  <div class="textbox">
-    <input type="text"  placeholder="パスワード" style="width:35%;" name="mailaddress" >
+    <input type="text"  placeholder="メールアドレス" style="width:35%;" name="mailaddress" >
    <br><br>
     <input type="password" placeholder="パスワード" style="width:35%;" name="password" id="password">
     <br>

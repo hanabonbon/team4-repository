@@ -1,7 +1,4 @@
-<?php
-  require_once('../DAO/Task.php');
-  $task = new Task();
-?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -15,7 +12,35 @@
     <link rel="stylesheet" href="../CSS/menuBar.css">
     <title>ホーム</title>
   </head>
-  
+  <?php
+  $user_id = 1; //セッションから取得してください
+  require_once('../DAO/Task.php');
+  $task = new Task();
+  $tasks = $task->getAllTaskByUserId($user_id);
+
+  //今日が期限のタスクを取得
+  $todayTaskList = $task->fetchTask($user_id,
+    is_complete: false, start: date('Y-m-d'), end: date('Y-m-d'));
+  //今日以降のタスクを取得
+  $ScheduledTaskList = $task->fetchTask($user_id,
+    is_complete: false, start: date('Y-m-d', strtotime('+1 day')));
+  //明日と明後日のタスクを取得
+  $NearTaskList = $task->fetchTask($user_id,
+    is_complete: false, start: date('Y-m-d', strtotime('+1 day')),end: date('Y-m-d', strtotime('+2 day')));
+  //今日のタスク数を取得
+  $TaskCount = $task->counttodayTask($user_id, date('Y-m-d'), date('Y-m-d'));
+    //TODO: 今日完了したタスクの数を取得
+  $completeTaskCount = $task->countCompletedTask($user_id, date('Y-m-d'), date('Y-m-d'));
+
+
+  require_once('../DAO/User.php');
+  $user = new User();
+  //ユーザー情報を取得
+  $UserskillData = $user->getUserskilpointlByUserId($user_id);
+  ?>
+  <script>
+
+  </script>
   <body style="background-color:#FFEED5;">
   <div class="container-fluid">
       <div class="row">
@@ -54,80 +79,56 @@
         </nav>
       </div>
     </div>
-    <h1 class="offset-3"><?= $date = date("Y/m/d"); echo $dayOfWeek = date("l"); ?></h1>
+    <h1 class="offset-2"><?= $date = date("Y/m/d"); echo $dayOfWeek = date("l"); ?></h1>
     <div class="container-fluid">
         <div class="row">
-            <h2 class="offset-3 col-9 pt-5">今日のタスク</h2>
-        </div>
-        <div class="row">
-          <div class="offset-10 col-2">
-            <h3 class="text-center">今日の完了数</h3>
-            <h3 class="text-center">3/5</h3>
+            <div class="col-8">
+                <h2 class="offset-4  mt-5 mb-4">今日のタスク</h2>
+                <div class="task-list offset-5">
+                  <?php foreach($todayTaskList as $taskData) :?>
+                    <div class="card task-style">
+                      <h6 class="text-style ml-2 mt-2">
+                      <input type="checkbox">
+                      <?=$taskData['title']?>
+                      </h6>
+                    </div>
+                  <?php endforeach; ?>
+                </div>
+                
+                <h2 class="offset-4 mt-5  mb-4">期限が近づいています！</h2>
+                <div class="task-list offset-5">
+                  <?php foreach($NearTaskList as $taskData) :?>
+                    <div class="card task-style">
+                      <h6 class="text-style ml-2 mt-2">
+                      <input type="checkbox">
+                      <?=$taskData['title']?>
+                      </h6>
+                    </div>
+                  <?php endforeach; ?>
+                </div>
+                <div class="insert-task  offset-4 mt-5">
+                  <input type="submit"value="＋"class="insert-btn"><input type="text" class="insert-text" placeholder="タスクを追加する"><input type="button"value="＋"class="insert-btn"><lalbel class="insert-limit">期限</lalbel>
+                </div>
+            </div>
+
+            <div class="col-4 text-center">
+                <div class="pt-4 pb-4">
+                    <p class="p-text">今日の完了数</p>
+                    <div class="num-text"><span><?=$completeTaskCount?></span>/<span><?=$TaskCount?></span></div>
+                </div>
+
+                <div class="pt-4 pb-4">
+                    <p class="p-text">順位</p>
+                    <div class="num-text">12</div>
+                </div>
+
+                <div class="pt-4 pb-4">
+                    <p class="p-text">未使用のスキルポイント</p>
+                    <div class="num-text"><?=$UserskillData?></div>
+                    <button class="use-btn ml-2 mt-2"onclick="location.href='mypage.php'">使う</button>
+                </div>
           </div>
-        </div>
-        <div class="row">
-            <h2 class="">今日のタスク</h2>
-        </div>
-        <div class="row">
-        <?php //foreach ?>
-        <div class="task-list offset-3">
-          <div class="card task-style">
-              <h6 class="text-style ml-2 mt-2">
-              <input type="checkbox">
-                <?= $task->getUserIdByTaskTitle(1);?>
-              </h6>
-          </div>
-          <div class="card task-style">
-              <h6 class="text-style ml-2 mt-2">
-              <input type="checkbox">
-                <?= $task->getUserIdByTaskTitle(1);?>
-              </h6>
-          </div>
-          <div class="card task-style">
-              <h6 class="text-style ml-2 mt-2">
-              <input type="checkbox">
-                <?= $task->getUserIdByTaskTitle(1);?>
-              </h6>
-          </div>
-          <div class="card task-style">
-              <h6 class="text-style ml-2 mt-2">
-              <input type="checkbox">
-                <?= $task->getUserIdByTaskTitle(1);?>
-              </h6>
-          </div>
-        </div>
-        <?php //ここまで ?>
-        <div class="row">
-          <div class="offset-10 col-2">
-            <h3 class="text-center">順位</h3>
-            <h3 class="text-center">12</h3>
-          </div>
-        </div>
-        <h2 class="mt-5 offset-3">期限が近づいています！</h2>
-        <div class="card task-style offset-3">
-            <h6 class="text-style ml-2 mt-2">
-            <input type="checkbox">
-              <?= $task->getUserIdByTaskTitle(1);?>
-            </h6>
-        </div>
-        <div class="card task-style offset-3">
-            <h6 class="text-style ml-2 mt-2">
-            <input type="checkbox">
-              <?= $task->getUserIdByTaskTitle(1);?>
-            </h6>
-        </div>
-        </div>
-        <?php //ここまで ?>
-        <div class="row">
-          <div class="offset-10 col-2">
-            <h3 class="text-center">未使用のSP</h3>
-            <h3 class="text-center">3</h3>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12 ms-5">
-            <input type="text" name="task" class="inputText-style">
-          </div>
+            </div>
         </div>
     </div>
 

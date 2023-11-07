@@ -15,7 +15,68 @@ body {
 }
 
 .task-list{
-    height:25vh;
+    height:20vh;
     width: 550px;
     overflow-y: scroll;
+}
+
+/*タスク追加*/
+.insert-task{
+    width: 625px;
+    height: 43px;
+    flex-shrink: 0;
+    background-color:#818181;
+    border-radius: 7px;
+}
+
+.insert-text{
+    width: 75%;
+    height: 43px;
+    border: none;
+    background-color:#818181;
+    border-radius: 7px;
+    color: white;
+}
+.insert-limit{
+    width: 13%;
+    height: 43px;
+    border: none;
+    background-color:#818181;
+    color: white;
+    border-radius: 7px;
+    padding-left: 3px;
+}
+.insert-btn{
+    width: 6%;
+    height: 40px;
+    border: none;
+    background-color:#818181;
+    border-radius: 7px;
+    color: white;
+}
+input[type="text"]{
+    color: white;
+}
+::placeholder {
+    color: white;
+}
+
+/*右側のスタイル*/
+.p-text{
+    font-size: 3vh;
+    font-weight: bold;
+}
+
+.num-text{
+    font-size: 7vh;
+    font-weight: 500;
+}
+
+.use-btn{
+    height: 6vh;
+    width: 8vw;
+    border: none;
+    background-color:#818181;
+    border-radius: 7px;
+    color: white;
 }

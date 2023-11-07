@@ -6,7 +6,7 @@ img{
     
      width: 300px;
      height: 200px;
-    
+    position: relative;
      top: 40px;
     
     
@@ -14,12 +14,12 @@ img{
  .textbox{
     text-align: center;
     position: relative;
-    top: 40px;
+    top: 50px;
  }
 .button{
     text-align: center;
     position: relative;
-    top: 100px;
+    top: 120px;
 }
  button{
     
@@ -45,6 +45,13 @@ img{
     color: rgba(255, 255, 255, 0.56);
     font-size: 15px;
 }
+a {
+    text-decoration: none; /* 下線をなしに */
+    color: #FFEED5; /* リンクのテキスト色 */
+  }
+  button:hover {
+    background-color: #2974a2; /* ホバー時の背景色 */
+  }
 body{
     background-color: #968067;
 }
