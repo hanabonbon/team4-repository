@@ -1,4 +1,4 @@
-body {
+.body {
     background-color: #FFEED5;
     display: flex;
     justify-content: center;
@@ -6,6 +6,17 @@ body {
     height: 100vh; /* 画面の高さいっぱいに表示 */
     margin: 0;
     flex-direction: column; /* コンテンツを縦に配置 */
+}
+
+p {
+    font-size: 25px;
+}
+
+.hnum {
+    width: 40px;
+    border: none;
+    margin-left: 5px;
+    background-color: #FFEED5;
 }
 
 .yoko {
@@ -68,4 +79,10 @@ button {
 
 .button {
     margin-top: 50px;
+}
+
+.num {
+    width: 40px;
+    border: none;
+    background-color: #FFEED5;
 }

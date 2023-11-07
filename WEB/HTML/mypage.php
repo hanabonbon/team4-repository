@@ -14,6 +14,7 @@
   $ps->execute();
   $result = $ps->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result as $row) {
+    $P = $row['skill_point'];
     $H = $row['hitpoint'];
     $A = $row['attack'];
     $S = $row['agility'];
@@ -33,7 +34,37 @@
     <link rel="stylesheet" href="../CSS/menubar.css?<?php echo date('YmdHis'); ?>"> <!-- CSSファイルのパスを適切に指定 -->
     <title>マイページ</title>
   </head>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('myForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // フォームの実際の送信を防ぐ
+
+      // フォームデータを取得
+      var formData = new FormData(this);
+
+      // フォームデータを配列に変換
+      var formDataArray = [];
+      formData.forEach(function(value, key) {
+        formDataArray.push({ name: key, value: value });
+      });
+
+      // 配列の内容を画面に表示
+      var formDataList = document.getElementById('formDataList');
+      formDataList.innerHTML = ''; // 以前の内容をクリア
+      var sum = 0;
+      formDataArray.forEach(function(item) {
+        var listItem = document.createElement('li');
+        listItem.textContent = item.name + ': ' + item.value;
+        sum += Number(item.value); 
+        formDataList.appendChild(listItem);
+      });
+      document.getElementById('sumValue').textContent = sum;
+    });
+  });
+</script>
+
   <body>
+    <form id="myForm" method="post" class="body">
     <div class="container-fluid">
       <div class="row">
           <!-- サイドバー -->
@@ -70,16 +101,15 @@
     </div>
     <h2>スキルポイント</h2>
     <h2><?php
-      
         echo $row['skill_point']; // ユーザーIDを配列に追加
     ?></h2>
     <p>体力</p>
     <div class="yoko-center">
       <?php
         echo $H; // ユーザーIDを配列に追加
-      ?> <!-- 横線を追加 -->
-      <button type="submit">+</button>
-    </div>
+      ?>
+      +<input type="number" min="0" max="<?php echo $P;?>" class="hnum" name="h" value="0">
+    </div><!-- 横線を追加 -->
     <svg xmlns="http://www.w3.org/2000/svg" width="186" height="24" viewBox="0 0 186 24" fill="none">
       <g filter="url(#filter0_d_307_231)">
         <path d="M14 14.0002H13V16.0002H14V14.0002ZM6.86603 1.5L6.36603 0.633975L4.63397 1.63397L5.13397 2.5L6.86603 1.5ZM180.666 2.5L181.166 1.63397L179.434 0.633975L178.934 1.5L180.666 2.5ZM14 16.0002H172.85V14.0002H14V16.0002ZM14.666 15.01L6.86603 1.5L5.13397 2.5L12.934 16.01L14.666 15.01ZM172.866 16.01L180.666 2.5L178.934 1.5L171.134 15.01L172.866 16.01Z" fill="black"/>
@@ -103,7 +133,7 @@
         <?php
           echo $A; // ユーザーIDを配列に追加
         ?>
-        <button type="submit">+</button>
+        + <input type="number" min="0" max="<?php echo $P;?>" class="num" name="a" value="0">
         <svg xmlns="http://www.w3.org/2000/svg" width="230" height="23" viewBox="0 0 230 23" fill="none">
           <path d="M71 22H230M0 0.999974H60M71.834 22.497L59.134 0.5" stroke="black" stroke-width="2"/>
         </svg>
@@ -116,7 +146,7 @@
         <?php
           echo $S; // ユーザーIDを配列に追加
         ?>
-        <button type="submit">+</button>
+        + <input type="number" min="0" max="<?php echo $P;?>" class="num" name="s" value="0">
         <svg xmlns="http://www.w3.org/2000/svg" width="230" height="24" viewBox="0 0 230 24" fill="none">
           <path d="M159 22.5H0M230 1.49997H170M158.166 22.997L170.866 1" stroke="black" stroke-width="2"/>
         </svg>
@@ -128,7 +158,7 @@
         <?php
           echo $D; // ユーザーIDを配列に追加
         ?>
-        <button type="submit">+</button>
+        + <input type="number" min="0" max="<?php echo $P;?>" class="num" name="d" value="0">
         <svg xmlns="http://www.w3.org/2000/svg" width="230" height="23" viewBox="0 0 230 23" fill="none">
           <path d="M71 22H230M0 0.999974H60M71.834 22.497L59.134 0.5" stroke="black" stroke-width="2"/>
         </svg>
@@ -138,7 +168,7 @@
         <?php
           echo $L; // ユーザーIDを配列に追加
         ?>
-        <button type="submit">+</button>
+        + <input type="number" min="0" max="<?php echo $P;?>" class="num" name="l" value="0">
         <svg xmlns="http://www.w3.org/2000/svg" width="230" height="24" viewBox="0 0 230 24" fill="none">
           <path d="M159 22.5H0M230 1.49997H170M158.166 22.997L170.866 1" stroke="black" stroke-width="2"/>
         </svg>
@@ -149,10 +179,12 @@
         }
     ?>
     <div class="button">
-      <a href="mypage.php" class="btn btn-primary">更新</a>
+      <button type="submit" class="btn btn-primary">更新</button>
       <a href="information.php" class="btn btn-primary">登録情報</a>
       <a href="logout.php" class="btn btn-primary">ログアウト</a>
     </div>
+    <ul id="formDataList"></ul>
+    <div>合計 (sum): <span id="sumValue">0</span></div>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -163,5 +195,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     -->
+  </form>
   </body>
 </html>
