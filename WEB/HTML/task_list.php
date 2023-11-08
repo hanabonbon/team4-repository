@@ -89,7 +89,8 @@
       <h3><?=date('Y-m-d D')?> 今日のタスク</h3>
       <hr>
     </div>
-    <div class="row">
+
+    <div class="row" id="task-list-area"><!-- タスク一覧エリア -->
       <div class="col-8">
         <div id="task-area"><!-- 60% -->
           <div id="today-task-area" class="container-fluid">
@@ -161,9 +162,6 @@
       </div>
     </div>
 
-
-
-    
     <div id="quick-task-area">
       <!-- 簡易タスク追加 -->
       <div class="row">
@@ -180,7 +178,7 @@
       </div>
     </div>
 
-  </div><!-- task-list-contents -->
+  </div><!-- /task-list-contents -->
   
   <!-- BootStrap CDN-->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

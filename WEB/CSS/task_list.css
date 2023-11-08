@@ -25,6 +25,7 @@ body {
 
 #top-area {
   /* height: 15%; */
+  height: 25%
 }
 
 #task-area {
@@ -86,6 +87,10 @@ body {
 /* 達成したタスク数など */
 #task-message {
  
+}
+
+#task-list-area {
+  height: 70%;
 }
 
 #quick-task-area {
