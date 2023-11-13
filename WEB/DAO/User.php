@@ -68,5 +68,21 @@
       $result = $ps->fetch(PDO::FETCH_ASSOC);
       return $result['skill_point']; 
     }
+
+    public function 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   }
 ?>
