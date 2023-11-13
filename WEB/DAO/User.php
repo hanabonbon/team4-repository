@@ -40,12 +40,13 @@
     //登録情報変更
     public function updateUserProfile($userData){
       $sql = "UPDATE user
-              SET nickname = ?,mailaddress = ?
+              SET nickname = ?,mailaddress = ?,icon_path = ?
               WHERE user_id = ?";
       $ps = $this->pdo->prepare($sql);
       $ps->bindValue(1,$userData['nickname'],PDO::PARAM_STR);
       $ps->bindValue(2,$userData['mailaddress'],PDO::PARAM_STR);
-      $ps->bindValue(3,$userData['user_id'],PDO::PARAM_INT);
+      $ps->bindValue(3,$userData['icon_path'],PDO::PARAM_STR);
+      $ps->bindValue(4,$userData['user_id'],PDO::PARAM_INT);
       $ps->execute();
     }
 
