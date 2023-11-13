@@ -35,7 +35,7 @@
 
   require_once('../DAO/User.php');
   $user = new User();
-  //ユーザー情報を取得
+  //ユーザースキルポイントを取得
   $UserskillData = $user->getUserskilpointlByUserId($user_id);
   ?>
   <script>
@@ -85,12 +85,26 @@
             <div class="col-8">
                 <h2 class="offset-4  mt-5 mb-4">今日のタスク</h2>
                 <div class="task-list offset-5">
+
                   <?php foreach($todayTaskList as $taskData) :?>
                     <div class="card task-style">
-                      <h6 class="text-style ml-2 mt-2">
-                      <input type="checkbox">
+                    
+                      <a href="./task_state_update.php?task_id=<?=$taskData['task_id']?>
+                                        &is_complete=<?=$taskData['is_complete']?>"class="complete_btn">
+                          <?php if($taskData['is_complete']) { ?>
+                            <button class="btn-secondry"><i class="bi bi-clipboard-check"></i></button>
+                          <?php } else { ?>
+                            <button class="btn-secondry"><i class="bi bi-clipboard"></i></button>
+                          <?php } ?><!--end if-->
+                      </a>
+                    
+                      <span>
                       <?=$taskData['title']?>
-                      </h6>
+                      </span>
+                      <span>
+                        a
+                      </span>
+                    
                     </div>
                   <?php endforeach; ?>
                 </div>
