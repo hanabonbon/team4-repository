@@ -17,3 +17,20 @@
 #profile-icon-style{
     display:none;
 }
+
+.plus-sign {
+    position: absolute;
+    top: 50;
+    right: 0;
+    font-size: 24px; /* ＋マークのフォントサイズを調整 */
+    color: white; /* ＋マークの色を調整 */
+    background-color: black; /* ＋マークの背景色を調整 */
+    border-radius: 50%; /* ＋マークを円形にする */
+    width: 30px; /* ＋マークの幅を調整 */
+    height: 30px; /* ＋マークの高さを調整 */
+    text-align: center;
+    line-height: 30px;
+    z-index: 1; /* 画像よりも上に表示する */
+  }
+  
+  

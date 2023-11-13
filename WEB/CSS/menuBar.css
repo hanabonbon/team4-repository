@@ -109,3 +109,10 @@
   background: transparent;
 }
 
+/*myページのアイコン画像*/
+.my-icon{
+  width: 200px;/* 写真の幅 */
+  height: 200px; /* 写真の高さ */
+  border-radius: 50%; /* 円形の形状にする */
+  object-fit: cover; /* アスペクト比を保持したまま画像を表示 */
+}

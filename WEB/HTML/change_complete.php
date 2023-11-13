@@ -21,7 +21,7 @@
   $user_id = $_SESSION['user_id']; //セッションから取得してください
   require_once('../DAO/User.php');
   $user = new User();
-  $users = $user->getUserDataByUserId($user_id);
+  $myuser = $user->getUserDataByUserId($user_id);
   ?>
   <body style="background-color:#FFEED5;">
   <div class="container-fluid">
@@ -33,10 +33,10 @@
                     <!--アイコンとユーザー名-->
                     <div class="icon-name">
                       <div class="img-area">
-                        <img src="../images/default_icon.png" class="img-icon">
+                        <img src="../images/<?= $myuser['icon_path'] ?>" class="img-icon">
                       </div>
                       <div class="name-area">
-                        <label class="username-area">〇〇〇〇</label>
+                        <label class="username-area"><?= $myuser['nickname'] ?></label>
                       </div>
                     </div>
   
@@ -68,7 +68,7 @@
         </div>
         <div class="row">
             <div class="col-12 text-center my-5">
-                <img src="../images/default_icon.png" width="200" height="auto">
+                <img src="<?= $myuser['icon_path']; ?>" class="my-icon">
             </div>
         </div>
         
@@ -76,12 +76,12 @@
                 <div class="row">
                     <div class="col-12 text-center">
                         <p class="text-center">
-                            ニックネーム:<span style="color:red;"><?= $users['nickname']; ?></span>
+                            ニックネーム:<span style="color:red;"><?= $myuser['nickname']; ?></span>
                         </p>
                     </div>
                     <div class="col-12 text-center my-4">
                         <p class="text-center">
-                            メールアドレス:<span style="color:red;"><?= $users['mailaddress']; ?></span>
+                            メールアドレス:<span style="color:red;"><?= $myuser['mailaddress']; ?></span>
                         </p>
                     </div>
                 </div>

@@ -3,15 +3,6 @@
   if(!isset($_SESSION['user_id'])){
     header('location: ./login.php');
   }
-  //ファイル名を変更
-  $newFileName = date("YmdHis"). "-". $_FILES['profile_icon']['name'];
-  //ファイルの保存先
-  $upload_dir = '../images/'. $newFileName;
-  if(move_uploaded_file($_FILES['profile_icon']['tmp_name'], $upload_dir)){
-    echo 'アップロード完了';
-  }else{
-    echo 'アップロード失敗';
-  }
 ?>
 <!doctype html>
 <html lang="en">
@@ -30,7 +21,20 @@
   $user_id = $_SESSION['user_id']; //セッションから取得してください
   require_once('../DAO/User.php');
   $user = new User();
-  $users = $user->getUserDataByUserId($user_id);
+  $myuser = $user->getUserDataByUserId($user_id);
+  if ($_FILES['profile_icon']['error'] == UPLOAD_ERR_NO_FILE) {
+    $upload_dir = '../images/' . $myuser['icon_path'];
+  }else{
+    //ファイル名を変更
+    $newFileName = date("YmdHis"). "-". $_FILES['profile_icon']['name'];
+    //ファイルの保存先
+    $upload_dir = '../images/'. $newFileName;
+    if(move_uploaded_file($_FILES['profile_icon']['tmp_name'], $upload_dir)){
+      echo 'アップロード完了';
+    }else{
+      echo 'アップロード失敗';
+    }
+  }
   ?>
   <body style="background-color:#FFEED5;">
   <div class="container-fluid">
@@ -42,10 +46,10 @@
                     <!--アイコンとユーザー名-->
                     <div class="icon-name">
                       <div class="img-area">
-                        <img src="../images/default_icon.png" class="img-icon">
+                        <img src="../images/<?= $myuser['icon_path'] ?>" class="img-icon">
                       </div>
                       <div class="name-area">
-                        <label class="username-area">〇〇〇〇</label>
+                        <label class="username-area"><?= $myuser['nickname'] ?></label>
                       </div>
                     </div>
   
@@ -77,7 +81,7 @@
         </div>
         <div class="row">
             <div class="col-12 text-center my-5">
-                <img src="../images/default_icon.png" width="200" height="auto">
+                <img src=<?= $upload_dir ?> class="my-icon">
             </div>
         </div>
         
@@ -85,18 +89,18 @@
                 <div class="row">
                     <div class="col-12 text-center">
                         <p class="text-center">
-                            ニックネーム:<?= $users['nickname']; ?> → <span style="color:red;"><?= $_POST['nickname']; ?></span>
+                            ニックネーム:<?= $myuser['nickname']; ?> → <span style="color:red;"><?= $_POST['nickname']; ?></span>
                         </p>
                         <input type="hidden" name="nickname" value="<?= $_POST['nickname']; ?>">
                     </div>
                     <div class="col-12 text-center my-4">
                         <p class="text-center">
-                            メールアドレス:<?= $users['mailaddress']; ?> → <span style="color:red;"><?= $_POST['mailaddress']; ?></span>
+                            メールアドレス:<?= $myuser['mailaddress']; ?> → <span style="color:red;"><?= $_POST['mailaddress']; ?></span>
                         </p>
                         <input type="hidden" name="mailaddress" value="<?= $_POST['mailaddress']; ?>">
                     </div>
                     <!-- アイコンパスを渡す -->
-                    <input type="hidden" name="icon_path" value="<?= $newFileName ?>">
+                    <input type="hidden" name="icon_path" value="<?= $upload_dir ?>">
                     <!-- セッションの値を渡す -->
                     <input type="hidden" name="user_id" value="<?= $_SESSION['user_id']; ?>">
                     <div class="row">
