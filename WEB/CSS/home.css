@@ -2,6 +2,8 @@
 body {
     overflow-x: hidden;
 }
+
+/*タスクのスタイル*/
 .task-style {
     width: 503px;
     height: 43px;
@@ -13,11 +15,21 @@ body {
 .text-style {
     color:white;
 }
-
+/*タスク一覧のスタイル*/
 .task-list{
     height:20vh;
     width: 550px;
     overflow-y: scroll;
+}
+
+.complete_btn{
+    width: 40px;
+}
+.btn-secondry{
+    width: 13px;
+    height: 13px;
+    border: none;
+    border-radius: 1px;
 }
 
 /*タスク追加*/
