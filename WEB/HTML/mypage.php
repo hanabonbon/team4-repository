@@ -33,38 +33,46 @@
     <link rel="stylesheet" href="../CSS/mypage.css?<?php echo date('YmdHis'); ?>"> <!-- CSSファイルのパスを適切に指定 -->
     <link rel="stylesheet" href="../CSS/menubar.css?<?php echo date('YmdHis'); ?>"> <!-- CSSファイルのパスを適切に指定 -->
     <title>マイページ</title>
+    <!-- HTMLのheadセクションにこのスクリプトを追加してください -->
+    <script>
+      function confirmUpdate() {
+        // フォームデータを取得
+        var formData = new FormData(document.getElementById('myForm'));
+
+        // フォームデータを配列に変換
+        var formDataArray = [];
+        formData.forEach(function(value, key) {
+          formDataArray.push({ name: key, value: value });
+        });
+
+        // 合計値を計算
+        var sum = 0;
+        formDataArray.forEach(function(item) {
+          sum += Number(item.value);
+        });
+
+        // スキルポイントの制限値 ($P) を取得
+        var skillPointLimit = <?php echo $P; ?>;
+
+        // スキルポイントが足りるかどうかを確認
+        if (sum <= skillPointLimit) {
+          // JavaScriptの確認ダイアログを使用
+          var confirmation = confirm("更新しますか？");
+
+          // ユーザーがOKをクリックした場合
+          if (confirmation) {
+            // フォームを送信
+            document.getElementById('myForm').submit();
+          }
+        } else {
+          // スキルポイントが足りない場合のメッセージを表示
+          alert("スキルポイントが足りません");
+        }
+      }
+    </script>
   </head>
-  <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('myForm').addEventListener('submit', function(event) {
-      event.preventDefault(); // フォームの実際の送信を防ぐ
-
-      // フォームデータを取得
-      var formData = new FormData(this);
-
-      // フォームデータを配列に変換
-      var formDataArray = [];
-      formData.forEach(function(value, key) {
-        formDataArray.push({ name: key, value: value });
-      });
-
-      // 配列の内容を画面に表示
-      var formDataList = document.getElementById('formDataList');
-      formDataList.innerHTML = ''; // 以前の内容をクリア
-      var sum = 0;
-      formDataArray.forEach(function(item) {
-        var listItem = document.createElement('li');
-        listItem.textContent = item.name + ': ' + item.value;
-        sum += Number(item.value); 
-        formDataList.appendChild(listItem);
-      });
-      document.getElementById('sumValue').textContent = sum;
-    });
-  });
-</script>
-
   <body>
-    <form id="myForm" method="post" class="body">
+    <form id="myForm" method="post" action="update.php" class="body">
     <div class="container-fluid">
       <div class="row">
           <!-- サイドバー -->
@@ -179,12 +187,10 @@
         }
     ?>
     <div class="button">
-      <button type="submit" class="btn btn-primary">更新</button>
+      <button type="button" class="btn btn-primary" onclick="confirmUpdate()">更新</button>
       <a href="information.php" class="btn btn-primary">登録情報</a>
       <a href="logout.php" class="btn btn-primary">ログアウト</a>
     </div>
-    <ul id="formDataList"></ul>
-    <div>合計 (sum): <span id="sumValue">0</span></div>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

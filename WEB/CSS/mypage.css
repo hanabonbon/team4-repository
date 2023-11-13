@@ -17,6 +17,7 @@ p {
     border: none;
     margin-left: 5px;
     background-color: #FFEED5;
+    color: red;
 }
 
 .yoko {
@@ -85,4 +86,5 @@ button {
     width: 40px;
     border: none;
     background-color: #FFEED5;
+    color: red;
 }
