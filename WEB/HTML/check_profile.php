@@ -1,3 +1,9 @@
+<?php 
+  session_start(); 
+  if(!isset($_SESSION['user_id'])){
+    header('location: ./login.php');
+  }
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -7,16 +13,16 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="../CSS/menuBar.css">
+    <link rel="stylesheet" href="../css/menuBar.css?<?php echo date('YmdHis'); ?>"/>
     <link rel="stylesheet" href="../CSS/profile.css">
 
     <title>登録情報確認</title>
   </head>
   <?php
-  $user_id = 1; //セッションから取得してください
+  $user_id = $_SESSION['user_id']; //セッションから取得してください
   require_once('../DAO/User.php');
   $user = new User();
-  $users = $user->getUserDataByUserId($user_id);
+  $myuser = $user->getUserDataByUserId($user_id);
   ?>
   <body style="background-color:#FFEED5;">
     <div class="container-fluid">
@@ -28,10 +34,10 @@
                     <!--アイコンとユーザー名-->
                     <div class="icon-name">
                       <div class="img-area">
-                        <img src="../images/default_icon.png" class="img-icon">
+                        <img src="../images/<?= $myuser['icon_path'] ?>" class="img-icon">
                       </div>
                       <div class="name-area">
-                        <label class="username-area">〇〇〇〇</label>
+                        <label class="username-area"><?= $myuser['nickname'] ?></label>
                       </div>
                     </div>
   
@@ -63,7 +69,7 @@
         </div>
         <div class="row">
             <div class="col-12 text-center my-5">
-                <img src="../images/default_icon.png" width="200" height="auto">
+                <img src="../images/<?= $myuser['icon_path']; ?>" class="my-icon">
             </div>
         </div>
         
@@ -71,12 +77,12 @@
                 <div class="row">
                     <div class="col-12 text-center">
                         <p class="text-center">
-                            ニックネーム : <?= $users['nickname']; ?>
+                            ニックネーム : <?= $myuser['nickname']; ?>
                         </p>
                     </div>
                     <div class="col-12 text-center my-4">
                         <p class="text-center">
-                            メールアドレス : <?= $users['mailaddress']; ?>
+                            メールアドレス : <?= $myuser['mailaddress']; ?>
                         </p>
                     </div>
                 </div>
