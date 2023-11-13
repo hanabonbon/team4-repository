@@ -16,16 +16,32 @@ img{
     position: relative;
     top: 70px;
  }
+ .enter{
+   text-align: center;
+   position: relative;
+   top: 10px;
+ }
+ .button a{
+   text-decoration: none;
+   
+ }
  .button{
     text-align: center;
+    justify-content: space-between;
+   
     position: relative;
-    top: 180px;
+   top:50px;
  }
- .enter{
-    text-align: center;
-    position: relative;
-    top: 30px;
- }
+button{
+   border-top-right-radius:5px;
+   border-top-left-radius: 5px;
+   border-bottom-left-radius:5px;
+   border-bottom-right-radius: 5px;
+   background-color: #818181;
+   color: #FFEED5;
+   height: 30px;
+}
+ 
  body{
     background-color: 968067;
  }
