@@ -51,9 +51,12 @@
         <h3>入力内容</h3>
         <p>'.$_POST['nickname'].'</p>
         <p>'.$_POST['mailaddress'].'</p>
-        <p>'.$_POST['password'].'</p><br>
-        <a href="./signup_complete.php">登録する</a>
+        <p>'.$_POST['password'].'</p>
         </div>
+        <div class="button">
+        <button><a href="./signup.php">戻る</a></button> 　　　
+        <button><a href="./signup_complete.php">登録する</a></button>
+       </div>
       ';
     }
   ?>
@@ -63,9 +66,9 @@
     <input type="hidden" name="nickname" value="<?php echo $_POST['nickname']; ?>">
     <input type="hidden" name="mailaddress" value="<?php echo $_POST['mailaddress']; ?>">
     <input type="hidden" name="password" value="<?php echo $_POST['password']; ?>">
-    <div class="button">
-      <a href="./signup.php">戻る</a>
-    </div>
+  
+  
+   
   </form>
 
 </body>
