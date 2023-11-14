@@ -69,7 +69,7 @@
       return $result['skill_point']; 
     }
 
-    public function 
+
 
 
 
