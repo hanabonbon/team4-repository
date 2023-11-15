@@ -15,9 +15,24 @@
   $result = $ps->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result as $row) {
     $P = $row['skill_point'];
-    $H = $row['hitpoint'];
-    $A = $row['attack'];
-    $S = $row['agility'];
+    $H = 100;
+    for ($i = 1; $i <= $row['hitpoint']; $i++) {
+      $H += 5;
+    }
+    $A = 20;
+    for ($i = 1; $i <= $row['attack']; $i++) {
+      $A += 1;
+    }
+    $S = 10;
+    for ($i = 1; $i <= $row['agility']; $i++) {
+      if($i <= 50){
+        $S += 0.4;
+      }elseif($i <= 100){
+        $S += 0.8;
+      }else{
+        $S += 0.1;
+      }
+    }
     $D = $row['defence'];
     $L = $row['luck'];
 ?>
@@ -112,11 +127,12 @@
         echo $row['skill_point']; // ユーザーIDを配列に追加
     ?></h2>
     <p>体力</p>
+    <button type="button">+</button>
     <div class="yoko-center">
       <?php
         echo $H; // ユーザーIDを配列に追加
       ?>
-      +<input type="number" min="0" max="<?php echo $P;?>" class="hnum" name="h" value="0">
+      →<input type="number" min="0" max="<?php echo $P;?>" class="hnum" name="h" value="0">
     </div><!-- 横線を追加 -->
     <svg xmlns="http://www.w3.org/2000/svg" width="186" height="24" viewBox="0 0 186 24" fill="none">
       <g filter="url(#filter0_d_307_231)">
@@ -138,10 +154,11 @@
     <div class="yoko">
       <div class="info">
         <p class="text-left">攻撃力</p>
+        <div><button type="button">+ </button></div>
         <?php
           echo $A; // ユーザーIDを配列に追加
         ?>
-        + <input type="number" min="0" max="<?php echo $P;?>" class="num" name="a" value="0">
+        →<input type="number" min="0" max="<?php echo $P;?>" class="num" name="a" value="0">
         <svg xmlns="http://www.w3.org/2000/svg" width="230" height="23" viewBox="0 0 230 23" fill="none">
           <path d="M71 22H230M0 0.999974H60M71.834 22.497L59.134 0.5" stroke="black" stroke-width="2"/>
         </svg>
@@ -151,10 +168,11 @@
       </div>
       <div class="info">
         <p class="text-right">素早さ</p>
+        <div><button type="button">+ </button></div>
         <?php
           echo $S; // ユーザーIDを配列に追加
         ?>
-        + <input type="number" min="0" max="<?php echo $P;?>" class="num" name="s" value="0">
+        →<input type="number" min="0" max="<?php echo $P;?>" class="num" name="s" value="0">
         <svg xmlns="http://www.w3.org/2000/svg" width="230" height="24" viewBox="0 0 230 24" fill="none">
           <path d="M159 22.5H0M230 1.49997H170M158.166 22.997L170.866 1" stroke="black" stroke-width="2"/>
         </svg>
