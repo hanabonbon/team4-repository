@@ -30,7 +30,7 @@
 ?>
 <body>
   <div class="container-fluid">
-    <p>ユーザー名：<?=$userName?></p>
+    <p>ユーザー名：<?=$userName?> {id:<?=$user_id?>}</p>
     <a href="./game_ranking.php">ランキングを見る</a>
     <hr>
     <div class="row">
