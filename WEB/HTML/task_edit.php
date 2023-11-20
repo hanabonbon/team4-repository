@@ -8,7 +8,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <!--BootStrap CDN-->
   <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -16,9 +16,15 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
   />
+  <link rel="stylesheet" href="../CSS/menuBar.css">
+  <link rel="stylesheet" href="../css/task_edit.css?<?php echo date('YmdHis'); ?>"/>
   <title>タスク編集</title>
 </head>
 <?php
+  $user_id = $_SESSION['user_id']; //セッションから取得してください
+  require_once('../DAO/User.php');
+  $user = new User();
+  $myuser = $user->getUserDataByUserId($user_id);
   //タスクIDがある場合は、登録済みのタスクの情報を取得して表示する
   require_once('../DAO/Task.php');
   $task = new Task();
@@ -50,7 +56,9 @@
   console.log(<?= json_encode($taskData) ?>)
 </script>
 
-<body id="app">
+<body>
+  <div class="card card-style float-end me-3">
+  <div class="row">
   <div id="app">
   <form action="./task_regist.php" method="POST" id="task-edit-form"></form>
   <?php
@@ -59,32 +67,46 @@
     }
   ?>
 
-  <!-- タイトル -->
-  <input type="text" value="<?=$title?>" name="title"  form="task-edit-form">
-
-  <!--期限-->
-  <br><input type="date" value="<?=$period?>" name="period" required="required" form="task-edit-form"><br>
-
   <!-- TODO: 入力内容の保存処理 -->
   <!-- タスク完了の入力 -->
+  <div class="text-end mx-3 my-3">
   <select name="is_complete" form="task-edit-form">
     <option value="1" <?= $is_complete ? "selected": "" ?>>完了済み</option>
     <option value="0" <?= $is_complete ? "": "selected" ?>>未完了</option>
   </select>
-  
+  </div>
 
+
+  <div class="text-center mt-3">
+  <!-- タイトル -->
+  <input type="text" value="<?=$title?>" name="title"  form="task-edit-form">
+  </div>
+
+  <div class="ms-5">
+  <!--期限-->
+  <br><input type="date" value="<?=$period?>" name="period" required="required" form="task-edit-form"><br>
+  </div>
+  
+  <div class="ms-5 mt-3">
   <p>完了日：<?=$completion_time?></p>
   <p>最終更新日:<?=$last_edit_time?></p>
   <p>作成日:<?=$created_time?></p>
-  
+  </div>
+  <hr>
+  <div class="text-center">
   <!--詳細-->
   <br><textarea name="detail" autocomplete="off" form="task-edit-form"><?=$detail?></textarea>
+  </div>
+  <hr>
   <br><button type="submit" form="task-edit-form">作成する</button>
   <br><button onclick="history.back()">キャンセル</button>
+  </div>
+  </div>
   </div>
 
   <!-- Vue.js CDN -->
   <!-- BootStrap CDN-->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 </body>
 </html>
