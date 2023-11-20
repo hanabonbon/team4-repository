@@ -33,7 +33,10 @@
         $S += 0.1;
       }
     }
-    $D = $row['defence'];
+    $D = 5;
+    for($i = 1;$row['defence'];){
+
+    }
     $L = $row['luck'];
 ?>
 <!doctype html>
@@ -172,7 +175,7 @@
         <?php
           echo $S; // ユーザーIDを配列に追加
         ?>
-        →<input type="number" min="0" max="<?php echo $P;?>" class="num" name="s" value="0">
+        %→<input type="number" min="0" max="<?php echo $P;?>" class="num" name="s" value="0">
         <svg xmlns="http://www.w3.org/2000/svg" width="230" height="24" viewBox="0 0 230 24" fill="none">
           <path d="M159 22.5H0M230 1.49997H170M158.166 22.997L170.866 1" stroke="black" stroke-width="2"/>
         </svg>
