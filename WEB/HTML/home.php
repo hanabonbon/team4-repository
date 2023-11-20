@@ -1,22 +1,32 @@
-
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/home.css?<?php echo date('YmdHis'); ?>"/>
-    <link rel="stylesheet" href="../CSS/menuBar.css">
-    <title>ホーム</title>
-  </head>
-  <?php
-  $user_id = 1; //セッションから取得してください
+<?php 
+  session_start(); 
+  if(!isset($_SESSION['user_id'])){
+    header('location: ./login.php');
+  }
+?>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--BootStrap CDN-->
+  <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+  />
+  <!--BootStrap Icons CDN-->
+  <link rel="stylesheet" 
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="../CSS/home.css?<?php echo date('YmdHis'); ?>">
+  <link rel="stylesheet" href="../CSS/menuBar.css?<?php echo date('YmdHis'); ?>">
+  <title>ホーム</title>
+</head>
+<?php
+  $user_id = $_SESSION['user_id']; 
   require_once('../DAO/Task.php');
   $task = new Task();
-  $tasks = $task->getAllTaskByUserId($user_id);
 
   //今日が期限のタスクを取得
   $todayTaskList = $task->fetchTask($user_id,
@@ -24,138 +34,165 @@
   //今日以降のタスクを取得
   $ScheduledTaskList = $task->fetchTask($user_id,
     is_complete: false, start: date('Y-m-d', strtotime('+1 day')));
+  
+ //今日完了したタスクの数を取得
+ $todaysCompletedCount = 
+ $task->countCompletedTask($user_id, is_complete:true,start: date('Y-m-d'),end: date('Y-m-d'));
+
   //明日と明後日のタスクを取得
   $NearTaskList = $task->fetchTask($user_id,
     is_complete: false, start: date('Y-m-d', strtotime('+1 day')),end: date('Y-m-d', strtotime('+2 day')));
-  //今日のタスク数を取得
-  $TaskCount = $task->counttodayTask($user_id, date('Y-m-d'), date('Y-m-d'));
-    //TODO: 今日完了したタスクの数を取得
-  $completeTaskCount = $task->countCompletedTask($user_id, date('Y-m-d'), date('Y-m-d'));
-
-
+  //今日のタスクの数を取得
+  $todayTaskCount = $task->counttodayTask($user_id, date('Y-m-d'), date('Y-m-d'));
+  
   require_once('../DAO/User.php');
   $user = new User();
   //ユーザースキルポイントを取得
   $UserskillData = $user->getUserskilpointlByUserId($user_id);
-  ?>
-  <script>
+?>
+<script>
+  console.log(<?= json_encode($todayTaskList) ?>)
+</script>
+<body>
+  <div class="row">
+    <!-- サイドバー -->
+    <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block  text-white sidebar  fixed-top">
+      <div class="position-sticky">
+        <ul class="nav flex-column">
+          <!--アイコンとユーザー名-->
+          <div class="icon-name">
+            <div class="img-area">
+              <img src="../images/default_icon.png" class="img-icon">
+            </div>
+            <div class="name-area">
+              <label class="username-area">〇〇〇〇</label>
+            </div>
+          </div>
+          <li class="nav-item active">
+            <!-- タスク上の白線 -->
+            <div class="nav-link"></div>
+            <a class="nav-link" href="task.html">タスク</a>
+          </li>
 
-  </script>
-  <body style="background-color:#FFEED5;">
-  <div class="container-fluid">
-      <div class="row">
-          <!-- サイドバー -->
-          <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block  text-white sidebar fixed-top">
-            <div class="position-sticky">
-                <ul class="nav flex-column">
-                  <!--アイコンとユーザー名-->
-                  <div class="icon-name">
-                    <div class="img-area">
-                      <img src="../images/default_icon.png" class="img-icon">
-                    </div>
-                    <div class="name-area">
-                      <label class="username-area">〇〇〇〇</label>
-                    </div>
-                  </div>
+          <li class="nav-item">
+            <a class="nav-link" href="mypage.html">マイページ</a>
+          </li>
 
-                    <li class="nav-item active">
-                      <!-- タスク上の白線 -->
-                      <div class="nav-link"></div>
-                        <a class="nav-link" href="task.html">タスク</a>
-                    </li>
+          <li class="nav-item">
+            <a class="nav-link" href="battle.html">対戦</a>
+          </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="mypage.html">マイページ</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="battle.html">対戦</a>
-                    </li>
-
-                    <li class="nav-item">
-                      <a class="nav-link" href="ranking.html">ランキング</a>
-                    </li>
-              </ul> 
-        </nav>
+          <li class="nav-item">
+            <a class="nav-link" href="ranking.html">ランキング</a>
+          </li>
+        </ul>
       </div>
+    </nav>
+  </div>
+  <!-- コンテンツ -->
+  <div class="container-fluid offset-" id="task-list-contents">
+    <div id="top-area"><!-- 20% -->
+      <!-- <a href="./logout.php">デバッグ用ログアウト</a> -->
+      <h3><?=date('Y-m-d D')?> </h3>
     </div>
-    <h1 class="offset-2"><?= $date = date("Y/m/d"); echo $dayOfWeek = date("l"); ?></h1>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-8">
-                <h2 class="offset-4  mt-5 mb-4">今日のタスク</h2>
-                <div class="task-list offset-5">
 
-                  <?php foreach($todayTaskList as $taskData) :?>
-                    <div class="card task-style">
-                    
-                      <a href="./task_state_update.php?task_id=<?=$taskData['task_id']?>
-                                        &is_complete=<?=$taskData['is_complete']?>"class="complete_btn">
-                          <?php if($taskData['is_complete']) { ?>
-                            <button class="btn-secondry"><i class="bi bi-clipboard-check"></i></button>
-                          <?php } else { ?>
-                            <button class="btn-secondry"><i class="bi bi-clipboard"></i></button>
-                          <?php } ?><!--end if-->
-                      </a>
-                    
-                      <span>
-                      <?=$taskData['title']?>
-                      </span>
-                      <span>
-                        a
-                      </span>
-                    
+    <div class="row" id="task-list-area"><!-- タスク一覧エリア -->
+      <div class="col-7">
+        <div id="task-area"><!-- 60% -->
+          <h2 class="offset-1 pb-1">今日のタスク</h2>
+          <div id="today-task-area" class="container-fluid offset-1">
+            <!-- 今日が期限のタスク一覧 -->
+            <?php foreach($todayTaskList as $taskData) :?>
+              <!-- フォーム設定 -->
+              <form action="./task_edit.php" method="get">
+                <input type="hidden" name="task_id" value="<?=$taskData['task_id']?>">
+                <div class="row offset-1" id="task-card"><!--  align-items-center -->
+    
+                  <div class="col-1 complete-button">
+                    <!-- 完了ボタン URL以外は変更できます-->
+                    <a href="./task_state_update.php?task_id=<?=
+                      $taskData['task_id']?>&is_complete=<?=$taskData['is_complete']?>"class="complete-btn">
+                      <i class="<?=$taskData['is_complete'] ? "bi bi-clipboard-check" : "bi bi-clipboard"?>"></i>
+                    </a>
+                  </div>
+    
+                  <button type="submit" class="task-card-data col-11">
+                    <div class="row">
+                      <!-- タイトル -->
+                      <div class="task-title col-6"><?=$taskData['title']?></div>
+                      <!-- 期限 -->
+                      <span class="task-period col-6">期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></span> 
                     </div>
-                  <?php endforeach; ?>
+                  </button>
                 </div>
                 
-                <h2 class="offset-4 mt-5  mb-4">期限が近づいています！</h2>
-                <div class="task-list offset-5">
-                  <?php foreach($NearTaskList as $taskData) :?>
-                    <div class="card task-style">
-                      <h6 class="text-style ml-2 mt-2">
-                      <input type="checkbox">
-                      <?=$taskData['title']?>
-                      </h6>
-                    </div>
-                  <?php endforeach; ?>
-                </div>
-                <div class="insert-task  offset-4 mt-5">
-                  <input type="submit"value="＋"class="insert-btn"><input type="text" class="insert-text" placeholder="タスクを追加する"><input type="button"value="＋"class="insert-btn"><lalbel class="insert-limit">期限</lalbel>
-                </div>
-            </div>
-
-            <div class="col-4 text-center">
-                <div class="pt-4 pb-4">
-                    <p class="p-text">今日の完了数</p>
-                    <div class="num-text"><span><?=$completeTaskCount?></span>/<span><?=$TaskCount?></span></div>
-                </div>
-
-                <div class="pt-4 pb-4">
-                    <p class="p-text">順位</p>
-                    <div class="num-text">12</div>
-                </div>
-
-                <div class="pt-4 pb-4">
-                    <p class="p-text">未使用のスキルポイント</p>
-                    <div class="num-text"><?=$UserskillData?></div>
-                    <button class="use-btn ml-2 mt-2"onclick="location.href='mypage.php'">使う</button>
-                </div>
+              </form>
+            <?php endforeach; ?>
           </div>
-            </div>
+      
+          <h2 class="pt-1 pb-1 offset-1">期限が近づいています！</h2>
+          <div id="scheduled-task-area" class="container-fluid offset-1">
+            <?php foreach($NearTaskList as $taskData) :?>
+              <!-- フォーム設定 -->
+              <form action="./task_edit.php" method="get">
+                <input type="hidden" name="task_id" value="<?=$taskData['task_id']?>">
+    
+                <div class="row offset-1" id="task-card"><!--  align-items-center -->
+    
+                  <div class="col-1 complete-button">
+                    <!-- 完了ボタン URL以外は変更できます-->
+                    <a href="./task_state_update.php?task_id=<?=
+                      $taskData['task_id']?>&is_complete=<?=$taskData['is_complete']?>"class="complete-btn">
+                      <i class="<?=$taskData['is_complete'] ? "bi bi-clipboard-check" : "bi bi-clipboard"?>"></i>
+                    </a>
+                  </div>
+    
+                  <button type="submit" class="task-card-data col-11">
+                    <div class="row">
+                      <!-- タイトル -->
+                      <div class="task-title col-6"><?=$taskData['title']?></div>
+                      <!-- 期限 -->
+                      <span class="task-period col-6">期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></span> 
+                    </div>
+                  </button>
+    
+                </div>
+              </form>
+            <?php endforeach; ?>
+          </div>
+          
         </div>
+
+      </div>
+      <div class="col-5 text-center">
+        <div class="pt-4 pb-4">
+          <p class="p-text">今日の完了数</p>
+          <div class="num-text"><span><?=$todaysCompletedCount?></span>/<span><?=$todayTaskCount?></span></div>
+        </div>
+
+        <div class="pt-4 pb-4">
+          <p class="p-text">順位</p>
+          <div class="num-text">12</div>
+        </div>
+
+        <div class="pt-4 pb-4">
+          <p class="p-text">未使用のスキルポイント</p>
+          <div class="num-text"><?=$UserskillData?></div>
+          <button class="use-btn ml-2 mt-2"onclick="location.href='mypage.php'">使う</button>
+        
+        </div>
+      </div>
     </div>
-
-
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    -->
-  </body>
+    <div id="quick-task-area"class="offset-1">
+            <!-- 簡易タスク追加 -->
+            <button type="submit" form="quick-task-add"class="insert-btn">＋</button>
+            <input type="text" name="title" form="quick-task-add"class="insert-text" placeholder="タイトル">
+            <input type="date" name="period" required="required" form="quick-task-add"class="insert-peroid">
+            <form action="./task_regist.php" method="post" id="quick-task-add"></form>
+    </div>
+  </div><!-- /task-list-contents -->
+  
+  <!-- BootStrap CDN-->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
 </html>
