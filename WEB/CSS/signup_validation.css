@@ -23,7 +23,7 @@ img{
  }
  .button a{
    text-decoration: none;
-   
+   color: #FFEED5;
  }
  .button{
     text-align: center;
@@ -32,6 +32,15 @@ img{
     position: relative;
    top:50px;
  }
+ .back a{
+   text-decoration: none;
+   color: #FFEED5;
+ }
+.back{
+   text-align: center;
+    position: relative;
+  top:150px;
+}
 button{
    border-top-right-radius:5px;
    border-top-left-radius: 5px;

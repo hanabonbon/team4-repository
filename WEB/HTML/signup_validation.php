@@ -66,7 +66,9 @@
     <input type="hidden" name="nickname" value="<?php echo $_POST['nickname']; ?>">
     <input type="hidden" name="mailaddress" value="<?php echo $_POST['mailaddress']; ?>">
     <input type="hidden" name="password" value="<?php echo $_POST['password']; ?>">
-  
+    <div class="back">
+      <button><a href="./signup.php">戻る</a></button>
+   </div>
   
    
   </form>
