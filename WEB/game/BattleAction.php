@@ -1,8 +1,8 @@
 <?php
-  interface PlayerAction {
+  interface BattleAction {
     public function attack();
     public function defence();
-    public function skill();
     public function avert();
+    public function skill();
   }
 ?>
