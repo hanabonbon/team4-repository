@@ -17,15 +17,15 @@
     $P = $row['skill_point'];
     $sp = $P;
     $H = 100;
-    for ($i = 1; $i <= $row['hitpoint']; $i++) {
+    for ($i = 1; $i < $row['hitpoint']; $i++) {
       $H += 5;
     }
     $A = 20;
-    for ($i = 1; $i <= $row['attack']; $i++) {
+    for ($i = 1; $i < $row['attack']; $i++) {
       $A += 1;
     }
     $S = 10;
-    for ($i = 1; $i <= $row['agility']; $i++) {
+    for ($i = 1; $i < $row['agility']; $i++) {
       if($i <= 50){
         $S += 0.4;
       }elseif($i <= 100){
@@ -35,7 +35,7 @@
       }
     }
     $D = 5;
-    for($i = 1;$i <= $row['defence'];$i++){
+    for($i = 1;$i < $row['defence'];$i++){
       if($i <= 50){
         $D += 0.4;
       }elseif($i <= 100){
@@ -45,7 +45,7 @@
       }
     }
     $L = 0.6;
-    for($i = 1;$i <= $row['luck'];$i++){
+    for($i = 1;$i < $row['luck'];$i++){
       if($i <= 50){
         $L += 0.6;
       }elseif($i <= 100){
