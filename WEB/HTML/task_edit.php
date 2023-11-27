@@ -117,27 +117,30 @@
 
   <div class="text-center mt-3">
   <!-- タイトル -->
-  <input type="text" value="<?=$title?>" name="title"  form="task-edit-form">
-  </div>
+  <input type="text" value="<?=$title?>" name="title" form="task-edit-form" style="background-color: inherit; border: none; width: 100%; text-align: center;">
+
+</div>
 
   <div class="ms-5">
   <!--期限-->
-  <br><input type="date" value="<?=$period?>" name="period" required="required" form="task-edit-form"><br>
+  <br><input type="date" value="<?=$period?>" name="period"  required="required" form="task-edit-form">
   </div>
   
-  <div class="ms-5 mt-3">
-  <p>完了日：<?=$completion_time?></p>
-  <p>最終更新日:<?=$last_edit_time?></p>
-  <p>作成日:<?=$created_time?></p>
-  </div>
+  <div class="ms-5 mt-3" style="font-size: 11px;">
+  <p>完了日：<span style="font-size: 13.5px;"><?=$completion_time?></span></p>
+  <p>最終更新日：<span style="font-size: 13.5px;"><?=$last_edit_time?></span></p>
+  <p>作成日：<span style="font-size: 13.5px;"><?=$created_time?></span></p>
+</div>
   <hr>
   <div class="text-center">
   <!--詳細-->
-  <br><textarea name="detail" autocomplete="off" form="task-edit-form"><?=$detail?></textarea>
+  <textarea name="detail" autocomplete="off" form="task-edit-form" style="width: 100%; min-height: 130px; background-color: inherit; border: none;"><?=$detail?></textarea>
   </div>
   <hr>
-  <br><button type="submit" form="task-edit-form">作成する</button>
-  <br><button onclick="history.back()">キャンセル</button>
+  <div class="button">
+  <br><button onclick="history.back()">キャンセル</button>　　　　　　　　　　
+  <button type="submit" form="task-edit-form">作成する</button>
+  </div>
   </div>
   </div>
   </div>
