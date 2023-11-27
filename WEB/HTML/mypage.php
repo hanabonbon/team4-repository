@@ -17,15 +17,15 @@
     $P = $row['skill_point'];
     $sp = $P;
     $H = 100;
-    for ($i = 1; $i <= $row['hitpoint']; $i++) {
+    for ($i = 1; $i < $row['hitpoint']; $i++) {
       $H += 5;
     }
     $A = 20;
-    for ($i = 1; $i <= $row['attack']; $i++) {
+    for ($i = 1; $i < $row['attack']; $i++) {
       $A += 1;
     }
     $S = 10;
-    for ($i = 1; $i <= $row['agility']; $i++) {
+    for ($i = 1; $i < $row['agility']; $i++) {
       if($i <= 50){
         $S += 0.4;
       }elseif($i <= 100){
@@ -35,7 +35,7 @@
       }
     }
     $D = 5;
-    for($i = 1;$i <= $row['defence'];$i++){
+    for($i = 1;$i < $row['defence'];$i++){
       if($i <= 50){
         $D += 0.4;
       }elseif($i <= 100){
@@ -45,7 +45,7 @@
       }
     }
     $L = 0.6;
-    for($i = 1;$i <= $row['luck'];$i++){
+    for($i = 1;$i < $row['luck'];$i++){
       if($i <= 50){
         $L += 0.6;
       }elseif($i <= 100){
@@ -125,7 +125,7 @@
         inputElement.value = Hcount;
         // カウンターの表示を更新
         document.getElementById("Hcounter").innerText = Hcount;
-        document.getElementById("Hchange").innerText = Hsum.toFixed(1);
+        document.getElementById("Hchange").innerText = Hsum.toFixed(0);
       }
       function HCounter2() {
         if(Hcount > 0){
@@ -140,7 +140,7 @@
         inputElement.value = Hcount;
         // カウンターの表示を更新
         document.getElementById("Hcounter").innerText = Hcount;
-        document.getElementById("Hchange").innerText = Hsum.toFixed(1);
+        document.getElementById("Hchange").innerText = Hsum.toFixed(0);
       }
       function ACounter1() {
         if(Acount < <?php echo $sp;?>){
@@ -155,7 +155,7 @@
         inputElement.value = Acount;
         // カウンターの表示を更新
         document.getElementById("Acounter").innerText = Acount;
-        document.getElementById("Achange").innerText = Asum.toFixed(1);
+        document.getElementById("Achange").innerText = Asum.toFixed(0);
       }
       function ACounter2() {
         if(Acount > 0){
@@ -170,7 +170,7 @@
         inputElement.value = Acount;
         // カウンターの表示を更新
         document.getElementById("Acounter").innerText = Acount;
-        document.getElementById("Achange").innerText = Asum.toFixed(1);
+        document.getElementById("Achange").innerText = Asum.toFixed(0);
       }
       function SCounter1() {
         if(Scount < <?php echo $sp?>){
@@ -192,7 +192,11 @@
         inputElement.value = Scount;
         // カウンターの表示を更新
         document.getElementById("Scounter").innerText = Scount;
-        document.getElementById("Schange").innerText = Ssum.toFixed(1);
+        if (Number.isInteger(Ssum)) {
+          document.getElementById("Schange").innerText = Ssum.toFixed(0);
+        } else {
+          document.getElementById("Schange").innerText = Ssum.toFixed(1);
+        }
       }
       function SCounter2() {
         if(Scount > 0){
@@ -214,7 +218,11 @@
         inputElement.value = Scount;
         // カウンターの表示を更新
         document.getElementById("Scounter").innerText = Scount;
-        document.getElementById("Schange").innerText = Ssum.toFixed(1);
+        if (Number.isInteger(Ssum)) {
+          document.getElementById("Schange").innerText = Ssum.toFixed(0);
+        } else {
+          document.getElementById("Schange").innerText = Ssum.toFixed(1);
+        }
       }
       function DCounter1() {
         if(Dcount < <?php echo $sp?>){
@@ -236,7 +244,11 @@
         inputElement.value = Dcount;
         // カウンターの表示を更新
         document.getElementById("Dcounter").innerText = Dcount;
-        document.getElementById("Dchange").innerText = Dsum.toFixed(1);
+        if (Number.isInteger(Dsum)) {
+          document.getElementById("Dchange").innerText = Dsum.toFixed(0);
+        } else {
+          document.getElementById("Dchange").innerText = Dsum.toFixed(1);
+        }
       }
       function DCounter2() {
         if(Dcount > 0){
@@ -258,7 +270,11 @@
         inputElement.value = Dcount;
         // カウンターの表示を更新
         document.getElementById("Dcounter").innerText = Dcount;
-        document.getElementById("Dchange").innerText = Dsum.toFixed(1);
+        if (Number.isInteger(Dsum)) {
+          document.getElementById("Dchange").innerText = Dsum.toFixed(0);
+        } else {
+          document.getElementById("Dchange").innerText = Dsum.toFixed(1);
+        }
       }
       function LCounter1() {
         if(Lcount < <?php echo $sp?>){
@@ -269,7 +285,9 @@
         for(i = 1; i <= Lcount; i++) {
           LS = <?php echo $row['luck']; ?> + Lcount;
           if(LS <= 50){
-            Lsum += 0.5;
+            Lsum += 0.6;
+          }else if(LS <= 100){
+            Lsum += 0.4;
           }else{
             Lsum += 0.1;
           }
@@ -278,7 +296,11 @@
         inputElement.value = Lcount;
         // カウンターの表示を更新
         document.getElementById("Lcounter").innerText = Lcount;
-        document.getElementById("Lchange").innerText = Lsum.toFixed(1);
+        if (Number.isInteger(Lsum)) {
+          document.getElementById("Lchange").innerText = Lsum.toFixed(0);
+        } else {
+          document.getElementById("Lchange").innerText = Lsum.toFixed(1);
+        }
       }
       function LCounter2() {
         if(Lcount > 0){
@@ -289,7 +311,9 @@
         for(i = 1; i <= Lcount; i++) {
           LS = <?php echo $row['luck']; ?> + Lcount;
           if(LS <= 50){
-            Lsum += 0.5;
+            Lsum += 0.6;
+          }else if(LS <= 100){
+            Lsum += 0.4;
           }else{
             Lsum += 0.1;
           }
@@ -298,7 +322,11 @@
         inputElement.value = Lcount;
         // カウンターの表示を更新
         document.getElementById("Lcounter").innerText = Lcount;
-        document.getElementById("Lchange").innerText = Lsum.toFixed(1);
+        if (Number.isInteger(Lsum)) {
+          document.getElementById("Lchange").innerText = Lsum.toFixed(0);
+        } else {
+          document.getElementById("Lchange").innerText = Lsum.toFixed(1);
+        }
       }
     </script>
   </head>
@@ -380,7 +408,7 @@
         </svg>
       </div>
       <div class="circle-icon">
-        <img class="icon-img" src="../images/DTBBqNQVwAEYiZW.jpg" alt="アイコン画像">
+        <img class="icon-img" src="../images/<?PHP echo $row['icon_path'];?>" alt="アイコン画像">
       </div>
       <div class="info">
         <p class="text-right">素早さ</p>
