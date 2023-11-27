@@ -8,9 +8,28 @@
     background: #FFEED5;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
-
+input[type="date"] {
+    appearance: none; /* ブラウザのデフォルトのスタイルを無効にする */
+     /* ボーダーを非表示にする */
+    outline: none; /* アウトラインを非表示にする */
+    background-color: #818181;
+    color: #FFEED5;
+  }
 body {
     overflow: hidden;
     height: 100%;
     background-color: #818181;
   }
+.button{
+    position: relative;
+    bottom: 20px;
+}
+button{
+    border-top-right-radius:5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius: 5px;
+    background-color: #818181;
+    color: #FFEED5;
+   
+}
