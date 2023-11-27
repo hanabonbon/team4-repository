@@ -49,6 +49,9 @@
   $user = new User();
   //ユーザースキルポイントを取得
   $UserskillData = $user->getUserskilpointlByUserId($user_id);
+
+  //ユーザーデータを取得
+  $myuser = $user->getUserDataByUserId($user_id);
 ?>
 <script>
   console.log(<?= json_encode($todayTaskList) ?>)
@@ -62,35 +65,35 @@
           <!--アイコンとユーザー名-->
           <div class="icon-name">
             <div class="img-area">
-              <img src="../images/default_icon.png" class="img-icon">
+              <img src="../images/<?= $myuser['icon_path'] ?>" class="img-icon">
             </div>
             <div class="name-area">
-              <label class="username-area">〇〇〇〇</label>
+              <label class="username-area"><?= $myuser['nickname'] ?></label>
             </div>
           </div>
           <li class="nav-item active">
             <!-- タスク上の白線 -->
             <div class="nav-link"></div>
-            <a class="nav-link" href="task.html">タスク</a>
+            <a class="nav-link" href="task_list.php">タスク</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="mypage.html">マイページ</a>
+            <a class="nav-link" href="mypage.php">マイページ</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="battle.html">対戦</a>
+            <a class="nav-link" href="">対戦</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="ranking.html">ランキング</a>
+            <a class="nav-link" href="rank.php">ランキング</a>
           </li>
         </ul>
       </div>
     </nav>
   </div>
   <!-- コンテンツ -->
-  <div class="container-fluid offset-" id="task-list-contents">
+  <div class="container-fluid" id="task-list-contents">
     <div id="top-area"><!-- 20% -->
       <!-- <a href="./logout.php">デバッグ用ログアウト</a> -->
       <h3><?=date('Y-m-d D')?> </h3>
@@ -99,14 +102,14 @@
     <div class="row" id="task-list-area"><!-- タスク一覧エリア -->
       <div class="col-7">
         <div id="task-area"><!-- 60% -->
-          <h2 class="offset-1 pb-1">今日のタスク</h2>
-          <div id="today-task-area" class="container-fluid offset-1">
+          <h2 class="pb-1">今日のタスク</h2>
+          <div id="today-task-area" class="container-fluid">
             <!-- 今日が期限のタスク一覧 -->
             <?php foreach($todayTaskList as $taskData) :?>
               <!-- フォーム設定 -->
               <form action="./task_edit.php" method="get">
                 <input type="hidden" name="task_id" value="<?=$taskData['task_id']?>">
-                <div class="row offset-1" id="task-card"><!--  align-items-center -->
+                <div class="row" id="task-card"><!--  align-items-center -->
     
                   <div class="col-1 complete-button">
                     <!-- 完了ボタン URL以外は変更できます-->
@@ -130,14 +133,14 @@
             <?php endforeach; ?>
           </div>
       
-          <h2 class="pt-1 pb-1 offset-1">期限が近づいています！</h2>
-          <div id="scheduled-task-area" class="container-fluid offset-1">
+          <h2 class="pt-1 pb-1">期限が近づいています！</h2>
+          <div id="scheduled-task-area" class="container-fluid">
             <?php foreach($NearTaskList as $taskData) :?>
               <!-- フォーム設定 -->
               <form action="./task_edit.php" method="get">
                 <input type="hidden" name="task_id" value="<?=$taskData['task_id']?>">
     
-                <div class="row offset-1" id="task-card"><!--  align-items-center -->
+                <div class="row" id="task-card"><!--  align-items-center -->
     
                   <div class="col-1 complete-button">
                     <!-- 完了ボタン URL以外は変更できます-->
@@ -183,12 +186,13 @@
         </div>
       </div>
     </div>
-    <div id="quick-task-area"class="offset-1">
+    <div id="quick-task-area">
             <!-- 簡易タスク追加 -->
             <button type="submit" form="quick-task-add"class="insert-btn">＋</button>
             <input type="text" name="title" form="quick-task-add"class="insert-text" placeholder="タイトル">
+            <label class="kigen-text">期限：</label>
             <input type="date" name="period" required="required" form="quick-task-add"class="insert-peroid">
-            <form action="./task_regist.php" method="post" id="quick-task-add"></form>
+            <form action="./task_regist_home.php" method="post" id="quick-task-add"></form>
     </div>
   </div><!-- /task-list-contents -->
   
