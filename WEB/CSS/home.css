@@ -1,79 +1,123 @@
-/* ページ全体に対して */
 body {
-    overflow-x: hidden;
-}
+    overflow: hidden;
+    height: 100%;
+    background-color: #FFEED5;
+  }
+  #task-list-contents {
+    width: 85%;
+    /* 左寄せ */
+    margin-left: 15%;
+    /* height: 801px; */
 
-/*タスクのスタイル*/
-.task-style {
-    width: 503px;
-    height: 43px;
-    flex-shrink: 0;
-    background-color:#818181;
+  }
+  
+  #task-result {
+    width: 20%;
+  }
+  
+  #button-area {
+    text-align: right;
+    margin-top: 20px;
+    /* margin-bottom: 20px; */
+  }
+  
+  #button-area button {
+    margin: 10px;
+  }
+  
+  #top-area {
+    /* height: 15%; */
+    height: 25%
+  }
+  
+  #task-area {
+    margin-top: 2%;
+    /* height: 63%; */
+  }
+  
+  #task-area h3 {
+    height: 10%;
+  }
+  
+  /* 表示してあるタスクのスタイル */
+  #task-card {
+    /* height: 20%; */
+    border:none;
     border-radius: 7px;
-    margin-bottom: 1vh;/*タスクの下にスペースを開ける*/
-}
-.text-style {
+    margin-bottom: 25px;
+    padding: 4px;
+    background-color: #818181;
+    width: 520px;
+    height: 35px;
+  }
+  
+  .task-card-data { 
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    appearance: none;
+    text-align: start;
     color:white;
-}
-/*タスク一覧のスタイル*/
-.task-list{
-    height:20vh;
-    width: 550px;
+  }
+  .complete-btn{
+    color: white;
+  }
+  /* .task-title {
+    margin-top: 2px;
+  }
+  
+  .task-period {
+    margin-top: 2px;
+  }
+  
+  .complete-button {
+    margin-top: 2px;
+  } */
+  
+  /* 「今日のタスク」エリア */
+  #today-task-area {
     overflow-y: scroll;
-}
+     height:25vh; 
+    margin-top: 1%;
+    margin-bottom: 1%;
+  }
+  
+  /* 「予定されたタスク」エリア */
+  #scheduled-task-area {
+    overflow-y: scroll;
+     height: 25vh; 
+    margin-top: 1%;
+    margin-bottom: 1%;
+  }
+  
+  /* 達成したタスク数など */
+  #task-message {
+   
+  }
+  
+  #task-list-area {
+    height: 70%;
+  }
+  
+  #quick-task-area {
+    height: 5%;
+  }
+  
+  /* 以下、スクロールバーのスタイル */
+  ::-webkit-scrollbar{
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track{
+    background-color: #ccc;
+  }
+  ::-webkit-scrollbar-thumb{
+    background-color: #818181;
+  }
 
-.complete_btn{
-    width: 40px;
-}
-.btn-secondry{
-    width: 13px;
-    height: 13px;
-    border: none;
-    border-radius: 1px;
-}
 
-/*タスク追加*/
-.insert-task{
-    width: 625px;
-    height: 43px;
-    flex-shrink: 0;
-    background-color:#818181;
-    border-radius: 7px;
-}
-
-.insert-text{
-    width: 75%;
-    height: 43px;
-    border: none;
-    background-color:#818181;
-    border-radius: 7px;
-    color: white;
-}
-.insert-limit{
-    width: 13%;
-    height: 43px;
-    border: none;
-    background-color:#818181;
-    color: white;
-    border-radius: 7px;
-    padding-left: 3px;
-}
-.insert-btn{
-    width: 6%;
-    height: 40px;
-    border: none;
-    background-color:#818181;
-    border-radius: 7px;
-    color: white;
-}
-input[type="text"]{
-    color: white;
-}
-::placeholder {
-    color: white;
-}
-
-/*右側のスタイル*/
+  /*右側のスタイル*/
 .p-text{
     font-size: 3vh;
     font-weight: bold;
@@ -92,3 +136,45 @@ input[type="text"]{
     border-radius: 7px;
     color: white;
 }
+ 
+/*追加エリア*/
+#quick-task-area{
+  background-color:#818181;
+  width:45vw;
+  border-radius: 7px;
+}
+.insert-text{
+  width: 30vw;
+  height: 43px;
+  border: none;
+  background-color:#818181;
+  border-radius: 7px;
+  color: white;
+}
+.insert-peroid{
+  width: 10vw;
+  height: 43px;
+  border: none;
+  background-color:#818181;
+  color: white;
+  border-radius: 7px;
+  padding-left: 3px;
+}
+.insert-btn{
+  width: 3vw;
+  height: 40px;
+  border: none;
+  background-color:#818181;
+  border-radius: 7px;
+  color: white;
+}
+input[type="text"]{
+  color: white;
+}
+::placeholder {
+  color: white;
+}
+
+  
+  
+  
