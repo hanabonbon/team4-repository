@@ -40,7 +40,6 @@
                         <label class="username-area"><?= $myuser['nickname'] ?></label>
                       </div>
                     </div>
-  
                       <li class="nav-item active">
                         <!-- タスク上の白線 -->
                         <div class="nav-link"></div>

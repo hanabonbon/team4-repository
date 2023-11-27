@@ -24,6 +24,9 @@
   require_once('../DAO/User.php');
   $user = new User();
   $myuser = $user->getUserDataByUserId($user_id);
+  require_once('../DAO/Test.php');
+  $test = new Test();
+  $rank = $test->selectAllRanking();
   ?>
   <body style="background-color:#FFEED5;">
   <div class="container-fluid">
@@ -66,10 +69,22 @@
       <!-- メニューバーここまで -->
     <h2 class="text-center mt-5">ランキング</h2>
     <h5 class="text-center mt-3">現在の順位：１位</h5>
+    <?php foreach($rank as $index => $row) : ?>
 
     <div class="ranking_area text-center">
-        a<br>a<br>a<br>a<br>a<br>a<br>a<br>a<br>a<br>a<br>a<br>a<br>
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card mb-2">
+                <div class="card-body text-color">
+                  <span class="text-start"><h6><?= $index + 1 . "位" ?></h6></span>
+                  <span><h5><?= $row['nickname']; ?></h5></span>
+                  <span class="text-end"><h6><?= $row['rank_point']; echo "RP"; ?></h6></span>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <?php endforeach; ?>
 
 
 
