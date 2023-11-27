@@ -42,12 +42,11 @@ body {
   /* 表示してあるタスクのスタイル */
   #task-card {
     /* height: 20%; */
-    border:none;
+    border:solid 1px;
     border-radius: 7px;
     margin-bottom: 25px;
     padding: 4px;
     background-color: #818181;
-    width: 520px;
     height: 35px;
   }
   
@@ -140,20 +139,20 @@ body {
 /*追加エリア*/
 #quick-task-area{
   background-color:#818181;
-  width:45vw;
+  width:620px;
   border-radius: 7px;
 }
 .insert-text{
-  width: 30vw;
-  height: 43px;
+  width: 64%;
+  height: 48px;
   border: none;
   background-color:#818181;
   border-radius: 7px;
   color: white;
 }
 .insert-peroid{
-  width: 10vw;
-  height: 43px;
+  width: 20%;
+  height: 48px;
   border: none;
   background-color:#818181;
   color: white;
@@ -161,12 +160,17 @@ body {
   padding-left: 3px;
 }
 .insert-btn{
-  width: 3vw;
-  height: 40px;
+  width: 5%;
+  height: 48px;
   border: none;
   background-color:#818181;
   border-radius: 7px;
   color: white;
+}
+
+.kigen-text{
+    color: white;
+    width: 8%;
 }
 input[type="text"]{
   color: white;
@@ -174,7 +178,7 @@ input[type="text"]{
 ::placeholder {
   color: white;
 }
-
-  
-  
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color:white;
+}
   
