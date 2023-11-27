@@ -82,30 +82,35 @@
   <div class="container-fluid" id="task-list-contents">
     <div id="top-area"><!-- 20% -->
       <!-- <a href="./logout.php">デバッグ用ログアウト</a> -->
-      <div id="button-area">
-        <a href="./task_edit.php"><button>新規作成</button></a>
-        <a href="./task_record.php"><button>記録を見る</button></a>
+      <div class="row">
+        <div class="col-6">
+          <h3><?=date('Y-m-d D')?></h3>
+        </div>
+        <div class="col-6">
+          <div id="button-area">
+            <a href="./task_edit.php"><button class="col-4 new-btn">新規作成</button></a>
+            <a href="./task_record.php"><button class="col-4 show-btn">記録を見る</button></a>
+          </div>
+        </div>
       </div>
-      <h3><?=date('Y-m-d D')?> 今日のタスク</h3>
-      <hr>
     </div>
 
     <div class="row" id="task-list-area"><!-- タスク一覧エリア -->
-      <div class="col-8">
+      <div class="col-7">
         <div id="task-area"><!-- 60% -->
+        <h2 class="pb-1">今日のタスク</h2>
           <div id="today-task-area" class="container-fluid">
             <!-- 今日が期限のタスク一覧 -->
             <?php foreach($todayTaskList as $taskData) :?>
               <!-- フォーム設定 -->
               <form action="./task_edit.php" method="get">
                 <input type="hidden" name="task_id" value="<?=$taskData['task_id']?>">
-    
                 <div class="row" id="task-card"><!--  align-items-center -->
     
                   <div class="col-1 complete-button">
                     <!-- 完了ボタン URL以外は変更できます-->
                     <a href="./task_state_update.php?task_id=<?=
-                      $taskData['task_id']?>&is_complete=<?=$taskData['is_complete']?>">
+                      $taskData['task_id']?>&is_complete=<?=$taskData['is_complete']?>"class="complete-btn">
                       <i class="<?=$taskData['is_complete'] ? "bi bi-clipboard-check" : "bi bi-clipboard"?>"></i>
                     </a>
                   </div>
@@ -118,13 +123,13 @@
                       <span class="task-period col-6">期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></span> 
                     </div>
                   </button>
-    
                 </div>
+                
               </form>
             <?php endforeach; ?>
           </div>
       
-          <h3>今後の予定</h3>
+          <h2 class="pt-1 pb-1">今後の予定</h2>
           <div id="scheduled-task-area" class="container-fluid">
             <?php foreach($ScheduledTaskList as $taskData) :?>
               <!-- フォーム設定 -->
@@ -136,7 +141,7 @@
                   <div class="col-1 complete-button">
                     <!-- 完了ボタン URL以外は変更できます-->
                     <a href="./task_state_update.php?task_id=<?=
-                      $taskData['task_id']?>&is_complete=<?=$taskData['is_complete']?>">
+                      $taskData['task_id']?>&is_complete=<?=$taskData['is_complete']?>"class="complete-btn">
                       <i class="<?=$taskData['is_complete'] ? "bi bi-clipboard-check" : "bi bi-clipboard"?>"></i>
                     </a>
                   </div>
@@ -157,25 +162,18 @@
         </div>
 
       </div>
-      <div class="col-4">
-        <p id="task-message">今日は<?=$todaysCompletedCount?>件のタスクを完了しました。</p>
+      <div class="col-5">
+        <p id="task-message"class="pt-4 h4">今日は<?=$todaysCompletedCount?>件のタスクを完了しました。</p>
       </div>
     </div>
 
     <div id="quick-task-area">
-      <!-- 簡易タスク追加 -->
-      <div class="row">
-        <div class="col-4">
-          <input type="text" name="title" form="quick-task-add">
-        </div>
-        <div class="col-3">
-          <input type="date" name="period" required="required" form="quick-task-add">
-        </div>
-        <div class="col-1">
-          <button type="submit" form="quick-task-add">追加</button>
-        </div> 
-        <form action="./task_regist.php" method="post" id="quick-task-add"></form>
-      </div>
+            <!-- 簡易タスク追加 -->
+            <button type="submit" form="quick-task-add"class="insert-btn">＋</button>
+            <input type="text" name="title" form="quick-task-add"class="insert-text" placeholder="タイトル">
+            <label class="kigen-text">期限：</label>
+            <input type="date" name="period" required="required" form="quick-task-add"class="insert-peroid">
+            <form action="./task_regist.php" method="post" id="quick-task-add"></form>
     </div>
 
   </div><!-- /task-list-contents -->

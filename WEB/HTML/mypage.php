@@ -105,6 +105,19 @@
       }
     </script>
     <script>
+        function logout() {
+            // アラートを表示
+            var confirmation = confirm("ログアウトしますか？");
+            // ユーザーがOKをクリックした場合
+            if (confirmation) {
+                // 新しいページのURLを指定
+                window.location.href = "logout.php";
+            } else {
+                // キャンセルをクリックした場合は何もしない
+            }
+        }
+    </script>
+    <script>
       // カウンターの初期値を設定
       let Hcount = 0;
       let Acount = 0;
@@ -453,7 +466,7 @@
     <div class="button">
       <button type="button" class="btn btn-primary" onclick="confirmUpdate()">更新</button>
       <a href="check_profile.php" class="btn btn-primary">登録情報</a>
-      <a href="logout.php" class="btn btn-primary">ログアウト</a>
+      <button type="button" class="btn btn-primary" onclick="logout()">ログアウト</button>
     </div>
     <!-- Optional JavaScript; choose one of the two! -->
 
