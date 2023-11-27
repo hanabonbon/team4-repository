@@ -15,6 +15,7 @@
   $result = $ps->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result as $row) {
     $P = $row['skill_point'];
+    $sp = $P;
     $H = 100;
     for ($i = 1; $i <= $row['hitpoint']; $i++) {
       $H += 5;
@@ -34,10 +35,25 @@
       }
     }
     $D = 5;
-    for($i = 1;$row['defence'];){
-
+    for($i = 1;$i <= $row['defence'];$i++){
+      if($i <= 50){
+        $D += 0.4;
+      }elseif($i <= 100){
+        $D += 0.5;
+      }else{
+        $D += 0.1;
+      }
     }
-    $L = $row['luck'];
+    $L = 0.6;
+    for($i = 1;$i <= $row['luck'];$i++){
+      if($i <= 50){
+        $L += 0.6;
+      }elseif($i <= 100){
+        $L += 0.4;
+      }else{
+        $L += 0.1;
+      }
+    }
 ?>
 <!doctype html>
 <html lang="en">
@@ -88,6 +104,203 @@
         }
       }
     </script>
+    <script>
+      // カウンターの初期値を設定
+      let Hcount = 0;
+      let Acount = 0;
+      let Scount = 0;
+      let Dcount = 0;
+      let Lcount = 0;
+      // カウンターを増加させる関数
+      function HCounter1() {
+        if(Hcount < <?php echo $sp?>){
+          // カウンターの値を1増やす
+          Hcount++;
+        }
+        Hsum = <?php echo $H;?>;
+        for(i = 1; i <= Hcount; i++) {
+          Hsum += 5;
+        }
+        var inputElement = document.getElementById("Hc");
+        inputElement.value = Hcount;
+        // カウンターの表示を更新
+        document.getElementById("Hcounter").innerText = Hcount;
+        document.getElementById("Hchange").innerText = Hsum.toFixed(1);
+      }
+      function HCounter2() {
+        if(Hcount > 0){
+          // カウンターの値を1増やす
+          Hcount--;
+        }
+        Hsum = <?php echo $H;?>;
+        for(i = 1; i <= Hcount; i++) {
+          Hsum += 5;
+        }
+        var inputElement = document.getElementById("Hc");
+        inputElement.value = Hcount;
+        // カウンターの表示を更新
+        document.getElementById("Hcounter").innerText = Hcount;
+        document.getElementById("Hchange").innerText = Hsum.toFixed(1);
+      }
+      function ACounter1() {
+        if(Acount < <?php echo $sp;?>){
+          // カウンターの値を1増やす
+          Acount++;
+        }
+        Asum = <?php echo $A;?>;
+        for(i = 1; i <= Acount; i++) {
+          Asum += 1;
+        }
+        var inputElement = document.getElementById("Ac");
+        inputElement.value = Acount;
+        // カウンターの表示を更新
+        document.getElementById("Acounter").innerText = Acount;
+        document.getElementById("Achange").innerText = Asum.toFixed(1);
+      }
+      function ACounter2() {
+        if(Acount > 0){
+          // カウンターの値を1減らす
+          Acount--;
+        }
+        Asum = <?php echo $A;?>;
+        for(i = 1; i <= Acount; i++) {
+          Asum += 1;
+        }
+        var inputElement = document.getElementById("Ac");
+        inputElement.value = Acount;
+        // カウンターの表示を更新
+        document.getElementById("Acounter").innerText = Acount;
+        document.getElementById("Achange").innerText = Asum.toFixed(1);
+      }
+      function SCounter1() {
+        if(Scount < <?php echo $sp?>){
+          // カウンターの値を1増やす
+          Scount++;
+        }
+        Ssum = <?php echo $S;?>;
+        for(i = 1; i <= Scount; i++) {
+          SS = <?php echo $row['agility']; ?> + Scount;
+          if(SS <= 50){
+            Ssum += 0.4;
+          }else if(SS <= 100){
+            Ssum += 0.8;
+          }else{
+            Ssum += 0.1;
+          }
+        }
+        var inputElement = document.getElementById("Sc");
+        inputElement.value = Scount;
+        // カウンターの表示を更新
+        document.getElementById("Scounter").innerText = Scount;
+        document.getElementById("Schange").innerText = Ssum.toFixed(1);
+      }
+      function SCounter2() {
+        if(Scount > 0){
+          // カウンターの値を1減らす
+          Scount--;
+        }
+        Ssum = <?php echo $S;?>;
+        for(i = 1; i <= Scount; i++) {
+          SS = <?php echo $row['agility']; ?> + Scount;
+          if(SS <= 50){
+            Ssum += 0.4;
+          }else if(SS <= 100){
+            Ssum += 0.8;
+          }else{
+            Ssum += 0.1;
+          }
+        }
+        var inputElement = document.getElementById("Sc");
+        inputElement.value = Scount;
+        // カウンターの表示を更新
+        document.getElementById("Scounter").innerText = Scount;
+        document.getElementById("Schange").innerText = Ssum.toFixed(1);
+      }
+      function DCounter1() {
+        if(Dcount < <?php echo $sp?>){
+          // カウンターの値を1増やす
+          Dcount++;
+        }
+        Dsum = <?php echo $D;?>;
+        for(i = 1; i <= Dcount; i++) {
+          DS = <?php echo $row['defence']; ?> + Dcount;
+          if(DS <= 50){
+            Dsum += 0.4;
+          }else if(DS <= 100){
+            Dsum += 0.5;
+          }else{
+            Dsum += 0.1;
+          }
+        }
+        var inputElement = document.getElementById("Dc");
+        inputElement.value = Dcount;
+        // カウンターの表示を更新
+        document.getElementById("Dcounter").innerText = Dcount;
+        document.getElementById("Dchange").innerText = Dsum.toFixed(1);
+      }
+      function DCounter2() {
+        if(Dcount > 0){
+          // カウンターの値を1減らす
+          Dcount--;
+        }
+        Dsum = <?php echo $D;?>;
+        for(i = 1; i <= Dcount; i++) {
+          DS = <?php echo $row['defence']; ?> + Dcount;
+          if(DS <= 50){
+            Dsum += 0.4;
+          }else if(DS <= 100){
+            Dsum += 0.5;
+          }else{
+            Dsum += 0.1;
+          }
+        }
+        var inputElement = document.getElementById("Dc");
+        inputElement.value = Dcount;
+        // カウンターの表示を更新
+        document.getElementById("Dcounter").innerText = Dcount;
+        document.getElementById("Dchange").innerText = Dsum.toFixed(1);
+      }
+      function LCounter1() {
+        if(Lcount < <?php echo $sp?>){
+          // カウンターの値を1増やす
+          Lcount++;
+        }
+        Lsum = <?php echo $L;?>;
+        for(i = 1; i <= Lcount; i++) {
+          LS = <?php echo $row['luck']; ?> + Lcount;
+          if(LS <= 50){
+            Lsum += 0.5;
+          }else{
+            Lsum += 0.1;
+          }
+        }
+        var inputElement = document.getElementById("Lc");
+        inputElement.value = Lcount;
+        // カウンターの表示を更新
+        document.getElementById("Lcounter").innerText = Lcount;
+        document.getElementById("Lchange").innerText = Lsum.toFixed(1);
+      }
+      function LCounter2() {
+        if(Lcount > 0){
+          // カウンターの値を1減らす
+          Lcount--;
+        }
+        Lsum = <?php echo $L;?>;
+        for(i = 1; i <= Lcount; i++) {
+          LS = <?php echo $row['luck']; ?> + Lcount;
+          if(LS <= 50){
+            Lsum += 0.5;
+          }else{
+            Lsum += 0.1;
+          }
+        }
+        var inputElement = document.getElementById("Lc");
+        inputElement.value = Lcount;
+        // カウンターの表示を更新
+        document.getElementById("Lcounter").innerText = Lcount;
+        document.getElementById("Lchange").innerText = Lsum.toFixed(1);
+      }
+    </script>
   </head>
   <body>
     <form id="myForm" method="post" action="update.php" class="body">
@@ -118,7 +331,7 @@
                     <a class="nav-link" href="battle.html">対戦</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="ranking.html">ランキング</a>
+                    <a class="nav-link" href="ranking.php">ランキング</a>
                   </li>
                 </ul>
             </div>
@@ -130,12 +343,12 @@
         echo $row['skill_point']; // ユーザーIDを配列に追加
     ?></h2>
     <p>体力</p>
-    <button type="button">+</button>
+    <div><button type="button" onclick="HCounter1()">+</button><h id="Hcounter">0</h><button type="button" onclick="HCounter2()">-</button></div>
     <div class="yoko-center">
       <?php
         echo $H; // ユーザーIDを配列に追加
       ?>
-      →<input type="number" min="0" max="<?php echo $P;?>" class="hnum" name="h" value="0">
+      →<h id="Hchange"><?php echo $H;?></h><input type="hidden" class="hnum" name="h" id="Hc" value="0">
     </div><!-- 横線を追加 -->
     <svg xmlns="http://www.w3.org/2000/svg" width="186" height="24" viewBox="0 0 186 24" fill="none">
       <g filter="url(#filter0_d_307_231)">
@@ -157,11 +370,11 @@
     <div class="yoko">
       <div class="info">
         <p class="text-left">攻撃力</p>
-        <div><button type="button">+ </button></div>
+        <button type="button" onclick="ACounter1()">+</button><h id="Acounter">0</h><button type="button" onclick="ACounter2()">-</button><br>
         <?php
           echo $A; // ユーザーIDを配列に追加
         ?>
-        →<input type="number" min="0" max="<?php echo $P;?>" class="num" name="a" value="0">
+        → <h id="Achange"><?php echo $A;?></h><input type="hidden" class="num" name="a" id="Ac" value="0">
         <svg xmlns="http://www.w3.org/2000/svg" width="230" height="23" viewBox="0 0 230 23" fill="none">
           <path d="M71 22H230M0 0.999974H60M71.834 22.497L59.134 0.5" stroke="black" stroke-width="2"/>
         </svg>
@@ -171,11 +384,11 @@
       </div>
       <div class="info">
         <p class="text-right">素早さ</p>
-        <div><button type="button">+ </button></div>
+        <button type="button" onclick="SCounter1()">+</button><h id="Scounter">0</h><button type="button" onclick="SCounter2()">-</button><br>
         <?php
           echo $S; // ユーザーIDを配列に追加
         ?>
-        %→<input type="number" min="0" max="<?php echo $P;?>" class="num" name="s" value="0">
+        %→ <h id="Schange"><?php echo $S;?></h>%<input type="hidden" class="num" name="s" id="Sc" value="0">
         <svg xmlns="http://www.w3.org/2000/svg" width="230" height="24" viewBox="0 0 230 24" fill="none">
           <path d="M159 22.5H0M230 1.49997H170M158.166 22.997L170.866 1" stroke="black" stroke-width="2"/>
         </svg>
@@ -184,20 +397,22 @@
     <div class="yoko2">
       <div class="info">
         <p class="text-left">防御力</p>
+        <button type="button" onclick="DCounter1()">+</button><h id="Dcounter">0</h><button type="button" onclick="DCounter2()">-</button><br>
         <?php
           echo $D; // ユーザーIDを配列に追加
         ?>
-        + <input type="number" min="0" max="<?php echo $P;?>" class="num" name="d" value="0">
+        %→ <h id="Dchange"><?php echo $D;?></h>%<input type="hidden" class="num" name="d" id="Dc" value="0">
         <svg xmlns="http://www.w3.org/2000/svg" width="230" height="23" viewBox="0 0 230 23" fill="none">
           <path d="M71 22H230M0 0.999974H60M71.834 22.497L59.134 0.5" stroke="black" stroke-width="2"/>
         </svg>
       </div>
       <div class="info">
         <p class="text-right">幸運</p>
+        <button type="button" onclick="LCounter1()">+</button><h id="Lcounter">0</h><button type="button" onclick="LCounter2()">-</button><br>
         <?php
           echo $L; // ユーザーIDを配列に追加
         ?>
-        + <input type="number" min="0" max="<?php echo $P;?>" class="num" name="l" value="0">
+        %→ <h id="Lchange"><?php echo $L;?></h>%<input type="hidden" class="num" name="l" id="Lc" value="0">
         <svg xmlns="http://www.w3.org/2000/svg" width="230" height="24" viewBox="0 0 230 24" fill="none">
           <path d="M159 22.5H0M230 1.49997H170M158.166 22.997L170.866 1" stroke="black" stroke-width="2"/>
         </svg>
@@ -209,7 +424,7 @@
     ?>
     <div class="button">
       <button type="button" class="btn btn-primary" onclick="confirmUpdate()">更新</button>
-      <a href="information.php" class="btn btn-primary">登録情報</a>
+      <a href="check_profile.php" class="btn btn-primary">登録情報</a>
       <a href="logout.php" class="btn btn-primary">ログアウト</a>
     </div>
     <!-- Optional JavaScript; choose one of the two! -->
