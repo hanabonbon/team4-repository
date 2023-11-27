@@ -1,9 +1,16 @@
 #task-list {
-  height: 500px;
+  height: 450px;
   /*スクロールする*/
   overflow: scroll;
 }
 
 #task-simple-view {
   width: 900px;
+}
+
+#task-list-contents {
+  width: 85%;
+  /* 左寄せ */
+  margin-left: 15%;
+  /* height: 801px; */
 }
