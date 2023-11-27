@@ -117,8 +117,8 @@
 
   <div class="text-center mt-3">
   <!-- タイトル -->
-  <input type="text" value="<?=$title?>" name="title" style="display: none;" form="task-edit-form">
-  <p><?=$title?></p>
+  <input type="text" value="<?=$title?>" name="title" form="task-edit-form" style="background-color: inherit; border: none; width: 100%; text-align: center;">
+
 </div>
 
   <div class="ms-5">
@@ -127,9 +127,9 @@
   </div>
   
   <div class="ms-5 mt-3" style="font-size: 11px;">
-  <p>完了日：<span style="font-size: 13px;"><?=$completion_time?></span></p>
-  <p>最終更新日：<span style="font-size: 13px;"><?=$last_edit_time?></span></p>
-  <p>作成日：<span style="font-size: 13px;"><?=$created_time?></span></p>
+  <p>完了日：<span style="font-size: 13.5px;"><?=$completion_time?></span></p>
+  <p>最終更新日：<span style="font-size: 13.5px;"><?=$last_edit_time?></span></p>
+  <p>作成日：<span style="font-size: 13.5px;"><?=$created_time?></span></p>
 </div>
   <hr>
   <div class="text-center">
@@ -138,7 +138,7 @@
   </div>
   <hr>
   <div class="button">
-  <br><button onclick="history.back()">キャンセル</button>　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
+  <br><button onclick="history.back()">キャンセル</button>　　　　　　　　　　
   <button type="submit" form="task-edit-form">作成する</button>
   </div>
   </div>
