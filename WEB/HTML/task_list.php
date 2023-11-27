@@ -90,7 +90,6 @@
       <hr>
     </div>
 
-<<<<<<< Updated upstream
     <div class="row" id="task-list-area"><!-- タスク一覧エリア -->
       <div class="col-8">
         <div id="task-area"><!-- 60% -->
@@ -156,36 +155,6 @@
             <?php endforeach; ?>
           </div>
         </div>
-=======
-    <div id="task-area"><!-- 60% -->
-      <div id="today-task-area" class="container-fluid">
-
-        <!-- 今日が期限のタスク一覧 -->
-        <?php foreach($todayTaskList as $taskData) :?>
-
-          
-          <div class="task-card">
-            <!-- 完了ボタン URL以外は変更できます-->
-            <a href="./task_state_update.php?task_id=<?=$taskData['task_id']?>
-                                                &is_complete=<?=$taskData['is_complete']?>" 
-                                                class="complete-button">
-              <?php if($taskData['is_complete']) { ?>
-                <button class="btn-secondry"><i class="bi bi-clipboard-check"></i></button>
-              <?php } else { ?>
-                <button class="btn-secondry"><i class="bi bi-clipboard"></i></button>
-              <?php } ?><!--end if-->
-            </a>
-
-            <form action="./task_edit.php" method="get">
-              <input type="hidden" name="task_id" value="<?=$taskData['task_id']?>">
-              <span class="task-title"><?=$taskData['title']?></span>
-              <span class="task-period">期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></span>
-              <button type="submit" class="edit-button">編集する</button>
-            </form>
-          </div>
-
-        <?php endforeach; ?>
->>>>>>> Stashed changes
 
       </div>
       <div class="col-4">
