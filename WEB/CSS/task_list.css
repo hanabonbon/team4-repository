@@ -1,6 +1,7 @@
 body {
   overflow: hidden;
   height: 100%;
+  background-color: #FFEED5;
 }
 #task-list-contents {
   width: 85%;
@@ -85,9 +86,11 @@ body {
 }
 
 /* 達成したタスク数など */
+/*
 #task-message {
  
 }
+*/
 
 #task-list-area {
   height: 70%;
