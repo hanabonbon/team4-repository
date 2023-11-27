@@ -331,7 +331,7 @@
                     <a class="nav-link" href="battle.html">対戦</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="ranking.html">ランキング</a>
+                    <a class="nav-link" href="ranking.php">ランキング</a>
                   </li>
                 </ul>
             </div>
@@ -424,7 +424,7 @@
     ?>
     <div class="button">
       <button type="button" class="btn btn-primary" onclick="confirmUpdate()">更新</button>
-      <a href="information.php" class="btn btn-primary">登録情報</a>
+      <a href="check_profile.php" class="btn btn-primary">登録情報</a>
       <a href="logout.php" class="btn btn-primary">ログアウト</a>
     </div>
     <!-- Optional JavaScript; choose one of the two! -->
