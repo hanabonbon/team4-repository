@@ -27,6 +27,10 @@
   $userName =  $user->getUserName($user_id);
   $gameUser = new GameUser();
   $opponentList = $gameUser->fetchTopPlayer(currentUser: $user_id, limit: 10);
+
+  // $array = array();
+  // $array['hihPoint'] = 100;
+  // echo $array['hihPoint'];
 ?>
 <body>
   <div class="container-fluid">

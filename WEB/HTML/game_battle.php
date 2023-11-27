@@ -22,13 +22,25 @@
 <?php
   require_once('../DAO/GameUser.php');
   $gameUser = new GameUser();
+  require_once('../game/player.php');
+  
+
   //自分
   $user_id = $_SESSION['user_id'];
   $userName =  $gameUser->getUserName($user_id);
+  $userStatusLv = $gameUser->fetchUserStatusLv($user_id);
+
+  $player = new Player($userStatusLv);
+
+  //echo $player->getHihPoint();
 
   //相手
   $opponentId = $_GET['opponent_user_id'];
-  $opponent = $gameUser->findOnePlayerData($opponentId);
+  $opponentData = $gameUser->findOnePlayerData($opponentId);
+  $userStatusLv = $gameUser->fetchUserStatusLv($opponentId);
+
+  $opponent = new Player($opponentData);
+  
 ?>
 <body>
   <div class="container-fluid">
@@ -38,21 +50,21 @@
       <div class="col-6">
         <h3>あなた：<?=$userName?> {id:<?=$user_id?>}</h3>
         <ul>
-          <li>体力：</li>
-          <li>攻撃力：</li>
-          <li>防御力：</li>
-          <li>すばやさ：</li>
-          <li>幸運：</li>
+          <li>体力：<?=$player->getHihPoint()?></li>
+          <li>攻撃力：<?=$player->getAttack()?></li>
+          <li>防御力：<?=$player->getdefence() * 100?>%</li>
+          <li>すばやさ：<?=$player->getAgility() * 100?>%</li>
+          <li>幸運：<?=$player->getluck() * 100?>%</li>
         </ul>
       </div>
       <div class="col-6">
-        <h3>相手：<?=$opponent['nickname']?> {id:<?=$opponent['user_id']?>}</h3>
+        <h3>相手：<?=$opponentData['nickname']?> {id:<?=$opponentData['user_id']?>}</h3>
         <ul>
-          <li>体力：</li>
-          <li>攻撃力：</li>
-          <li>防御力：</li>
-          <li>すばやさ：</li>
-          <li>幸運：</li>
+          <li>体力：<?=$opponent->getHihPoint()?></li>
+          <li>攻撃力：<?=$opponent->getAttack()?></li>
+          <li>防御力：<?=$opponent->getdefence() * 100?>%</li>
+          <li>すばやさ：<?=$opponent->getAgility() * 100?>%</li>
+          <li>幸運：<?=$opponent->getluck() * 100?>%</li>
         </ul>
       </div>
     </div>
