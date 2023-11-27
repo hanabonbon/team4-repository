@@ -48,11 +48,11 @@
                       <li class="nav-item active">
                         <!-- タスク上の白線 -->
                         <div class="nav-link"></div>
-                          <a class="nav-link" href="task.html">タスク</a>
+                          <a class="nav-link" href="task_list.php">タスク</a>
                       </li>
   
                       <li class="nav-item">
-                          <a class="nav-link" href="mypage.html">マイページ</a>
+                          <a class="nav-link" href="mypage.php">マイページ</a>
                       </li>
   
                       <li class="nav-item">
@@ -60,7 +60,7 @@
                       </li>
   
                       <li class="nav-item">
-                        <a class="nav-link" href="ranking.html">ランキング</a>
+                        <a class="nav-link" href="ranking.php">ランキング</a>
                       </li>
                   </ul>
           </nav>
@@ -74,10 +74,10 @@
     <div class="ranking_area text-center">
       <div class="row">
         <div class="col-md-8 offset-md-2">
-            <div class="card mb-2">
+            <div class="card mb-2 <?= ($index < 3) ? 'top-rank' : '' ?>">
                 <div class="card-body text-color">
                   <span class="text-start"><h6><?= $index + 1 . "位" ?></h6></span>
-                  <span><h5><?= $row['nickname']; ?></h5></span>
+                  <span><img src="../images/<?= $row['icon_path'] ?>" class="img-icon"><h5><?= $row['nickname']; ?></h5></span>
                   <span class="text-end"><h6><?= $row['rank_point']; echo "RP"; ?></h6></span>
                 </div>
             </div>
