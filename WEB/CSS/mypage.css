@@ -12,6 +12,10 @@ p {
     font-size: 25px;
 }
 
+h {
+    color: red;
+}
+
 .hnum {
     width: 40px;
     border: none;
@@ -34,6 +38,7 @@ p {
 
 .yoko-center {
     display: flex; /* 要素を横に並べる */
+    align-items: center; /* 垂直方向の中央揃え */
 }
 
 .text-left {
