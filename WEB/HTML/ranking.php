@@ -68,15 +68,15 @@
       </div>
       <!-- メニューバーここまで -->
     <h2 class="text-center mt-5">ランキング</h2>
-    <h5 class="text-center mt-3">現在の順位：１位</h5>
+    <h5 class="text-center mt-3">現在の順位：<?php $test->selectMyRanking($_SESSION['user_id']) ?>位</h5>
     <?php foreach($rank as $index => $row) : ?>
 
     <div class="ranking_area text-center">
       <div class="row">
         <div class="col-md-8 offset-md-2">
-            <div class="card mb-2 <?= ($index < 3) ? 'top-rank' : '' ?>">
+            <div class="card mb-2 <?= ($index === 0) ? 'top-rank-1' : (($index === 1) ? 'top-rank-2' : (($index === 2) ? 'top-rank-3' : '')) ?>">
                 <div class="card-body text-color">
-                  <span class="text-start"><h6><?= $index + 1 . "位" ?></h6></span>
+                  <span class="text-start"><h6><?= $test->selectMyRanking($row['user_id']) . "位" ?></h6></span>
                   <span><img src="../images/<?= $row['icon_path'] ?>" class="img-icon"><h5><?= $row['nickname']; ?></h5></span>
                   <span class="text-end"><h6><?= $row['rank_point']; echo "RP"; ?></h6></span>
                 </div>

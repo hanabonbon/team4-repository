@@ -54,8 +54,7 @@
         <p>'.$_POST['password'].'</p>
         </div>
         <div class="button">
-        <button><a href="./signup.php">戻る</a></button> 　　　
-        <button><a href="./signup_complete.php">登録する</a></button>
+        <button type="submit" form="signup-validation-form">登録する</button>
        </div>
       ';
     }

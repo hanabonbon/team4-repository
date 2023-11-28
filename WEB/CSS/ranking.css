@@ -19,8 +19,16 @@ body {
     color:#FFEED5;
 }
 
-.top-rank .card-body {
-    color: #FFD700; /* 上位3位までのテキスト色を変更する色を指定 */
+.top-rank-1 .card-body {
+    color: #FFD700; /* 1位のテキスト色 */
+}
+
+.top-rank-2 .card-body {
+    color: #C0C0C0; /* 2位のテキスト色 */
+}
+
+.top-rank-3 .card-body {
+    color: #8c4841; /* 3位のテキスト色 */
 }
 
 
