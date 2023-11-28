@@ -36,6 +36,10 @@
       return $this->luck;
     }
 
+    public function decreaseHP(float $damage) {
+      $this->hihpoint -= $damage;
+    }
+
     public function culcStatus($statusLv) {
       $status = array();
 

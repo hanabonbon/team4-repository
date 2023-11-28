@@ -24,7 +24,6 @@
   $gameUser = new GameUser();
   require_once('../game/player.php');
   
-
   //自分
   $user_id = $_SESSION['user_id'];
   $userName =  $gameUser->getUserName($user_id);
@@ -32,14 +31,40 @@
 
   $player = new Player($userStatusLv);
 
-  //echo $player->getHihPoint();
-
   //相手
   $opponentId = $_GET['opponent_user_id'];
-  $opponentData = $gameUser->findOnePlayerData($opponentId);
-  $userStatusLv = $gameUser->fetchUserStatusLv($opponentId);
+  $opponentName =  $gameUser->getUserName($opponentId);
+  $opponentStatusLv = $gameUser->fetchUserStatusLv($opponentId);
 
-  $opponent = new Player($opponentData);
+  $opponent = new Player($opponentStatusLv);
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 ?>
 <body>
@@ -58,7 +83,7 @@
         </ul>
       </div>
       <div class="col-6">
-        <h3>相手：<?=$opponentData['nickname']?> {id:<?=$opponentData['user_id']?>}</h3>
+        <h3>相手：<?=$opponentName?> {id:<?=$opponentId?>}</h3>
         <ul>
           <li>体力：<?=$opponent->getHihPoint()?></li>
           <li>攻撃力：<?=$opponent->getAttack()?></li>
