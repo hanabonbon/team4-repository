@@ -86,7 +86,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="rank.php">ランキング</a>
+            <a class="nav-link" href="ranking.php">ランキング</a>
           </li>
         </ul>
       </div>
@@ -111,7 +111,7 @@
                 <input type="hidden" name="task_id" value="<?=$taskData['task_id']?>">
                 <div class="row" id="task-card"><!--  align-items-center -->
     
-                  <div class="col-1 complete-button">
+                  <div class="col-1">
                     <!-- 完了ボタン URL以外は変更できます-->
                     <a href="./task_state_update.php?task_id=<?=
                       $taskData['task_id']?>&is_complete=<?=$taskData['is_complete']?>"class="complete-btn">
@@ -142,7 +142,7 @@
     
                 <div class="row" id="task-card"><!--  align-items-center -->
     
-                  <div class="col-1 complete-button">
+                  <div class="col-1">
                     <!-- 完了ボタン URL以外は変更できます-->
                     <a href="./task_state_update.php?task_id=<?=
                       $taskData['task_id']?>&is_complete=<?=$taskData['is_complete']?>"class="complete-btn">

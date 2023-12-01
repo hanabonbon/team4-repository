@@ -4,13 +4,42 @@
   overflow: scroll;
 }
 
-#task-simple-view {
-  width: 900px;
-}
-
 #task-list-contents {
   width: 85%;
   /* 左寄せ */
   margin-left: 15%;
   /* height: 801px; */
+}
+
+/*タスク一覧*/
+
+.task-card-view{
+  width: 900px;
+  height: 35px;
+  border:solid 1px;
+  padding: 4px;
+  background-color: #818181;
+  color: white;
+  align-items: center;
+  border-radius: 7px;
+}
+
+
+/*完了ボタン*/
+.btn-secondry{
+  color: white;
+  background-color: #818181;
+  border:none;
+  border-radius: 7px;
+}
+
+/*編集ボタン*/
+.edit-btn{
+  color: white;
+  background-color: #818181;
+  border:none;
+}
+
+.title-period{
+  margin: 0;
 }
