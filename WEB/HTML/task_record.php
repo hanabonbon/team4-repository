@@ -135,11 +135,12 @@
     
         <!-- 月ごとのタスクを表示 -->
         <?php foreach($taskListByMonth as $taskData) :?>
-          <div class="row" id="task-simple-view">
+          <div  id="task-simple-view"class="container-fluid">
+            <div class="row task-card-view">
             <div class="col-1">
               <!-- 完了ボタン URL以外は変更できます-->
               <a href="./task_state_update.php?task_id=<?=$taskData['task_id']?>
-                                              &is_complete=<?=$taskData['is_complete']?>">
+                                              &is_complete=<?=$taskData['is_complete']?>"class="complete-btn">
                 <?php if($taskData['is_complete']) { ?>
                   <button class="btn-secondry"><i class="bi bi-clipboard-check"></i></button>
                 <?php } else { ?>
@@ -149,16 +150,17 @@
             </div>
             <div class="col-4">
               <!-- タイトル -->
-              <p><?=$taskData['title']?></p>
+              <p class="title-period"><?=$taskData['title']?></p>
             </div>
             <div class="col-4">
-                <p>期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></p>
+                <p class="title-period">期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></p>
             </div>
             <div class="col-3">
               <!-- 編集ボタン URL以外は変更できます -->
               <a href="./task_edit.php?task_id=<?=$taskData['task_id']?>">
-                <button>編集する</button>
+                <button class="edit-btn">編集する</button>
               </a>
+            </div>
             </div>
           </div>
           <hr>

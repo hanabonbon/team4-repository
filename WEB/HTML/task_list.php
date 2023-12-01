@@ -38,6 +38,12 @@
   //今日完了したタスクの数を取得
   $todaysCompletedCount = 
     $task->countCompletedTask($user_id, date('Y-m-d'), date('Y-m-d'));
+
+    require_once('../DAO/User.php');
+    $user = new User();
+  
+    //ユーザーデータを取得
+    $myuser = $user->getUserDataByUserId($user_id);
 ?>
 <script>
   console.log(<?= json_encode($todayTaskList) ?>)
@@ -51,28 +57,28 @@
           <!--アイコンとユーザー名-->
           <div class="icon-name">
             <div class="img-area">
-              <img src="../images/default_icon.png" class="img-icon">
+              <img src="../images/<?= $myuser['icon_path'] ?>" class="img-icon">
             </div>
             <div class="name-area">
-              <label class="username-area">〇〇〇〇</label>
+              <label class="username-area"><?= $myuser['nickname'] ?></label>
             </div>
           </div>
           <li class="nav-item active">
             <!-- タスク上の白線 -->
             <div class="nav-link"></div>
-            <a class="nav-link" href="task.html">タスク</a>
+            <a class="nav-link" href="task_list.php">タスク</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="mypage.html">マイページ</a>
+            <a class="nav-link" href="mypage.php">マイページ</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="battle.html">対戦</a>
+            <a class="nav-link" href="">対戦</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="ranking.html">ランキング</a>
+            <a class="nav-link" href="ranking.php">ランキング</a>
           </li>
         </ul>
       </div>
