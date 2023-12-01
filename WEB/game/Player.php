@@ -16,7 +16,7 @@
       $this->luck = $status['luck'];
     }
 
-    public function getHihPoint() {
+    public function getHitPoint() {
       return $this->hihpoint;
     }
 

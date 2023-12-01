@@ -1,7 +1,9 @@
 <?php 
   class BattleController {
     private $player;
+    private $playerId;
     private $opponent;
+    private $opponentId;
 
     public function __construct($playerId, $opponentId) {
       //必要なクラスをインスタンス化
@@ -10,20 +12,40 @@
       $gameUser = new GameUser();
 
       //自分
-      $user_id = $playerId;
-      $userStatusLv = $gameUser->fetchUserStatusLv($user_id);
+      $this->$playerId = $playerId;
+      $userStatusLv = $gameUser->fetchUserStatusLv($playerId);
       //プレイヤーインスタンス
       $this->player = new Player($userStatusLv);
 
       //相手
+      $this->opponentId = $opponentId;
       $opponentStatusLv = $gameUser->fetchUserStatusLv($opponentId);
       //相手インスタンス
       $this->opponent = new Player($opponentStatusLv);
     }
 
-    public function attack($target) {
-      
+    //ターンの管理
+    
+    public function attack($targetId) {
+      switch ($targetId) {
+        case $this->opponentId:
+          $this->opponent->decreaseHP($this->player->getAttack());
+          break;
+
+        case $this->playerId:
+          $this->player->decreaseHP($this->opponent->getAttack());
+          break;
+
+        default:
+          # code...
+          break;
+      }
     }
+
+    public function getHP() {
+      return $this->player->getHitPoint();
+    }
+
 
     
 
