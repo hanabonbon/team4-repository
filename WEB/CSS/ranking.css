@@ -10,13 +10,28 @@ body {
 }
 
 .card-body{
-    
-    
     background: #818181;
 }
 
 .text-color{
     color:#FFEED5;
+}
+
+.table_style{
+    background-color: #818181;
+    border-radius: 10px;
+    border: 1px solid #FFF;
+    width: 60%; /* 任意の幅を指定 */
+    margin: auto; /* テーブルを中央配置する場合 */
+    color:#FFEED5;
+}
+
+.win_text{
+    color: red;
+}
+
+.lose_text{
+    color:blue;
 }
 
 .top-rank-1 .card-body {
