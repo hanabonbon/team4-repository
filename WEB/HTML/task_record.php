@@ -62,33 +62,41 @@
   <div class="row">
     <!-- サイドバー -->
     <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block  text-white sidebar  fixed-top">
-      <div class="position-sticky">
-        <ul class="nav flex-column">
-          <!--アイコンとユーザー名-->
-          <div class="icon-name">
-            <div class="img-area">
-              <img src="../images/<?= $myuser['icon_path'] ?>" class="img-icon">
-            </div>
-            <div class="name-area">
-              <label class="username-area"><?= $myuser['nickname'] ?></label>
-            </div>
-          </div>
-          <li class="nav-item active">
-            <!-- タスク上の白線 -->
-            <div class="nav-link"></div>
-            <a class="nav-link" href="task_list.php">タスク</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="mypage.php">マイページ</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="battle.php">対戦</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="ranking.php">ランキング</a>
-          </li>
-        </ul>
-      </div>
+        <div class="position-sticky">
+            <ul class="nav flex-column">
+              <!--アイコンとユーザー名-->
+              <div class="icon-name">
+                <div class="img-area">
+                  <img src="../images/<?= $myuser['icon_path'] ?>" class="img-icon">
+                </div>
+                <div class="name-area">
+                  <label class="username-area"><?= $myuser['nickname'] ?></label>
+                </div>
+              </div>
+
+                <li class="nav-item active">
+                  <!-- タスク上の白線 -->
+                  <div class="nav-link"></div>
+                    <a class="nav-link" href="home.php">ホーム</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="task_list.php">タスク</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="mypage.php">マイページ</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="game_home.php">対戦</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="ranking.php">ランキング</a>
+                </li>
+            </ul>
+        </div>
     </nav>
   </div>
   <!-- コンテンツ -->
