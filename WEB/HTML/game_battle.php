@@ -24,13 +24,11 @@
   $gameUser = new GameUser();
   require_once('../game/player.php');
   require_once('../game/BattleController.php');
-  
+
   //自分
   $user_id = $_SESSION['user_id'];
   $userName =  $gameUser->getUserName($user_id);
   $userStatusLv = $gameUser->fetchUserStatusLv($user_id);
-
-  $player = new Player($userStatusLv);
 
   //相手
   if(isset($_GET['opponent_user_id'])) {
@@ -42,18 +40,20 @@
   $opponentName =  $gameUser->getUserName($opponentId);
   $opponentStatusLv = $gameUser->fetchUserStatusLv($opponentId);
 
-  $opponent = new Player($opponentStatusLv);
-
   //対戦を開始
   if(isset($_SESSION['battle'])) {
     $battle = unserialize($_SESSION['battle']);
-    var_dump($_SESSION['battle']);
   } else {
     echo '対戦を開始します';
     $battle = new BattleController($user_id, $opponentId);
     $_SESSION['battle'] = serialize($battle);
+    $_SESSION['player'] = serialize($battle->getPlayer());
+    $_SESSION['opponent'] = serialize($battle->getOpponent());
   }
 
+  $player = $battle->getPlayer();
+
+  $opponent = $battle->getOpponent();
 ?>
 <body>
   <div class="container-fluid">
@@ -72,8 +72,10 @@
 
         <form action="./game_battle_process.php" method="post">
           <input type="submit" value="攻撃" name="attack">
-          <input type="submit" value="防御" name="defence">
-          <input type="submit" value="逃げる" name="escape">
+        </form>
+
+        <form action="./clear_battle_session.php" method="post">
+          <input type="submit" value="対戦セッションをクリア" name="">
         </form>
 
       </div>
