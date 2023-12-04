@@ -60,7 +60,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="battle.html">対戦</a>
+                        <a class="nav-link" href="game_home.php">対戦</a>
                     </li>
 
                     <li class="nav-item">
