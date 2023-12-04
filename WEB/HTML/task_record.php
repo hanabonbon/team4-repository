@@ -76,16 +76,16 @@
           <li class="nav-item active">
             <!-- タスク上の白線 -->
             <div class="nav-link"></div>
-            <a class="nav-link" href="task.html">タスク</a>
+            <a class="nav-link" href="task_list.php">タスク</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="mypage.html">マイページ</a>
+              <a class="nav-link" href="mypage.php">マイページ</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="battle.html">対戦</a>
+              <a class="nav-link" href="battle.php">対戦</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="ranking.html">ランキング</a>
+            <a class="nav-link" href="ranking.php">ランキング</a>
           </li>
         </ul>
       </div>
