@@ -23,7 +23,6 @@
       //相手インスタンス
       $this->opponent = new Player($opponentStatusLv);
       
-
       echo "コンストラクタ opponentId:$this->opponentId, playerId:$this->playerId";
 
     }
@@ -48,32 +47,28 @@
       return $this->playerId;
     }
 
+    public function getOpponentId() {
+      return $this->opponentId;
+    }
+
     //ターンの管理
     
     public function attack($targetId) {
       switch ($targetId) {
         case $this->opponentId:
-          $this->opponent->decreaseHP($this->player->getAttack());
-          echo '相手に攻撃を与えた';
+          //相手に攻撃
+          $this->opponent->decreaseHP($this->player->getATK());
           break;
 
         case $this->playerId:
-          $this->player->decreaseHP($this->opponent->getAttack());
-          echo 'あなたは攻撃を受けた';
+          $this->player->decreaseHP($this->opponent->getATK());
           break;
 
         default:
           # code...
-          echo "targetId:$targetId,  opponentId:$this->opponentId, playerId:$this->playerId";
           break;
       }
     }
-
-    public function getHP() {
-      return $this->player->getHitPoint();
-    }
-
-
     
 
 

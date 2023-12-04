@@ -44,7 +44,7 @@
   if(isset($_SESSION['battle'])) {
     $battle = unserialize($_SESSION['battle']);
   } else {
-    echo '対戦を開始します';
+    echo '対戦を開始します<br>';
     $battle = new BattleController($user_id, $opponentId);
     $_SESSION['battle'] = serialize($battle);
     $_SESSION['player'] = serialize($battle->getPlayer());
@@ -52,8 +52,9 @@
   }
 
   $player = $battle->getPlayer();
-
   $opponent = $battle->getOpponent();
+
+  $message = '';
 ?>
 <body>
   <div class="container-fluid">
@@ -63,11 +64,11 @@
       <div class="col-6">
         <h3>あなた：<?=$userName?> {id:<?=$user_id?>}</h3>
         <ul>
-          <li>体力：<?=$battle->getHP()?></li>
-          <li>攻撃力：<?=$player->getAttack()?></li>
-          <li>防御力：<?=$player->getdefence() * 100?>%</li>
-          <li>すばやさ：<?=$player->getAgility() * 100?>%</li>
-          <li>幸運：<?=$player->getluck() * 100?>%</li>
+          <li>体力：<?=$player->getHP()?></li>
+          <li>攻撃力：<?=$player->getATK()?></li>
+          <li>防御力：<?=$player->getDEF() * 100?>%</li>
+          <li>すばやさ：<?=$player->getAGL() * 100?>%</li>
+          <li>幸運：<?=$player->getLUK() * 100?>%</li>
         </ul>
 
         <form action="./game_battle_process.php" method="post">
@@ -82,15 +83,18 @@
       <div class="col-6">
         <h3>相手：<?=$opponentName?> {id:<?=$opponentId?>}</h3>
         <ul>
-          <li>体力：<?=$opponent->getHitPoint()?></li>
-          <li>攻撃力：<?=$opponent->getAttack()?></li>
-          <li>防御力：<?=$opponent->getdefence() * 100?>%</li>
-          <li>すばやさ：<?=$opponent->getAgility() * 100?>%</li>
-          <li>幸運：<?=$opponent->getluck() * 100?>%</li>
+          <li>体力：<?=$opponent->getHP()?></li>
+          <li>攻撃力：<?=$opponent->getATK()?></li>
+          <li>防御力：<?=$opponent->getDEF() * 100?>%</li>
+          <li>すばやさ：<?=$opponent->getAGL() * 100?>%</li>
+          <li>幸運：<?=$opponent->getLUK() * 100?>%</li>
         </ul>
       </div>
     </div>
 
+    <div name="message">
+      <p><?=$message?></p>
+    </div>
 
   </div>
   <!-- BootStrap CDN -->

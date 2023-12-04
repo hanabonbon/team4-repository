@@ -16,23 +16,23 @@
       $this->luck = $status['luck'];
     }
 
-    public function getHitPoint() {
+    public function getHP() {
       return $this->hihpoint;
     }
 
-    public function getAttack() {
+    public function getATK() {
       return $this->attack;
     }
 
-    public function getdefence() {
+    public function getDEF() {
       return $this->defence;
     }
 
-    public function getAgility() {
+    public function getAGL() {
       return $this->agility;
     }
 
-    public function getLuck() {
+    public function getLUK() {
       return $this->luck;
     }
 
