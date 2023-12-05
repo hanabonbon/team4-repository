@@ -91,6 +91,29 @@
           break;
       }
     }
+
+    //作業中
+    public function action($actionNumber) {
+      switch ($actionNumber) {
+        case 0:
+          //攻撃
+          
+          break;
+        
+        case 1:
+          //防御
+          break;
+
+        case 2:
+          //回復
+          break;
+
+        default:
+          # code...
+          break;
+      }
+    }
+
     
 
 
