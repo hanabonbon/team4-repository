@@ -1,9 +1,10 @@
 <?php 
   class BattleController {
-    private $player;
+    private Player $player;
     private $playerId;
-    private $opponent;
+    private Player $opponent;
     private $opponentId;
+    private Bool $isControllable;
 
     public function __construct($playerId, $opponentId) {
       //必要なクラスをインスタンス化
@@ -22,9 +23,29 @@
       $opponentStatusLv = $gameUser->fetchUserStatusLv($opponentId);
       //相手インスタンス
       $this->opponent = new Player($opponentStatusLv);
+
+      $this->isControllable = true;
       
       echo "コンストラクタ opponentId:$this->opponentId, playerId:$this->playerId";
+    }
 
+    public function isControllable() {
+      return $this->isControllable;
+    }
+
+    //isControllableを逆にする
+    public function switchControllable() {
+      $this->isControllable = !$this->isControllable;
+    }
+
+    //プレイヤーの操作を無効化
+    public function disabledPlayerAction() {
+      $this->isControllable = false;
+    }
+
+    //プレイヤーの操作を有効化
+    public function enabledPlayerAction() {
+      $this->isControllable = true;
     }
 
     public function getPlayer() {
@@ -53,6 +74,7 @@
 
     //ターンの管理
     
+    //Playerクラスに移動したい
     public function attack($targetId) {
       switch ($targetId) {
         case $this->opponentId:

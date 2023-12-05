@@ -51,6 +51,9 @@
     $_SESSION['opponent'] = serialize($battle->getOpponent());
   }
 
+  $isControllable = $battle->isControllable();
+  //$isControllable = true;
+
   $player = $battle->getPlayer();
   $opponent = $battle->getOpponent();
 
@@ -71,13 +74,14 @@
           <li>幸運：<?=$player->getLUK() * 100?>%</li>
         </ul>
 
-        <form action="./game_battle_process.php" method="post">
-          <input type="submit" value="攻撃" name="attack">
+        <form action="./game_action_player.php" method="post">
+          <input type="submit" value="攻撃" <?=$isControllable ? "" : "disabled"?>>
         </form>
 
         <form action="./clear_battle_session.php" method="post">
           <input type="submit" value="対戦セッションをクリア" name="">
         </form>
+        <a href="./game_home.php">ホームへ戻る</a>
 
       </div>
       <div class="col-6">
@@ -92,9 +96,19 @@
       </div>
     </div>
 
-    <div name="message">
-      <p><?=$message?></p>
+    <div id="message">
+      <p><?php
+        //処理を遅延させて自分の行動→相手の行動の順番に表示する
+        $message = "相手に攻撃しました。";
+        echo $message;
+      ?></p>
     </div>
+
+    <form action="./game_action_opponent.php" method="post">
+      <input type="submit" value="次のターンへ" <?=$isControllable ? "disabled" : ""?>>
+    </form>
+    
+
 
   </div>
   <!-- BootStrap CDN -->

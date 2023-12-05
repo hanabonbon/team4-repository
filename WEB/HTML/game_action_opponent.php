@@ -1,4 +1,5 @@
-<?php 
+<?php
+  //相手の行動処理
   session_start();
   if(!isset($_SESSION['user_id'])){
     header('location: ./login.php');
@@ -17,13 +18,6 @@
   $battle->setPlayer($player);
   $battle->setOpponent($opponent);
 
-  //確認用
-  echo 'session/userId:'. $_SESSION['user_id']. '<br>';
-  echo 'BattleController/userId:'. $battle->getPlayerId(). '<br>';
-
-  //プレイヤーの行動
-  //攻撃処理
-  $battle->attack($_SESSION['user_id']);
 
   //相手の行動
   //相手AIクラス
@@ -32,7 +26,9 @@
   //対戦コントローラーを返す
   $Ai = new OpponentAi($battle);
   $battle = $Ai->action();
-
+  
+  //コントローラーの有効化
+  $battle->enabledPlayerAction();
 
   //セッションの値を更新
   $_SESSION['player'] = serialize($battle->getPlayer());
