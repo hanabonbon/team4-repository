@@ -62,6 +62,8 @@
 <body>
   <div class="container-fluid">
     <h1>対戦画面</h1>
+    <a href="./game_home.php">ホームへ戻る</a>
+    <a href="./clear_battle_session.php">対戦セッションをクリア</a>
     <!-- 2人のデータをもとに、インスタンスを作る -->
     <div class="row">
       <div class="col-6">
@@ -77,11 +79,6 @@
         <form action="./game_action_player.php" method="post">
           <input type="submit" value="攻撃" <?=$isControllable ? "" : "disabled"?>>
         </form>
-
-        <form action="./clear_battle_session.php" method="post">
-          <input type="submit" value="対戦セッションをクリア" name="">
-        </form>
-        <a href="./game_home.php">ホームへ戻る</a>
 
       </div>
       <div class="col-6">
