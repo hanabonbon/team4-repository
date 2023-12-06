@@ -79,8 +79,9 @@
           <li>幸運：<?=$player->getLUK() * 100?>%</li>
         </ul>
 
-        <form action="./game_action_player.php" method="post">
-          <input type="submit" value="攻撃" <?=$isControllable ? "" : "disabled"?>>
+        <form action="./game_action_player.php" method="get">
+          <input type="submit" value="攻撃" name="attack"<?=$isControllable ? "" : "disabled"?>>
+          <input type="submit" value="防御" name="defence"<?=$isControllable ? "" : "disabled"?>>
         </form>
 
       </div>

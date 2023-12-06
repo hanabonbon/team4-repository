@@ -31,7 +31,7 @@
           $this->hitpoint -= $damage;
           break;
         case EnumActionState::DEFENCE:
-          $this->hitpoint -= $damage * 0.5;
+          $this->hitpoint -= ($damage * 0.5);
           break;
         case EnumActionState::AVOID:
           //回避成功の場合はダメージを受けない

@@ -23,15 +23,18 @@
   echo 'BattleController/userId:'. $battle->getPlayerId(). '<br>';
 
   //プレイヤーの行動
-  //攻撃処理
+  if(isset($_GET['attack]'])) {
+    $battle->attack($_SESSION['opponentId']);
+
+  } else if(isset($_GET['defence'])) {
+    $battle->defence($_SESSION['playerId']);
+    
+  } else if(isset($_GET['avoid'])) {
+    //未実装
+    //$battle->avoid();
+  }
   
-  $battle->attack($_SESSION['opponentId']);
-  
-  //予定している修正
-  //実際の行動処理はコントローラー内のPlayerクラスのメソッドで行う
-  //$battle->action(/**行動番号 */);
-  
-  //コントローラーの無効化
+  //プレイヤー操作を無効化
   $battle->disabledPlayerAction();
 
   
