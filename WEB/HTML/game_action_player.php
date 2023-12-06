@@ -24,7 +24,7 @@
 
   //プレイヤーの行動
   //攻撃処理
-
+  
   $battle->attack($_SESSION['opponentId']);
   
   //予定している修正
