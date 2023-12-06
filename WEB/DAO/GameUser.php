@@ -1,4 +1,6 @@
 <?php
+  namespace task_game;
+  use \PDO;
   class GameUser{
     private $pdo;
     

@@ -1,4 +1,5 @@
 <?php
+  namespace task_game;
   session_start();
   if(!isset($_SESSION['user_id'])){
     header('location: ./login.php');
@@ -35,6 +36,7 @@
 <body>
   <div class="container-fluid">
     <p>ユーザー名：<?=$userName?> {id:<?=$user_id?>}</p>
+    <a href="./clear_battle_session.php">対戦セッションをクリア</a>
     <a href="./game_ranking.php">ランキングを見る</a>
     <hr>
     <div class="row">

@@ -6,6 +6,7 @@
   //クラスの読み込み
   include('../game/BattleController.php');
   include('../game/player.php');
+  include('../game/EnumActionState.php');
 
   //セッションからオブジェクトを取得
   $battle = unserialize($_SESSION['battle']);

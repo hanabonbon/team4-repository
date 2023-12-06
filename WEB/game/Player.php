@@ -1,23 +1,29 @@
 <?php
-  class Player {
-    private float $hihpoint;
+  namespace task_game;
+  use task_game\EnumActionState;
+  class Player {    
+    private float $hitpoint;
     private float $attack;
     private float $defence;
     private float $agility;
     private float $luck;
-
+    //プレイヤーの状態（通常,防御,回避)
+    private EnumActionState $actionState = EnumActionState::NEUTRAL;
+    //前回の行動を保存
+    
     public function __construct($statusLv = array()) {
       $status =  $this->culcStatus($statusLv);
-
-      $this->hihpoint = $status['hihpoint'];
+      $this->hitpoint = $status['hitpoint'];
       $this->attack = $status['attack'];
       $this->defence = $status['defence'];
       $this->agility = $status['agility'];
       $this->luck = $status['luck'];
+      require_once __DIR__ . '/EnumActionState.php';
+      //$this->actionState = EnumActionState::NEUTRAL;
     }
 
     public function getHP() {
-      return $this->hihpoint;
+      return $this->hitpoint;
     }
 
     public function getATK() {
@@ -37,14 +43,36 @@
     }
 
     public function decreaseHP(float $damage) {
-      $this->hihpoint -= $damage;
+      switch ($this->actionState) {
+        case EnumActionState::NEUTRAL:
+          //TODO: 防御ステータスによるダメージカットの計算
+          $this->hitpoint -= $damage;
+          break;
+        case EnumActionState::DEFENCE:
+          $this->hitpoint -= $damage * 0.5;
+          break;
+        case EnumActionState::AVOID:
+          //回避成功の場合はダメージを受けない
+          //失敗した場合は回避確率の分ダメージカット
+          $avoid = rand(0, 100);
+          if ($avoid >= $this->agility * 100) {
+            $this->hitpoint -= 0;
+          } else {
+            $this->hitpoint -= $damage - $damage * $this->agility;
+          }
+          break;
+        default:
+          # code...
+          break;
+      }
+      $this->actionState = EnumActionState::NEUTRAL;
     }
 
     public function culcStatus($statusLv) {
       $status = array();
 
       //体力値の計算
-      $status['hihpoint'] = 100 + $statusLv['hitpoint'] * 5;
+      $status['hitpoint'] = 100 + $statusLv['hitpoint'] * 5;
 
       //攻撃力の計算
       $status['attack'] = 20 + $statusLv['attack'];

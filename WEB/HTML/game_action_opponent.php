@@ -1,5 +1,7 @@
 <?php
   //相手の行動処理
+  namespace task_game;
+  use task_game\EnumActionState;
   session_start();
   if(!isset($_SESSION['user_id'])){
     header('location: ./login.php');
@@ -8,6 +10,7 @@
   include('../game/BattleController.php');
   include('../game/player.php');
   include('../game/OpponentAi.php');
+  include('../game/EnumActionState.php');
 
   //セッションからオブジェクトを取得
   $battle = unserialize($_SESSION['battle']);

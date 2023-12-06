@@ -1,4 +1,6 @@
 <?php
+  namespace task_game;
+  use task_game\EnumActionState;
   //相手の行動プログラム
   //ランダムで行動を決定する
   //0:攻撃 1:防御 2:回避
@@ -7,6 +9,7 @@
 
     public function __construct(BattleController $battle) {
       $this->battle = $battle;
+      require_once('../game/EnumActionState.php');
     }
 
     public function action() {

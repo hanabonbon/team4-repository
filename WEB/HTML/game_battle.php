@@ -1,4 +1,6 @@
 <?php
+  namespace task_game;
+  use task_game\EnumActionState;
   session_start();
   if(!isset($_SESSION['user_id'])){
     header('location: ./login.php');
@@ -24,6 +26,7 @@
   $gameUser = new GameUser();
   require_once('../game/player.php');
   require_once('../game/BattleController.php');
+  require_once('../game/EnumActionState.php');
 
   //自分
   $user_id = $_SESSION['user_id'];

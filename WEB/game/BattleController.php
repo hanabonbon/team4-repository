@@ -1,4 +1,6 @@
 <?php 
+  namespace task_game;
+  use task_game\EnumActionState;
   class BattleController {
     private Player $player;
     private $playerId;
@@ -10,6 +12,7 @@
       //必要なクラスをインスタンス化
       require_once('../game/player.php');
       require_once('../DAO/GameUser.php');
+      require_once('../game/EnumActionState.php');
       $gameUser = new GameUser();
 
       //自分
@@ -74,7 +77,6 @@
 
     //ターンの管理
     
-    //Playerクラスに移動したい
     public function attack($targetId) {
       switch ($targetId) {
         case $this->opponentId:
@@ -92,26 +94,9 @@
       }
     }
 
-    //作業中
-    public function action($actionNumber) {
-      switch ($actionNumber) {
-        case 0:
-          //攻撃
-          
-          break;
-        
-        case 1:
-          //防御
-          break;
-
-        case 2:
-          //回復
-          break;
-
-        default:
-          # code...
-          break;
-      }
+    //次に受けるダメージを50%カット
+    public function defence() {
+      
     }
 
     
