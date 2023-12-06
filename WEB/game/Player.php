@@ -22,25 +22,7 @@
       //$this->actionState = EnumActionState::NEUTRAL;
     }
 
-    public function getHP() {
-      return $this->hitpoint;
-    }
-
-    public function getATK() {
-      return $this->attack;
-    }
-
-    public function getDEF() {
-      return $this->defence;
-    }
-
-    public function getAGL() {
-      return $this->agility;
-    }
-
-    public function getLUK() {
-      return $this->luck;
-    }
+    
 
     public function decreaseHP(float $damage) {
       switch ($this->actionState) {
@@ -66,6 +48,10 @@
           break;
       }
       $this->actionState = EnumActionState::NEUTRAL;
+    }
+
+    public function defence() {
+      $this->actionState = EnumActionState::DEFENCE;
     }
 
     public function culcStatus($statusLv) {
@@ -128,8 +114,24 @@
       return $status;
     }
 
-    
+    public function getHP() {
+      return $this->hitpoint;
+    }
 
+    public function getATK() {
+      return $this->attack;
+    }
 
+    public function getDEF() {
+      return $this->defence;
+    }
+
+    public function getAGL() {
+      return $this->agility;
+    }
+
+    public function getLUK() {
+      return $this->luck;
+    }
   }
 ?>

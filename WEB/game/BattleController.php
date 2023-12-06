@@ -51,6 +51,42 @@
       $this->isControllable = true;
     }
 
+    //ターンの管理
+    
+    public function attack($targetId) {
+      switch ($targetId) {
+        case $this->opponentId:
+          //相手に攻撃
+          $this->opponent->decreaseHP($this->player->getATK());
+          break;
+
+        case $this->playerId:
+          $this->player->decreaseHP($this->opponent->getATK());
+          break;
+
+        default:
+          # code...
+          break;
+      }
+    }
+
+    //防御行動
+    public function defence($targetId) {
+      switch ($targetId) {
+        case $this->opponentId:
+          $this->opponent->defence();
+          break;
+
+        case $this->playerId:
+          $this->player->defence();
+          break;
+
+        default:
+          # code...
+          break;
+      }
+    }
+
     public function getPlayer() {
       return $this->player;
     }
@@ -74,33 +110,5 @@
     public function getOpponentId() {
       return $this->opponentId;
     }
-
-    //ターンの管理
-    
-    public function attack($targetId) {
-      switch ($targetId) {
-        case $this->opponentId:
-          //相手に攻撃
-          $this->opponent->decreaseHP($this->player->getATK());
-          break;
-
-        case $this->playerId:
-          $this->player->decreaseHP($this->opponent->getATK());
-          break;
-
-        default:
-          # code...
-          break;
-      }
-    }
-
-    //次に受けるダメージを50%カット
-    public function defence() {
-      
-    }
-
-    
-
-
   }
 ?>

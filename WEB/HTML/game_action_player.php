@@ -1,4 +1,5 @@
 <?php 
+  namespace task_game;
   session_start();
   if(!isset($_SESSION['user_id'])){
     header('location: ./login.php');
@@ -23,6 +24,7 @@
 
   //プレイヤーの行動
   //攻撃処理
+
   $battle->attack($_SESSION['opponentId']);
   
   //予定している修正
