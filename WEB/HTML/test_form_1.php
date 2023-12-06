@@ -11,5 +11,8 @@
     <button type="submit" name="defence">防御する</button>
     <button type="submit" name="avoid">回避する</button>
   </form>
+
+  <form action="./game_home.php" method="get">
+    <button type="submit" name="attack">ほーむへ</button>
 </body>
 </html>

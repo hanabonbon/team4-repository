@@ -25,13 +25,18 @@
   //プレイヤーの行動
   if(isset($_GET['attack]'])) {
     $battle->attack($_SESSION['opponentId']);
+    throw new \Exception('攻撃');
 
   } else if(isset($_GET['defence'])) {
-    $battle->defence($_SESSION['playerId']);
-    
+    $battle->defence($_SESSION['user_id']);
+    throw new \Exception('防御');
+
   } else if(isset($_GET['avoid'])) {
     //未実装
     //$battle->avoid();
+    throw new \Exception('回避');
+  } else {
+    //throw new \Exception('行動分岐エラー');
   }
   
   //プレイヤー操作を無効化
