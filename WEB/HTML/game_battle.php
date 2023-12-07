@@ -64,6 +64,7 @@
   $isControllable ? $nextButton = "disabled" : $nextButton = "";
 
   if($isEnd) {
+    $actionButton = "disabled";
     $nextButton = "disabled";
   }
 
@@ -122,6 +123,11 @@
         if($battle->isEnd()) {
           echo '<br>対戦終了';
           //TODO: 勝者の表示
+          if($player->getActionState() == EnumActionState::DEAD) {
+            echo '<br>あなたの負けです';
+          } else {
+            echo '<br>あなたの勝ちです';
+          }
         }
       ?></p>
     </div>

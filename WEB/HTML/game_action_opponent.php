@@ -37,8 +37,18 @@
   // プレイヤーの行動
   switch ($action) {
     case "attack":
+      $message = 'opponent_id:' . $_SESSION['opponentId'] . 'の攻撃！';
+
+      //プレイヤーが防御or回避していたときのメッセージ
+      if ($battle->getPlayerState() === EnumActionState::DEFENCE) {
+        $message .= '<br>user_id:' . $_SESSION['user_id'] . 'は防御している';
+      } elseif ($battle->getPlayerState() === EnumActionState::AVOID) {
+        $message .= '<br>user_id:' . $_SESSION['user_id'] . 'は回避している';
+      }
+
+      //攻撃
       $damage_ = $battle->attack($_SESSION['user_id']);
-      $message = 'opponent_id:' . $_SESSION['opponentId'] . 'が' . $damage_ . 'のダメージを与えた';
+      $message .= '<br>opponent_id:' . $_SESSION['opponentId'] .'は'. $damage_ . 'のダメージを与えた';
       break;
 
     case "defence":

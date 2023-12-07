@@ -7,7 +7,7 @@
     private float $defence;
     private float $agility;
     private float $luck;
-    //プレイヤーの状態（通常,防御,回避)
+    //プレイヤーの状態（通常,防御,回避,死)
     private EnumActionState $actionState = EnumActionState::NEUTRAL;
     //前回の行動を保存
     
@@ -44,6 +44,7 @@
         case EnumActionState::AVOID:
           //回避成功の場合はダメージを受けない
           //失敗した場合は回避確率の分ダメージカット
+          //todo: 成功or失敗の情報が必要
           $avoid = rand(0, 100);
           if ($avoid >= $this->agility * 100) {
             $damage_ = 0;
@@ -76,6 +77,10 @@
       $this->actionState = EnumActionState::DEFENCE;
     }
 
+    public function avoid() {
+      $this->actionState = EnumActionState::AVOID;
+    }
+    
     public function culcStatus($statusLv) {
       $status = array();
 
