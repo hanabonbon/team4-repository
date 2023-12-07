@@ -27,8 +27,34 @@
   //対戦コントローラーを渡す
   //行動の処理
   //対戦コントローラーを返す
-  $Ai = new OpponentAi($battle);
-  $battle = $Ai->action();
+  
+  //修正
+  //行うアクションをかえす
+
+  $Ai = new OpponentAi();
+  $action = $Ai->action();
+
+  // プレイヤーの行動
+  switch ($action) {
+    case "attack":
+      $damage_ = $battle->attack($_SESSION['user_id']);
+      $message = 'opponent_id:' . $_SESSION['opponentId'] . 'が' . $damage_ . 'のダメージを与えた';
+      break;
+
+    case "defence":
+      $battle->defence($_SESSION['opponentId']);
+      $message = 'opponent_id:' . $_SESSION['opponentId'] . 'は防御した';
+      break;
+
+    case "avoid":
+      // 未実装
+      // $battle->avoid();
+      throw new \Exception('回避');
+      break;
+
+    default:
+      throw new \Exception('行動分岐エラー');
+  }
   
   //コントローラーの有効化
   $battle->enabledPlayerAction();
@@ -38,6 +64,8 @@
   $_SESSION['opponent'] = serialize($battle->getOpponent());
 
   $_SESSION['battle'] = serialize($battle);
+
+  $_SESSION['message'] = $message;
 
   header('location: ./game_battle.php');
 

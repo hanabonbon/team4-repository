@@ -7,35 +7,37 @@
   class OpponentAi {
     private BattleController $battle;
 
-    public function __construct(BattleController $battle) {
-      $this->battle = $battle;
+    public function __construct() {
+      // $this->battle = $battle;
       require_once('../game/EnumActionState.php');
     }
 
     public function action() {
       //行動の決定
-      $action = rand(0, 2);
+      $actionCode = rand(0, 2);
+      $action = "";
 
       //行動の実行
-      switch ($action) {
+      switch ($actionCode) {
         case 0:
           //攻撃
-          $this->battle->attack($this->battle->getPlayerId());
+          $action = "attack";
           break;
 
         case 1:
-          //攻撃
-          $this->battle->attack($this->battle->getPlayerId());
+          //防御
+          $action = "defence";
           break;
 
         case 2:
+          //TODO:回避
           //攻撃
-          $this->battle->attack($this->battle->getPlayerId());
+          $action = "attack";
           break;
       }
 
       //必須
-      return $this->battle;
+      return $action;
     }
 
   }

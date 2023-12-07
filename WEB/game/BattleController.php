@@ -7,6 +7,7 @@
     private Player $opponent;
     private $opponentId;
     private Bool $isControllable;
+    private Bool $isEnd;
 
     public function __construct($playerId, $opponentId) {
       //必要なクラスをインスタンス化
@@ -14,6 +15,7 @@
       require_once('../DAO/GameUser.php');
       require_once('../game/EnumActionState.php');
       $gameUser = new GameUser();
+      $this->isEnd = false;
 
       //自分
       $this->playerId = $playerId;
@@ -30,6 +32,10 @@
       $this->isControllable = true;
       
       echo "コンストラクタ opponentId:$this->opponentId, playerId:$this->playerId";
+    }
+
+    public function isEnd() {
+      return $this->isEnd;
     }
 
     public function isControllable() {
@@ -51,26 +57,45 @@
       $this->isControllable = true;
     }
     
+    //攻撃
     public function attack($targetId) {
       $damage_ = 0;
       switch ($targetId) {
-        case $this->opponentId:
-          //相手に攻撃
-          $damage_ =  $this->opponent->decreaseHP($this->player->getATK());
-          break;
+        //呼び出す関数（decreaseHP()）側で呼び出し元に応じた処理を行うようにしたい
 
+        //相手に攻撃
+        case $this->opponentId:
+          $damage_ =  $this->opponent->decreaseHP($this->player->getATK());
+          //自身のステータスを更新
+          $this->player->setActionState(EnumActionState::NEUTRAL);
+
+          //相手のHPがあるかチェック
+          if($this->opponent->getActionState() == EnumActionState::DEAD) {
+            $this->isEnd = true;
+          }
+          break;
+          
+        //プレイヤーに攻撃
         case $this->playerId:
           $damage_ =  $this->player->decreaseHP($this->opponent->getATK());
+          //自身のステータスを更新
+          $this->opponent->setActionState(EnumActionState::NEUTRAL);
+
+          //相手のHPがあるかチェック
+          if($this->player->getActionState() == EnumActionState::DEAD) {
+            $this->isEnd = true;
+          }
           break;
 
         default:
           # code...
           break;
       }
+      
       return $damage_;
     }
 
-    //防御行動
+    //防御
     public function defence($targetId) {
       switch ($targetId) {
         case $this->opponentId:

@@ -54,8 +54,18 @@
     $_SESSION['opponent'] = serialize($battle->getOpponent());
   }
 
+  //操作ボタンのON/OFF
   $isControllable = $battle->isControllable();
-  //$isControllable = true;
+  $isEnd = $battle->isEnd();
+  $actionButton = "";
+  $nextButton = "";
+
+  $isControllable ? $actionButton = "" : $actionButton = "disabled";
+  $isControllable ? $nextButton = "disabled" : $nextButton = "";
+
+  if($isEnd) {
+    $nextButton = "disabled";
+  }
 
   $player = $battle->getPlayer();
   $opponent = $battle->getOpponent();
@@ -104,16 +114,25 @@
           $message = $_SESSION['message'];
           unset($_SESSION['message']);
         } else {
-          $message = 'エラー：表示すべきメッセージがありません';
+          $message = '表示すべきメッセージがありません';
         }
         
         echo $message;
+
+        if($battle->isEnd()) {
+          echo '<br>対戦終了';
+          //TODO: 勝者の表示
+        }
       ?></p>
     </div>
 
     <form action="./game_action_opponent.php" method="post">
-      <input type="submit" value="次のターンへ" <?=$isControllable ? "disabled" : ""?>>
+      <input type="submit" value="次のターンへ" <?=$nextButton?>>
     </form>
+    
+    <div <?=$isEnd ?  "": "hidden" ?>>
+      <a href="./game_result.php"><button>対戦結果へ</button></a>
+    </div>
     
   </div>
   <!-- BootStrap CDN -->

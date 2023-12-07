@@ -22,6 +22,14 @@
       //$this->actionState = EnumActionState::NEUTRAL;
     }
 
+    public function setActionState(EnumActionState $actionState) {
+      $this->actionState = $actionState;
+    }
+
+    public function getActionState() {
+      return $this->actionState;
+    }
+
     
 
     public function decreaseHP(float $damage) {
@@ -29,29 +37,40 @@
       switch ($this->actionState) {
         case EnumActionState::NEUTRAL:
           //TODO: 防御ステータスによるダメージカットの計算
-          $this->hitpoint -= $damage_;
+          
           break;
         case EnumActionState::DEFENCE:
           $damage_ = $damage_ * 0.5;
-          $this->hitpoint -= $damage_;
           break;
+
         case EnumActionState::AVOID:
           //回避成功の場合はダメージを受けない
           //失敗した場合は回避確率の分ダメージカット
           $avoid = rand(0, 100);
           if ($avoid >= $this->agility * 100) {
             $damage_ = 0;
-            $this->hitpoint -= $damage_;
           } else {
             $damage_ = $damage_ - $damage_ * $this->agility;
-            $this->hitpoint -= $damage_;
           }
           break;
+
         default:
           # code...
           break;
       }
+
+      //ダメージを受ける
+      $this->hitpoint -= $damage_;
+
+      //状態のリセット
       $this->actionState = EnumActionState::NEUTRAL;
+
+      //生存判定
+      if($this->hitpoint <= 0) {
+        //HPが0以下の場合は状態を更新
+        $this->actionState = EnumActionState::DEAD;
+      }
+      
       return $damage_;
     }
 

@@ -26,10 +26,10 @@
   if(isset($_GET['attack'])) {
     $damage_ =  $battle->attack($_SESSION['opponentId']);
     $message = 'user_id:'.$_SESSION['user_id'].'が'.$damage_ .'のダメージを与えた';
-
+    
   } else if(isset($_GET['defence'])) {
     $battle->defence($_SESSION['user_id']);
-    //throw new \Exception('防御');
+    $message = 'user_id:'.$_SESSION['user_id'].'は防御した';
 
   } else if(isset($_GET['avoid'])) {
     //未実装

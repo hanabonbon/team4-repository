@@ -4,5 +4,6 @@
     case NEUTRAL;
     case DEFENCE;
     case AVOID;
+    case DEAD;
   }
 ?>
