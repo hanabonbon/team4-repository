@@ -30,8 +30,6 @@
       return $this->actionState;
     }
 
-    
-
     public function decreaseHP(float $damage) {
       $damage_ = $damage;
       switch ($this->actionState) {

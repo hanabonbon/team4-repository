@@ -90,8 +90,8 @@
         </ul>
 
         <form action="./game_action_player.php" method="get">
-          <button type="submit" name="attack" <?=$isControllable ? "" : "disabled"?>>攻撃する</button>
-          <button type="submit" name="defence" <?=$isControllable ? "" : "disabled"?>>防御する</button>
+          <button type="submit" name="attack" <?=$actionButton?>>攻撃する</button>
+          <button type="submit" name="defence" <?=$actionButton?>>防御する</button>
           <!-- <button type="submit" name="avoid">回避する</button> -->
         </form>
 
