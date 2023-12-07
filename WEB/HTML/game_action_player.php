@@ -24,8 +24,8 @@
 
   //プレイヤーの行動
   if(isset($_GET['attack'])) {
-    $battle->attack($_SESSION['opponentId']);
-    //throw new \Exception('攻撃');
+    $damage_ =  $battle->attack($_SESSION['opponentId']);
+    $message = 'user_id:'.$_SESSION['user_id'].'が'.$damage_ .'のダメージを与えた';
 
   } else if(isset($_GET['defence'])) {
     $battle->defence($_SESSION['user_id']);
@@ -48,6 +48,8 @@
   $_SESSION['opponent'] = serialize($battle->getOpponent());
 
   $_SESSION['battle'] = serialize($battle);
+
+  $_SESSION['message'] = $message;
 
   header('location: ./game_battle.php');
 

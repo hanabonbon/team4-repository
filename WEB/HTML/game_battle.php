@@ -100,8 +100,13 @@
 
     <div id="message">
       <p><?php
-        //処理を遅延させて自分の行動→相手の行動の順番に表示する
-        $message = "相手に攻撃しました。";
+        if(isset($_SESSION['message'])) {
+          $message = $_SESSION['message'];
+          unset($_SESSION['message']);
+        } else {
+          $message = 'エラー：表示すべきメッセージがありません';
+        }
+        
         echo $message;
       ?></p>
     </div>

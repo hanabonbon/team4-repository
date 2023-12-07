@@ -50,24 +50,24 @@
     public function enabledPlayerAction() {
       $this->isControllable = true;
     }
-
-    //ターンの管理
     
     public function attack($targetId) {
+      $damage_ = 0;
       switch ($targetId) {
         case $this->opponentId:
           //相手に攻撃
-          $this->opponent->decreaseHP($this->player->getATK());
+          $damage_ =  $this->opponent->decreaseHP($this->player->getATK());
           break;
 
         case $this->playerId:
-          $this->player->decreaseHP($this->opponent->getATK());
+          $damage_ =  $this->player->decreaseHP($this->opponent->getATK());
           break;
 
         default:
           # code...
           break;
       }
+      return $damage_;
     }
 
     //防御行動
