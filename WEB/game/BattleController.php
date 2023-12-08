@@ -8,6 +8,7 @@
     private $opponentId;
     private Bool $isControllable;
     private Bool $isEnd;
+    private $winnerId;
 
     public function __construct($playerId, $opponentId) {
       //必要なクラスをインスタンス化
@@ -72,6 +73,7 @@
           //相手のHPがあるかチェック
           if($this->opponent->getActionState() == EnumActionState::DEAD) {
             $this->isEnd = true;
+            $this->winnerId = $this->playerId;
           }
           break;
           
@@ -84,6 +86,7 @@
           //相手のHPがあるかチェック
           if($this->player->getActionState() == EnumActionState::DEAD) {
             $this->isEnd = true;
+            $this->winnerId = $this->opponentId;
           }
           break;
 
@@ -128,6 +131,10 @@
           break;
       }
     }
+
+    public function getWinnerId() {
+      return $this->winnerId;
+    } 
 
     public function getPlayer() {
       return $this->player;
