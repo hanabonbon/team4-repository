@@ -1,0 +1,29 @@
+/*アイコン画像*/
+.img-icon{
+    width: 200px;/* 写真の幅 */
+    height: auto; /* 写真の高さ */
+    border-radius: 50%; /* 円形の形状 */
+    object-fit: cover; /* 画像を中央に配置してクリッピング */
+}
+
+.card{
+    width: 700px;
+    height:200px;
+    background-color: #818181;
+    border: 5px solid #968067;  /* 枠線の色を指定 */
+    border-radius: 10px;    /* 角を丸くする */
+    
+}
+
+.card-style{
+    width: 500px;
+    height:200px;
+    background-color: #818181;
+    margin-left:100px;
+    border: 5px solid #968067;  /* 枠線の色を指定 */
+    border-radius: 10px;    /* 角を丸くする */
+}
+
+.log-style{
+    color: #FFEED5;
+}
