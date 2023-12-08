@@ -137,11 +137,13 @@
       return $this->opponent;
     }
 
-    public function getPlayerState() {
+    //プレイヤーの行動状態を返す
+    public function getPlayerActionState() {
       return $this->player->getActionState();
     }
 
-    public function getOpponentState() {
+    //相手の行動状態を返す
+    public function getOpponentActionState() {
       return $this->opponent->getActionState();
     }
 

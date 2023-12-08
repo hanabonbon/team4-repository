@@ -46,7 +46,7 @@
           //失敗した場合は回避確率の分ダメージカット
           //todo: 成功or失敗の情報が必要
           $avoid = rand(0, 100);
-          if ($avoid >= $this->agility * 100) {
+          if ($avoid <= $this->agility * 100) {
             $damage_ = 0;
           } else {
             $damage_ = $damage_ - $damage_ * $this->agility;

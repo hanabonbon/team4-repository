@@ -28,13 +28,13 @@
   if(isset($_GET['attack'])) {
     $message = 'user_id:' . $_SESSION['user_id'] . 'の攻撃！';
 
-    if ($battle->getOpponentState() === EnumActionState::DEFENCE) {
+    if ($battle->getOpponentActionState() === EnumActionState::DEFENCE) {
       $message .= '<br>opponent_id:' . $_SESSION['opponent_id'] . 'は防御している';
       //攻撃
       $damage_ = $battle->attack($_SESSION['opponentId']);
       $message .= '<br>user_id:' . $_SESSION['user_id'] .'は'. $damage_ . 'のダメージを与えた';
 
-    } elseif ($battle->getOpponentState() === EnumActionState::AVOID) {
+    } elseif ($battle->getOpponentActionState() === EnumActionState::AVOID) {
       //攻撃
       $damage_ = $battle->attack($_SESSION['opponentId']);
       //このタイミングで回避結果がでる

@@ -31,7 +31,8 @@
   //修正
   //行うアクションをかえす
 
-  $Ai = new OpponentAi();
+  //AIのインスタンス化
+  $Ai = new OpponentAi($battle);
   $action = $Ai->action();
 
   $damage_ = 0;
@@ -41,13 +42,13 @@
     case "attack":
       $message = 'opponent_id:' . $_SESSION['opponentId'] . 'の攻撃！';
 
-      if ($battle->getPlayerState() === EnumActionState::DEFENCE) {
+      if ($battle->getPlayerActionState() === EnumActionState::DEFENCE) {
         $message .= '<br>player_id:' . $_SESSION['user_id'] . 'は防御している';
         //攻撃
         $damage_ = $battle->attack($_SESSION['user_id']);
         $message .= '<br>opponent_id:' . $_SESSION['opponentId'] .'は'. $damage_ . 'のダメージを与えた';
 
-      } elseif ($battle->getPlayerState() === EnumActionState::AVOID) {
+      } elseif ($battle->getPlayerActionState() === EnumActionState::AVOID) {
         //攻撃
         $damage_ = $battle->attack($_SESSION['user_id']);
         //このタイミングで回避結果がでる
