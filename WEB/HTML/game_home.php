@@ -85,7 +85,7 @@
 <body>
   <header>
     <a href="home.php">←ホームへ</a>
-    <a href="game_ranking.php">ランキングを見る→</a>
+    <a href="ranking.php">ランキングを見る→</a>
   </header>
   <div class="container">
     <div class="container-fluid">
@@ -130,7 +130,7 @@
                 </div>
                 <input type="hidden" name="opponent_user_id" value="<?=$row2['user_id']?>">
                 <button type="submit"><?=$row2['nickname']?></button>
-                <p class="m-0 ms-2">総合：<?php echo $sum;?></p>
+                <p class="m-0 ms-2">想定パワー：<?php echo $sum;?></p>
               </form>
               <form action="./game_battle.php" name="yourhistory" method="post" class="ml-auto d-flex">
                 <input type="hidden" value="<?=$row2['user_id']?>">
