@@ -127,7 +127,7 @@
   </div>
   
   <div class="ms-5 mt-3" style="font-size: 11px;">
-  <p>完了日：<span style="font-size: 13.5px;"><?=$completion_time?></span></p>
+  <p>完了日：<span style="font-size: 13.5wpx;"><?=$completion_time?></span></p>
   <p>最終更新日：<span style="font-size: 13.5px;"><?=$last_edit_time?></span></p>
   <p>作成日：<span style="font-size: 13.5px;"><?=$created_time?></span></p>
 </div>
