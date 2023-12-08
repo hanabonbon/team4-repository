@@ -4,5 +4,50 @@
 }
 
 body {
+  background-color: #FFEED5;
   font-family: "DotGothic16", sans-serif;
+}
+
+button {
+  border: none;
+  background: transparent;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 10px;
+}
+
+.bordered-text {
+  border: 2px solid #333; /* 線の太さと色を指定 */
+  padding: 10px; /* 任意の余白 */
+}
+
+.color {
+  background-color: #FFEED5;
+}
+
+.circle-icon {
+  width: 100px; /* アイコンの幅を調整 */
+  height: 100px; /* アイコンの高さを調整 */
+  align-items: center;
+  overflow: hidden; /* 画像を丸く切り取るために必要 */
+  margin: 0 auto; /* アイコンを水平方向に中央に配置 */
+}
+
+.circle-icon-mini {
+  width: 50px; /* アイコンの幅を調整 */
+  height: 50px; /* アイコンの高さを調整 */
+  align-items: center;
+  overflow: hidden; /* 画像を丸く切り取るために必要 */
+  margin: 0 auto; /* アイコンを水平方向に中央に配置 */
+}
+
+.icon-img {
+  width: 100%; /* 画像の幅を100%に設定 */
+  height: 100%; /* 画像の高さを100%に設定 */
+  object-fit: cover; /* 画像を中央に配置してクリッピング */
+  border-radius: 50%; /* 丸い形状を指定 */
 }
