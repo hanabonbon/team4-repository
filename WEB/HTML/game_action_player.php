@@ -24,9 +24,22 @@
 
   //プレイヤーの行動
   if(isset($_GET['attack'])) {
-    $damage_ =  $battle->attack($_SESSION['opponentId']);
-    $message = 'user_id:'.$_SESSION['user_id'].'が'.$damage_ .'のダメージを与えた';
-    
+    // $damage_ =  $battle->attack($_SESSION['opponentId']);
+    // $message = 'user_id:'.$_SESSION['user_id'].'が'.$damage_ .'のダメージを与えた';
+
+    $message = 'user_id:' . $_SESSION['user_id'] . 'の攻撃！';
+
+    //プレイヤーが防御or回避していたときのメッセージ
+    if ($battle->getPlayerState() === EnumActionState::DEFENCE) {
+      $message .= '<br>opponent_id:' . $_SESSION['opponent_id'] . 'は防御している';
+    } elseif ($battle->getPlayerState() === EnumActionState::AVOID) {
+      $message .= '<br>opponent_id:' . $_SESSION['opponent_id'] . 'は回避している';
+    }
+
+    //攻撃
+    $damage_ = $battle->attack($_SESSION['opponentId']);
+    $message .= '<br>user_id:' . $_SESSION['user_id'] .'は'. $damage_ . 'のダメージを与えた';
+
   } else if(isset($_GET['defence'])) {
     $battle->defence($_SESSION['user_id']);
     $message = 'user_id:'.$_SESSION['user_id'].'は防御した';
