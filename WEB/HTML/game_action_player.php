@@ -18,36 +18,47 @@
   $battle->setPlayer($player);
   $battle->setOpponent($opponent);
 
+  $damage_ = 0;
+
   //確認用
   echo 'session/userId:'. $_SESSION['user_id']. '<br>';
   echo 'BattleController/userId:'. $battle->getPlayerId(). '<br>';
 
   //プレイヤーの行動
   if(isset($_GET['attack'])) {
-    // $damage_ =  $battle->attack($_SESSION['opponentId']);
-    // $message = 'user_id:'.$_SESSION['user_id'].'が'.$damage_ .'のダメージを与えた';
-
     $message = 'user_id:' . $_SESSION['user_id'] . 'の攻撃！';
 
-    //プレイヤーが防御or回避していたときのメッセージ
-    if ($battle->getPlayerState() === EnumActionState::DEFENCE) {
+    if ($battle->getOpponentState() === EnumActionState::DEFENCE) {
       $message .= '<br>opponent_id:' . $_SESSION['opponent_id'] . 'は防御している';
-    } elseif ($battle->getPlayerState() === EnumActionState::AVOID) {
-      $message .= '<br>opponent_id:' . $_SESSION['opponent_id'] . 'は回避している';
+      //攻撃
+      $damage_ = $battle->attack($_SESSION['opponentId']);
+      $message .= '<br>user_id:' . $_SESSION['user_id'] .'は'. $damage_ . 'のダメージを与えた';
+
+    } elseif ($battle->getOpponentState() === EnumActionState::AVOID) {
+      //攻撃
+      $damage_ = $battle->attack($_SESSION['opponentId']);
+      //このタイミングで回避結果がでる
+      if($damage_ == 0) {
+        $message .= '<br>opponent_id:' . $_SESSION['opponentId'] . 'は回避した！';
+      } else {
+        $message .= '<br>opponent_id:' . $_SESSION['opponentId'] . 'は回避に失敗した！';
+        $message .= '<br>user_id:' . $_SESSION['user_id'] .'は'. $damage_ . 'のダメージを与えた';
+      }
+
+    } else {
+      //攻撃
+      $damage_ = $battle->attack($_SESSION['opponentId']);
+      $message .= '<br>user_id:' . $_SESSION['user_id'] .'は'. $damage_ . 'のダメージを与えた';
     }
 
-    //攻撃
-    $damage_ = $battle->attack($_SESSION['opponentId']);
-    $message .= '<br>user_id:' . $_SESSION['user_id'] .'は'. $damage_ . 'のダメージを与えた';
 
   } else if(isset($_GET['defence'])) {
     $battle->defence($_SESSION['user_id']);
     $message = 'user_id:'.$_SESSION['user_id'].'は防御した';
 
   } else if(isset($_GET['avoid'])) {
-    //未実装
-    //$battle->avoid();
-    throw new \Exception('回避');
+    $battle->avoid($_SESSION['user_id']);
+    $message = 'user_id:'.$_SESSION['user_id'].'は回避姿勢をとった';
   } else {
     throw new \Exception('行動分岐エラー');
   }

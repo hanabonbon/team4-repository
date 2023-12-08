@@ -14,7 +14,8 @@
 
     public function action() {
       //行動の決定
-      $actionCode = rand(0, 2);
+      //$actionCode = rand(0, 2);
+      $actionCode = 0;
       $action = "";
 
       //行動の実行
@@ -31,8 +32,8 @@
 
         case 2:
           //TODO:回避
-          //攻撃
-          $action = "attack";
+          //回避
+          $action = "avoid";
           break;
       }
 

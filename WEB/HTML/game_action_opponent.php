@@ -34,21 +34,35 @@
   $Ai = new OpponentAi();
   $action = $Ai->action();
 
-  // プレイヤーの行動
+  $damage_ = 0;
+
+  // 相手の行動
   switch ($action) {
     case "attack":
       $message = 'opponent_id:' . $_SESSION['opponentId'] . 'の攻撃！';
 
-      //プレイヤーが防御or回避していたときのメッセージ
       if ($battle->getPlayerState() === EnumActionState::DEFENCE) {
-        $message .= '<br>user_id:' . $_SESSION['user_id'] . 'は防御している';
-      } elseif ($battle->getPlayerState() === EnumActionState::AVOID) {
-        $message .= '<br>user_id:' . $_SESSION['user_id'] . 'は回避している';
-      }
+        $message .= '<br>player_id:' . $_SESSION['user_id'] . 'は防御している';
+        //攻撃
+        $damage_ = $battle->attack($_SESSION['user_id']);
+        $message .= '<br>opponent_id:' . $_SESSION['opponentId'] .'は'. $damage_ . 'のダメージを与えた';
 
-      //攻撃
-      $damage_ = $battle->attack($_SESSION['user_id']);
-      $message .= '<br>opponent_id:' . $_SESSION['opponentId'] .'は'. $damage_ . 'のダメージを与えた';
+      } elseif ($battle->getPlayerState() === EnumActionState::AVOID) {
+        //攻撃
+        $damage_ = $battle->attack($_SESSION['user_id']);
+        //このタイミングで回避結果がでる
+        if($damage_ == 0) {
+          $message .= '<br>user_id:' . $_SESSION['user_id'] . 'は回避した！';
+        } else {
+          $message .= '<br>user_id:' . $_SESSION['user_id'] . 'は回避に失敗した！';
+          $message .= '<br>opponent_Id:' . $_SESSION['opponentId'] .'は'. $damage_ . 'のダメージを与えた';
+        }
+
+      } else {
+        //攻撃
+        $damage_ = $battle->attack($_SESSION['user_id']);
+        $message .= '<br>opponent_id:' . $_SESSION['opponentId'] .'は'. $damage_ . 'のダメージを与えた';
+      }
       break;
 
     case "defence":
@@ -57,9 +71,9 @@
       break;
 
     case "avoid":
-      // 未実装
-      // $battle->avoid();
-      throw new \Exception('回避');
+      $battle->avoid($_SESSION['opponentId']);
+      $message = 'opponent_id:' . $_SESSION['opponentId'] . 'は回避姿勢をとった';
+      //throw new \Exception('回避');
       break;
 
     default:
