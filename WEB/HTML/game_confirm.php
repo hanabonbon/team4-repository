@@ -1,6 +1,6 @@
 <?php
   namespace task_game;
-  use task_game\EnumActionState;
+  //use task_game\EnumActionState;
   session_start();
   if(!isset($_SESSION['user_id'])){
     header('location: ./login.php');
