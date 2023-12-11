@@ -5,6 +5,12 @@
   if(!isset($_SESSION['user_id'])){
     header('location: ./login.php');
   }
+
+  if(isset($_SESSION['opponentId'])) {
+    $opponentId = $_SESSION['opponentId'];
+  } else {
+    header('location: ./game_home.php');
+  }
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -34,9 +40,11 @@
   $userStatusLv = $gameUser->fetchUserStatusLv($user_id);
 
   //相手
-  if(isset($_GET['opponent_user_id'])) {
-    $_SESSION['opponentId'] = $_GET['opponent_user_id'];
-  }
+  // if(isset($_GET['opponent_user_id'])) {
+  //   $_SESSION['opponentId'] = $_GET['opponent_user_id'];
+  // }
+
+  
 
   $opponentId = $_SESSION['opponentId'];
   

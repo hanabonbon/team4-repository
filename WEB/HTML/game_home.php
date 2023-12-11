@@ -64,7 +64,7 @@
           <!-- 仮でランキング上位10人を表示 -->
             <?php foreach($opponentList as $opponent): ?>
               <li>
-                <form action="./game_battle.php" method="get">
+                <form action="./game_confirm.php" method="get">
                   <input type="hidden" name="opponent_user_id" value="<?=$opponent['user_id']?>">
                   <button type="submit"><?=$opponent['nickname']?></button>
                 </form>
