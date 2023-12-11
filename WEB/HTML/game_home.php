@@ -133,7 +133,8 @@
             <?php foreach ($result2 as $row2): ?>
             <?php $sum = $row2['hitpoint'] + $row2['attack'] + $row2['agility'] + $row2['defence'] + $row2['luck']; ?> 
             <li class="list-group-item lh-sm color d-flex justify-content-between">
-              <form action="./game_confirm.php" method="post" class="d-flex align-items-center">
+
+              <form action="./game_confirm.php" method="get" class="d-flex align-items-center">
                 <div class="circle-icon-mini">
                   <img class="icon-img" src="../images/<?php echo $row2['icon_path']?>" alt="アイコン画像">
                 </div>
@@ -141,6 +142,7 @@
                 <button type="submit"><?=$row2['nickname']?></button>
                 <p class="m-0 ms-2">想定パワー：<?php echo $sum;?></p>
               </form>
+
               <form action="./game_battle.php" name="yourhistory" method="post" class="ml-auto d-flex">
                 <input type="hidden" value="<?=$row2['user_id']?>">
                 <button type="submit">戦歴を見る</button>
