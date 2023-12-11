@@ -113,10 +113,14 @@
               <p class="text-size">幸運：<?=$L?></p>
             </div>
           </div>
-          <form action="game_battle.php" method="post">
+          
+          <!-- 修正 -->
+          <form action="game_battle.php">
             <input type="hidden" value="<?=$row1['user_id']?>">
             <button type="submit" class="btn btn-primary"  style="width: 100%;">対戦開始！</button>
           </form>
+          <!-- ----------------------------------------------------------------------------------------------- -->
+
         </div>
       </div>
     </div><?php endforeach; ?>
