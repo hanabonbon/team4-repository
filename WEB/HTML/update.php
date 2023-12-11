@@ -1,5 +1,7 @@
-<!-- update.php -->
 <?php
+namespace task_game;
+use DAO;
+use PDO;
 session_start();
 
 if (!isset($_SESSION['user_id'])) {

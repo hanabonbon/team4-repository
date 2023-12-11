@@ -65,5 +65,14 @@
       $result = $ps->fetch(PDO::FETCH_ASSOC);
       return $result['level'];
     }
+
+    public function fetchIconPath($user_id){
+      $sql = "SELECT icon_path FROM user WHERE user_id = ?";
+      $ps = $this->pdo->prepare($sql);
+      $ps->bindValue(1, $user_id, PDO::PARAM_INT); 
+      $ps->execute();
+      $result = $ps->fetch(PDO::FETCH_ASSOC);
+      return $result['icon_path']; 
+    }
   }
 ?>
