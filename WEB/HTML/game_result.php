@@ -83,7 +83,7 @@
       <h2>
         <?=$battle->getWinnerId() === $playerId ? 'WIN!' : 'LOSE';?>
       </h2>
-      <img src="" alt="プレイヤーアイコン">
+      <img src="../images/<?=$gameUser->fetchIconPath($playerId)?>" alt="プレイヤーアイコン">
       <p><?=$gameUser->getUserName($playerId)?></p>
       <p>○勝✕敗</p>
       <p>ｘｘ位</p>
@@ -93,7 +93,7 @@
       <h2>
         <?=$battle->getWinnerId() === $opponentId ? 'WIN!' : 'LOSE';?>
       </h2>
-        <img src="" alt="相手のアイコン">
+        <img src="../images/<?=$gameUser->fetchIconPath($opponentId)?>" alt="相手のアイコン">
         <p><?=$gameUser->getUserName($opponentId)?></p>
         <p>○勝✕敗</p>
         <p>ｘｘ位</p>
