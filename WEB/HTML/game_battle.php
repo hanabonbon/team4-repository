@@ -43,11 +43,13 @@
   $opponentName =  $gameUser->getUserName($opponentId);
   $opponentStatusLv = $gameUser->fetchUserStatusLv($opponentId);
 
+  $message = '';
   //対戦を開始
   if(isset($_SESSION['battle'])) {
     $battle = unserialize($_SESSION['battle']);
   } else {
-    echo '対戦を開始します<br>';
+    //echo '対戦を開始します<br>';
+    $message = '対戦を開始します<br>';
     $battle = new BattleController($user_id, $opponentId);
     $_SESSION['battle'] = serialize($battle);
     $_SESSION['player'] = serialize($battle->getPlayer());
@@ -71,7 +73,6 @@
   $player = $battle->getPlayer();
   $opponent = $battle->getOpponent();
 
-  $message = '';
 ?>
 <body>
   <div class="container-fluid">
@@ -115,8 +116,6 @@
         if(isset($_SESSION['message'])) {
           $message = $_SESSION['message'];
           unset($_SESSION['message']);
-        } else {
-          $message = '表示すべきメッセージがありません';
         }
         
         echo $message;

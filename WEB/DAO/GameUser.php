@@ -47,5 +47,23 @@
       $result = $ps->fetch(PDO::FETCH_ASSOC);
       return $result;
     }
+
+    //ランクポイントを更新
+    public function updateRankPoint($user_id, $point) {
+      $sql = "UPDATE v_game_user SET rank_point = rank_point + :point WHERE user_id = :user_id";
+      $ps = $this->pdo->prepare($sql);
+      $ps->bindValue(':point', $point, PDO::PARAM_INT);
+      $ps->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+      $ps->execute(); //err
+    }
+
+    public function fetchLevel($id) {
+      $sql = "SELECT level FROM v_game_user WHERE user_id = ?";
+      $ps = $this->pdo->prepare($sql);
+      $ps->bindValue(1, $id, PDO::PARAM_INT);
+      $ps->execute();
+      $result = $ps->fetch(PDO::FETCH_ASSOC);
+      return $result['level'];
+    }
   }
 ?>

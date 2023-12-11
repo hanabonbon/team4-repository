@@ -36,8 +36,44 @@
   $playerId = $_SESSION['user_id'];
   $opponentId = $_SESSION['opponentId'];
 
-  
+  //レベル
+  $playerLv = $gameUser->fetchLevel($playerId);
+  $opponentLv = $gameUser->fetchLevel($opponentId);
 
+  $rankPoint = 0;
+
+  //レベル差に応じてランクポイントを決定
+  if($battle->getWinnerId() === $playerId) {
+    //プレイヤーが勝ったとき
+    if($playerLv > $opponentLv) {
+      $rankPoint = 5;
+    } else if($playerLv === $opponentLv) {
+      $rankPoint = 10;
+    } else {
+      $rankPoint = 15;
+    }
+  } else {
+    //プレイヤーが負けたとき
+    if($playerLv > $opponentLv) {
+      $rankPoint = -20;
+    } else if($playerLv === $opponentLv) {
+      $rankPoint = -15;
+    } else {
+      $rankPoint = -5;
+    }
+  }
+
+  //複数回更新されないようにする
+  if(isset($_SESSION['isUpdated'])) {
+    if($_SESSION['isUpdated'] == false) {
+      $gameUser->updateRankPoint($playerId, $rankPoint);
+      $_SESSION['isUpdated'] = true;
+    }
+  } else {
+    $gameUser->updateRankPoint($playerId, $rankPoint);
+    $_SESSION['isUpdated'] = true;
+  }
+  
 ?>
 <body>
   <h1>対戦結果</h1>
@@ -63,8 +99,14 @@
         <p>ｘｘ位</p>
     </div>
   </div>
-  <h3>ランクポイント：xxP</h3>
-  <a href="./game_home.php"><button>対戦ホームへ戻る</button></a>
+  <h3>ランクポイント：<?=$rankPoint?></h3>
+  <a href="./game_clear.php"><button>対戦ホームへ戻る</button></a>
+
+  <?php
+    // echo "<pre>";
+    // var_dump($_SESSION);
+    // echo "</pre>";
+  ?>
 
 
   <!-- BootStrap CDN -->
