@@ -117,8 +117,8 @@
               <p>防御力：<?=$D?></p>
               <p>すばやさ：<?=$S?></p>
               <p>幸運：<?=$L?></p>
-              <form action="./game_battle.php" method="post">
-                <input type="hidden" name="myhistory" value="<?=$row1['user_id']?>">
+              <form action="./game_battle_record.php" method="post">
+                <input type="hidden" name="record_user_id" value="<?=$row1['user_id']?>">
                 <button type="submit">戦歴を見る</button>
               </form>
             </div>
@@ -144,8 +144,8 @@
                 <p class="m-0 ms-2">想定パワー：<?php echo $sum;?></p>
               </form>
 
-              <form action="./game_battle.php" name="yourhistory" method="post" class="ml-auto d-flex">
-                <input type="hidden" value="<?=$row2['user_id']?>">
+              <form action="./game_battle_record.php" name="yourhistory" method="post" class="ml-auto d-flex">
+                <input type="hidden" name="record_user_id" value="<?=$row2['user_id']?>">
                 <button type="submit">戦歴を見る</button>
               </form>
             </li>
