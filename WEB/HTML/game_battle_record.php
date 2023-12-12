@@ -21,13 +21,25 @@
   </head>
   <?php
   $user_id = $_SESSION['user_id']; //セッションから取得してください
+  $record_user_id = $_POST['myhistory'];//戦歴のユーザーID
   require_once('../DAO/User.php');
   $user = new User();
   $myuser = $user->getUserDataByUserId($user_id);
+  $recorduser=$user->getUserDataByUserId($record_user_id);
   require_once('../DAO/Test.php');
   $test = new Test();
   $rank = $test->selectAllRanking();
+  //対戦相手のデータ取得
+  $battlerecord = $test->getBattlerecordByUserId($record_user_id);
+  //通算試合数カウント
+  $totalcount = $test->gettotalbattle($record_user_id);
+  //勝利数カウント
+  $wincount=$test->getcountbattleresult($record_user_id,1);
+  //敗北数カウント
+  $losecount=$test->getcountbattleresult($record_user_id,0);
+
   ?>
+  
   <body style="background-color:#FFEED5;">
   <div class="row">
     <!-- サイドバー -->
@@ -59,7 +71,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="battle.html">対戦</a>
+                    <a class="nav-link" href="battle.php">対戦</a>
                 </li>
 
                 <li class="nav-item">
@@ -70,8 +82,13 @@
     </nav>
   </div>
   <!-- メニューバーここまで -->
-    <h1 class="text-center mt-5">対戦記録</h1>
-    <h2 class="text-center mt-5">通算</h2>
+    <h2 class="text-center mt-5">対戦記録</h2>
+    <h3 class="text-center mt-4"><?= $recorduser['nickname'] ?></h3>
+    <div class="text-center mt-2 totalbattledata">
+        通算<span class="battle-record-data"><?=$totalcount?>戦</span>
+            <span class="battle-record-data"><?=$wincount?>勝</span>
+            <span class="battle-record-data"><?=$losecount?>敗</span>
+    </div>
 
     <div class="container">
         <table class="table text-center table_style">
@@ -81,31 +98,23 @@
                     <th><span class="me-2">勝敗</span></th>
                 </tr>
             </thead>
+            <?php foreach($battlerecord as $battledata) :?>
             <tdoby>
                 <tr>
                     <td>
-                        <img src="../images/<?= $myuser['icon_path'] ?>" class="img-icon">
-                        <span class="ms-1">user</span>
+                        <img src="../images/<?= $battledata['icon_path'] ?>" class="img-icon">
+                        <span class="ms-1"><?= $battledata['nickname'] ?></span>
                     </td>
-                    <td class="win_text text-center"><div class="mt-2 me-2">WIN</div></td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="../images/<?= $myuser['icon_path'] ?>" class="img-icon">
-                        <span class="ms-1">user</span>
+                    <td class="text-center"><?php if($battledata['user_is_win']==1){echo '<div class="win_text mt-2 me-2">win</div>';}else{echo '<div class="lose_text mt-2 me-2">lose</div>';
+
+                    } ?>
                     </td>
-                    <td class="win_text text-center"><div class="mt-2 me-2">WIN</div></td>
                 </tr>
-                <tr>
-                    <td>マイユーザ</td>
-                    <td class="win_text">win</td>
-                </tr>
-                <tr>
-                    <td>マイユーザ</td>
-                    <td class="lose_text">LOSE</td>
-                </tr>
+                
             </tdoby>
+            <?php endforeach; ?>
         </table>
+       
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
@@ -119,4 +128,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     -->
   </body>
-</html
+</html>
