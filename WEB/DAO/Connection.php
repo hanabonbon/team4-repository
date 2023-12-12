@@ -1,4 +1,6 @@
 <?php
+  namespace task_game;
+
   class Connection{
     
     private $pdo;
@@ -11,8 +13,8 @@
 
     public function __construct() {
       try{
-        $this->pdo = new PDO($this->dsn, $this->username, $this->password);
-      }catch (PDOException $e){
+        $this->pdo = new \PDO($this->dsn, $this->username, $this->password);
+      }catch (\PDOException $e){
         print('Error:'.$e->getMessage());
         die();
       }

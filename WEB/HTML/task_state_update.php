@@ -1,4 +1,6 @@
 <?php
+  namespace task_game;
+
   //タスクの完了処理
   session_start();
   if(!isset($_SESSION['user_id'])){
@@ -7,7 +9,7 @@
   require_once('../DAO/Task.php');
   require_once('../DAO/Test.php');
   $task = new Task();
-  $test = new Test();
+  $test = new \Test();
   //var_dump($_GET);
   $spData = $test->getSpByUserId($_SESSION['user_id']);
   $sp = $spData['skill_point'] + 1;

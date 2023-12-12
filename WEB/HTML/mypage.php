@@ -1,4 +1,7 @@
 <?php
+  namespace task_game;
+  use PDO;
+  use DAO;
   session_start(); 
   if(!isset($_SESSION['user_id'])){
     header('location: ./login.php');

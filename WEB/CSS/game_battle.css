@@ -6,3 +6,9 @@
 body {
   font-family: "DotGothic16", sans-serif;
 }
+
+#message {
+  border: solid 1px #878787;
+  border-radius: 5px;
+  background-color: rgb(223, 223, 223);
+}
