@@ -1,6 +1,5 @@
 <?php 
   namespace task_game;
-  use Test;
   session_start(); 
   if(!isset($_SESSION['user_id'])){
     header('location: ./login.php');
