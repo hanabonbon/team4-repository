@@ -1,11 +1,12 @@
 <?php 
+  namespace task_game;
   session_start();
   if(!isset($_SESSION['user_id'])){
     header('location: ./login.php');
   }
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="ja">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
