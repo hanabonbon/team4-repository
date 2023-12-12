@@ -114,10 +114,10 @@
               <h3>ステータス</h3>
               <p>体力：<?=$H?></p>
               <p>攻撃力：<?=$A?></p>
-              <p>防御力：<?=$D?></p>
-              <p>すばやさ：<?=$S?></p>
-              <p>幸運：<?=$L?></p>
-              <form action="./game_battle.php" method="post">
+              <p>防御力：<?=$D?> %</p>
+              <p>すばやさ：<?=$S?> %</p>
+              <p>幸運：<?=$L?> %</p>
+              <form action="./game_battle_record.php" method="post">
                 <input type="hidden" name="myhistory" value="<?=$row1['user_id']?>">
                 <button type="submit">戦歴を見る</button>
               </form>
