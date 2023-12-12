@@ -1,4 +1,6 @@
 <?php
+namespace task_game;
+use PDO;
 class Test1 {
     private $pdo;
     public function __construct() {
