@@ -35,7 +35,7 @@
 </head>
 <style>
   .text-size {
-    font-size: 18px; /* 適切なサイズに調整してください */
+    font-size: 16px; /* 適切なサイズに調整してください */
   }
   /* すべてのカードのボーダーを茶色に設定 */
   .card {
@@ -62,11 +62,12 @@
             </div>
             <div class="card-body">
               <h3>ステータス</h3>
-              <p class="text-size">総合：<?=$gameUser->fetchLevel($opponentId)?></p>
-              <p class="text-size">攻撃力：<?=$opponent->getATK()?></p>
-              <p class="text-size">防御力：<?=$opponent->getDEF()?></p>
-              <p class="text-size">すばやさ：<?=$opponent->getAGL()?></p>
-              <p class="text-size">幸運：<?=$opponent->getLUK()?></p>
+              <p class="text-size">総合：<?=$sum?></p>
+              <p class="text-size">体力：<?=$H?></p>
+              <p class="text-size">攻撃力：<?=$A?></p>
+              <p class="text-size">防御力：<?=$D?></p>
+              <p class="text-size">すばやさ：<?=$S?></p>
+              <p class="text-size">幸運：<?=$L?></p>
             </div>
           </div>
 
