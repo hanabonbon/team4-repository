@@ -65,23 +65,22 @@
   }
 
   //操作ボタンのON/OFF
-  $isControllable = $battle->isControllable();
-  $isEnd = $battle->isEnd();
   $actionButton = "";
   $nextButton = "";
   $skillButton = "disabled";
+  $isControllable = $battle->isControllable();
+  $isSkillAvailable = $battle->isSkillAvailable($user_id);
+  $isEnd = $battle->isEnd();
+
 
   $isControllable ? $actionButton = "" : $actionButton = "disabled";
   $isControllable ? $nextButton = "disabled" : $nextButton = "";
+  $isSkillAvailable ? $skillButton = "" : $skillButton = "disabled";
 
+  //ゲーム終了時はすべての操作ボタンを無効化
   if($isEnd) {
     $actionButton = "disabled";
     $nextButton = "disabled";
-  }
-
-  //スキルボタンのON/OFF
-  if(isset($_SESSION['isSkillAvailable'])) {
-    $isSkillAvailable = $_SESSION['isSkillAvailable'];
   }
 
   $player = $battle->getPlayer();
@@ -109,7 +108,7 @@
           <button type="submit" name="attack" <?=$actionButton?>>攻撃する</button>
           <button type="submit" name="defence" <?=$actionButton?>>防御する</button>
           <button type="submit" name="avoid" <?=$actionButton?>>回避する</button>
-          <!-- <button type="submit" name="avoid">回避する</button> -->
+          <button type="submit" name="skill" <?=$skillButton?>>スキルを発動する</button>
         </form>
 
       </div>
