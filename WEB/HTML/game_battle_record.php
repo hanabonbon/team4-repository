@@ -1,4 +1,8 @@
-<?php 
+<?php
+
+use task_game\Test;
+use task_game\User;
+
   session_start();
   if(!isset($_SESSION['user_id'])){
     header('location: ./login.php');
@@ -21,7 +25,7 @@
   </head>
   <?php
   $user_id = $_SESSION['user_id']; //セッションから取得してください
-  $record_user_id = $_POST['myhistory'];//戦歴のユーザーID
+  $record_user_id = $_POST['record_user_id'];//戦歴のユーザーID
   require_once('../DAO/User.php');
   $user = new User();
   $myuser = $user->getUserDataByUserId($user_id);
