@@ -1,4 +1,5 @@
 <?php 
+  namespace task_game;
   session_start();
 ?>
 <!DOCTYPE html>
