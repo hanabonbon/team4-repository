@@ -9,7 +9,9 @@
     private float $luck;
     //プレイヤーの状態（通常,防御,回避,死)
     private EnumActionState $actionState = EnumActionState::NEUTRAL;
-    //前回の行動を保存
+    //スキル発動の可否
+    private bool $isSkillAvailable = false;
+
     
     public function __construct($statusLv = array()) {
       $status =  $this->culcStatus($statusLv);
@@ -80,7 +82,33 @@
     public function avoid() {
       $this->actionState = EnumActionState::AVOID;
     }
+
+    //getter, setter
+    public function setIsSkillAvailable(bool $isSkillAvailable) {
+      $this->isSkillAvailable = $isSkillAvailable;
+    }
+
+    public function getHP() {
+      return $this->hitpoint;
+    }
+
+    public function getATK() {
+      return $this->attack;
+    }
+
+    public function getDEF() {
+      return $this->defence;
+    }
+
+    public function getAGL() {
+      return $this->agility;
+    }
+
+    public function getLUK() {
+      return $this->luck;
+    }
     
+    //ステータスの計算
     public function culcStatus($statusLv) {
       $status = array();
 
@@ -139,26 +167,6 @@
       }
 
       return $status;
-    }
-
-    public function getHP() {
-      return $this->hitpoint;
-    }
-
-    public function getATK() {
-      return $this->attack;
-    }
-
-    public function getDEF() {
-      return $this->defence;
-    }
-
-    public function getAGL() {
-      return $this->agility;
-    }
-
-    public function getLUK() {
-      return $this->luck;
     }
   }
 ?>

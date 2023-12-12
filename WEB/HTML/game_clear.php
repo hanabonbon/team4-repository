@@ -6,6 +6,6 @@
   unset($_SESSION['battle']);
   unset($_SESSION['isUpdated']);
   unset($_SESSION['message']);
-
+  //unset($_SESSION['isSkillAvailable']);
   header("Location:./game_home.php");
 ?>

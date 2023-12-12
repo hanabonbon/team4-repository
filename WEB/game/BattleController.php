@@ -132,6 +132,29 @@
       }
     }
 
+    //スキルが発動できるか？
+    //状態はPlayerクラスに持たせる
+    //TODO:スキル使用状態の更新
+    public function ($playerId) {
+      $player = $this->getPlayerObjectById($playerId);
+      $playerLuc = $player->getLUK();
+
+      $rand = rand(0, 100);
+      if($rand <= $playerLuc * 100) {
+        $player->setIsSkillAvailable(true);
+      }
+    }
+
+    public function getPlayerObjectById($playerId) {
+      if($playerId == $this->playerId) {
+        return $this->player;
+      } else if($playerId == $this->opponentId) {
+        return $this->opponent;
+      } else {
+        throw new \Exception('プレイヤーIDが不正です');
+      }
+    }
+
     public function getWinnerId() {
       return $this->winnerId;
     } 
