@@ -10,13 +10,48 @@ body {
 }
 
 .card-body{
-    
-    
     background: #818181;
 }
 
 .text-color{
     color:#FFEED5;
+}
+
+.table_style{
+    background-color: #818181;
+    border-radius: 10px;
+    border: 1px solid #FFF;
+    width: 60%; /* 任意の幅を指定 */
+    margin: auto; /* テーブルを中央配置する場合 */
+    color:#FFEED5;
+}
+
+.win_text{
+    color: red;
+}
+
+.lose_text{
+    color:blue;
+}
+
+.top-rank-1 .card-body {
+    color: #FFD700; /* 1位のテキスト色 */
+}
+
+.top-rank-2 .card-body {
+    color: #C0C0C0; /* 2位のテキスト色 */
+}
+
+.totalbattledata{
+    font-size: 25px;
+}
+.battle-record-data{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.top-rank-3 .card-body {
+    color: #8c4841; /* 3位のテキスト色 */
 }
 
 

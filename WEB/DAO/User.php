@@ -1,4 +1,6 @@
 <?php
+  namespace task_game;
+  use \PDO;
   class User {
     private $pdo;
     
@@ -25,7 +27,7 @@
       $ps->bindValue(1, $user_id, PDO::PARAM_INT); 
       $ps->execute();
       $result = $ps->fetch(PDO::FETCH_ASSOC);
-      return $result['username']; 
+      return $result['nickname']; 
     }
     
     public function getUserDataByMail($mailaddress) {
@@ -68,5 +70,21 @@
       $result = $ps->fetch(PDO::FETCH_ASSOC);
       return $result['skill_point']; 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   }
 ?>

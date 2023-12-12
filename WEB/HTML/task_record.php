@@ -1,4 +1,5 @@
 <?php 
+  namespace task_game;
   session_start(); 
   if(!isset($_SESSION['user_id'])){
     header('location: ./login.php');
@@ -62,33 +63,41 @@
   <div class="row">
     <!-- サイドバー -->
     <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block  text-white sidebar  fixed-top">
-      <div class="position-sticky">
-        <ul class="nav flex-column">
-          <!--アイコンとユーザー名-->
-          <div class="icon-name">
-            <div class="img-area">
-              <img src="../images/<?= $myuser['icon_path'] ?>" class="img-icon">
-            </div>
-            <div class="name-area">
-              <label class="username-area"><?= $myuser['nickname'] ?></label>
-            </div>
-          </div>
-          <li class="nav-item active">
-            <!-- タスク上の白線 -->
-            <div class="nav-link"></div>
-            <a class="nav-link" href="task.html">タスク</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="mypage.html">マイページ</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="battle.html">対戦</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="ranking.html">ランキング</a>
-          </li>
-        </ul>
-      </div>
+        <div class="position-sticky">
+            <ul class="nav flex-column">
+              <!--アイコンとユーザー名-->
+              <div class="icon-name">
+                <div class="img-area">
+                  <img src="../images/<?= $myuser['icon_path'] ?>" class="img-icon">
+                </div>
+                <div class="name-area">
+                  <label class="username-area"><?= $myuser['nickname'] ?></label>
+                </div>
+              </div>
+
+                <li class="nav-item active">
+                  <!-- タスク上の白線 -->
+                  <div class="nav-link"></div>
+                    <a class="nav-link" href="home.php">ホーム</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="task_list.php">タスク</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="mypage.php">マイページ</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="game_home.php">対戦</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="ranking.php">ランキング</a>
+                </li>
+            </ul>
+        </div>
     </nav>
   </div>
   <!-- コンテンツ -->
@@ -135,11 +144,12 @@
     
         <!-- 月ごとのタスクを表示 -->
         <?php foreach($taskListByMonth as $taskData) :?>
-          <div class="row" id="task-simple-view">
+          <div  id="task-simple-view"class="container-fluid">
+            <div class="row task-card-view">
             <div class="col-1">
               <!-- 完了ボタン URL以外は変更できます-->
               <a href="./task_state_update.php?task_id=<?=$taskData['task_id']?>
-                                              &is_complete=<?=$taskData['is_complete']?>">
+                                              &is_complete=<?=$taskData['is_complete']?>"class="complete-btn">
                 <?php if($taskData['is_complete']) { ?>
                   <button class="btn-secondry"><i class="bi bi-clipboard-check"></i></button>
                 <?php } else { ?>
@@ -149,16 +159,17 @@
             </div>
             <div class="col-4">
               <!-- タイトル -->
-              <p><?=$taskData['title']?></p>
+              <p class="title-period"><?=$taskData['title']?></p>
             </div>
             <div class="col-4">
-                <p>期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></p>
+                <p class="title-period">期限：<?=date('Y-m-d' ,strtotime($taskData['period']))?></p>
             </div>
             <div class="col-3">
               <!-- 編集ボタン URL以外は変更できます -->
               <a href="./task_edit.php?task_id=<?=$taskData['task_id']?>">
-                <button>編集する</button>
+                <button class="edit-btn">編集する</button>
               </a>
+            </div>
             </div>
           </div>
           <hr>

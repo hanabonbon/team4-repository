@@ -1,4 +1,5 @@
 <?php 
+  namespace task_game;
   session_start();
   if(isset($_SESSION['user_id'])){
     header('location: ./task_list.php');

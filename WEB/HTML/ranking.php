@@ -1,11 +1,12 @@
 <?php 
+  namespace task_game;
   session_start();
   if(!isset($_SESSION['user_id'])){
     header('location: ./login.php');
   }
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="ja">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -25,59 +26,65 @@
   $user = new User();
   $myuser = $user->getUserDataByUserId($user_id);
   require_once('../DAO/Test.php');
+  require_once('../DAO/Test1.php');
   $test = new Test();
+  $test1 = new Test1();
   $rank = $test->selectAllRanking();
   ?>
   <body style="background-color:#FFEED5;">
   <div class="container-fluid">
-        <div class="row">
-            <!-- サイドバー -->
-            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block  text-white sidebar  fixed-top">
-              <div class="position-sticky">
-                  <ul class="nav flex-column">
-                    <!--アイコンとユーザー名-->
-                    <div class="icon-name">
-                      <div class="img-area">
-                        <img src="../images/<?= $myuser['icon_path'] ?>" class="img-icon">
-                      </div>
-                      <div class="name-area">
-                        <label class="username-area"><?= $myuser['nickname'] ?></label>
-                      </div>
+      <div class="row">
+          <!-- サイドバー -->
+          <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block  text-white sidebar  fixed-top">
+            <div class="position-sticky">
+                <ul class="nav flex-column">
+                  <!--アイコンとユーザー名-->
+                  <div class="icon-name">
+                    <div class="img-area">
+                      <img src="../images/<?= $myuser['icon_path'] ?>" class="img-icon">
                     </div>
-  
-                      <li class="nav-item active">
-                        <!-- タスク上の白線 -->
-                        <div class="nav-link"></div>
-                          <a class="nav-link" href="task.html">タスク</a>
-                      </li>
-  
-                      <li class="nav-item">
-                          <a class="nav-link" href="mypage.html">マイページ</a>
-                      </li>
-  
-                      <li class="nav-item">
-                          <a class="nav-link" href="battle.html">対戦</a>
-                      </li>
-  
-                      <li class="nav-item">
-                        <a class="nav-link" href="ranking.html">ランキング</a>
-                      </li>
-                  </ul>
-          </nav>
+                    <div class="name-area">
+                      <label class="username-area"><?= $myuser['nickname'] ?></label>
+                    </div>
+                  </div>
+
+                    <li class="nav-item active">
+                      <!-- タスク上の白線 -->
+                      <div class="nav-link"></div>
+                        <a class="nav-link" href="home.php">ホーム</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="task_list.php">タスク</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="mypage.php">マイページ</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="game_home.php">対戦</a>
+                    </li>
+
+                    <li class="nav-item">
+                      <a class="nav-link" href="ranking.php">ランキング</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-      </div>
+    </div>
       <!-- メニューバーここまで -->
     <h2 class="text-center mt-5">ランキング</h2>
-    <h5 class="text-center mt-3">現在の順位：１位</h5>
+    <h5 class="text-center mt-3">現在の順位：<?php $test->selectMyRanking($_SESSION['user_id']) ?>位</h5>
     <?php foreach($rank as $index => $row) : ?>
 
     <div class="ranking_area text-center">
       <div class="row">
         <div class="col-md-8 offset-md-2">
-            <div class="card mb-2">
+            <div class="card mb-2 <?= ($index === 0) ? 'top-rank-1' : (($index === 1) ? 'top-rank-2' : (($index === 2) ? 'top-rank-3' : '')) ?>">
                 <div class="card-body text-color">
-                  <span class="text-start"><h6><?= $index + 1 . "位" ?></h6></span>
-                  <span><h5><?= $row['nickname']; ?></h5></span>
+                  <span class="text-start"><h6><?= $test1->selectMyRanking($row['user_id']) . "位" ?></h6></span>
+                  <span><img src="../images/<?= $row['icon_path'] ?>" class="img-icon"><h5><?= $row['nickname']; ?></h5></span>
                   <span class="text-end"><h6><?= $row['rank_point']; echo "RP"; ?></h6></span>
                 </div>
             </div>
