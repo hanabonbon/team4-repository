@@ -25,7 +25,9 @@
   $user = new User();
   $myuser = $user->getUserDataByUserId($user_id);
   require_once('../DAO/Test.php');
+  require_once('../DAO/Test1.php');
   $test = new Test();
+  $test1 = new Test1();
   $rank = $test->selectAllRanking();
   ?>
   <body style="background-color:#FFEED5;">
@@ -80,7 +82,7 @@
         <div class="col-md-8 offset-md-2">
             <div class="card mb-2 <?= ($index === 0) ? 'top-rank-1' : (($index === 1) ? 'top-rank-2' : (($index === 2) ? 'top-rank-3' : '')) ?>">
                 <div class="card-body text-color">
-                  <span class="text-start"><h6><?= $test->selectMyRanking($row['user_id']) . "位" ?></h6></span>
+                  <span class="text-start"><h6><?= $test1->selectMyRanking($row['user_id']) . "位" ?></h6></span>
                   <span><img src="../images/<?= $row['icon_path'] ?>" class="img-icon"><h5><?= $row['nickname']; ?></h5></span>
                   <span class="text-end"><h6><?= $row['rank_point']; echo "RP"; ?></h6></span>
                 </div>
