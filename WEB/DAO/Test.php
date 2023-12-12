@@ -54,5 +54,41 @@
     $ps->bindValue(2, $user_id, PDO::PARAM_INT);
     $ps->execute();
   }
+
+  //対戦記録対戦相手取得
+  public function getBattlerecordByUserId($user_id){
+    $sql = "SELECT m.match_id,m.user_is_win,m.enemy_user_id,m.user_id,u.user_id,u.nickname,u.icon_path
+    FROM match_record m INNER JOIN user u
+    ON m.enemy_user_id=u.user_id
+    WHERE m.user_id=?
+    ORDER BY m.match_id desc";
+    $ps = $this->pdo->prepare($sql);
+    $ps->bindValue(1,$user_id,PDO::PARAM_INT);
+    $ps->execute();
+    $result = $ps->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+  //通算試合数カウント
+  public function gettotalbattle($user_id) {
+    $sql = "SELECT COUNT(*) FROM match_record
+    WHERE user_id = ?";
+    $ps = $this->pdo->prepare($sql);
+    $ps->bindValue(1, $user_id, PDO::PARAM_INT);
+    $ps->execute();
+    $result = $ps->fetch(PDO::FETCH_ASSOC);
+    return $result['COUNT(*)'];
+  }                          
+
+  //対戦記録勝敗カウント
+  public function getcountbattleresult($user_id,$battle_result) {
+      $sql = "SELECT COUNT(*) FROM match_record
+      WHERE user_id = ? AND user_is_win= ?";
+      $ps = $this->pdo->prepare($sql);
+      $ps->bindValue(1, $user_id, PDO::PARAM_INT);
+      $ps->bindValue(2, $battle_result, PDO::PARAM_INT);
+      $ps->execute();
+      $result = $ps->fetch(PDO::FETCH_ASSOC);
+      return $result['COUNT(*)'];
+    }                          
 }
 ?>
