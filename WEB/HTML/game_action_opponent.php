@@ -1,4 +1,5 @@
 <?php
+  //「次へ」ボタン押下後の処理
   //相手の行動処理
   namespace task_game;
   use task_game\EnumActionState;
@@ -84,6 +85,9 @@
   //コントローラーの有効化
   $battle->enabledPlayerAction();
 
+  //プレイヤー側：スキルの発動判定
+  $battle->isSkillAvailable($_SESSION['user_id']);
+
   //セッションの値を更新
   $_SESSION['player'] = serialize($battle->getPlayer());
   $_SESSION['opponent'] = serialize($battle->getOpponent());
@@ -91,6 +95,8 @@
   $_SESSION['battle'] = serialize($battle);
 
   $_SESSION['message'] = $message;
+
+
 
   header('location: ./game_battle.php');
 

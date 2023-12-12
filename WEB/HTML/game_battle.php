@@ -69,6 +69,7 @@
   $isEnd = $battle->isEnd();
   $actionButton = "";
   $nextButton = "";
+  $skillButton = "disabled";
 
   $isControllable ? $actionButton = "" : $actionButton = "disabled";
   $isControllable ? $nextButton = "disabled" : $nextButton = "";
@@ -76,6 +77,11 @@
   if($isEnd) {
     $actionButton = "disabled";
     $nextButton = "disabled";
+  }
+
+  //スキルボタンのON/OFF
+  if(isset($_SESSION['isSkillAvailable'])) {
+    $isSkillAvailable = $_SESSION['isSkillAvailable'];
   }
 
   $player = $battle->getPlayer();
