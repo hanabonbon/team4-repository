@@ -1,4 +1,5 @@
 <?php
+  namespace task_game;
   require_once('../DAO/User.php');
   $user = new User();
   $user->updateUserProfile($_POST);

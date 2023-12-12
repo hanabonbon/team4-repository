@@ -1,46 +1,91 @@
 <?php
-  class Player {
-    private float $hihpoint;
+  namespace task_game;
+  use task_game\EnumActionState;
+  class Player {    
+    private float $hitpoint;
     private float $attack;
     private float $defence;
     private float $agility;
     private float $luck;
-
+    //プレイヤーの状態（通常,防御,回避,死)
+    private EnumActionState $actionState = EnumActionState::NEUTRAL;
+    //前回の行動を保存
+    
     public function __construct($statusLv = array()) {
       $status =  $this->culcStatus($statusLv);
-
-      $this->hihpoint = $status['hihpoint'];
+      $this->hitpoint = $status['hitpoint'];
       $this->attack = $status['attack'];
       $this->defence = $status['defence'];
       $this->agility = $status['agility'];
       $this->luck = $status['luck'];
+      require_once __DIR__ . '/EnumActionState.php';
+      //$this->actionState = EnumActionState::NEUTRAL;
     }
 
-    public function getHihPoint() {
-      return $this->hihpoint;
+    public function setActionState(EnumActionState $actionState) {
+      $this->actionState = $actionState;
     }
 
-    public function getAttack() {
-      return $this->attack;
+    public function getActionState() {
+      return $this->actionState;
     }
 
-    public function getdefence() {
-      return $this->defence;
+    public function decreaseHP(float $damage) {
+      $damage_ = $damage;
+      switch ($this->actionState) {
+        case EnumActionState::NEUTRAL:
+          //TODO: 防御ステータスによるダメージカットの計算
+          
+          break;
+        case EnumActionState::DEFENCE:
+          $damage_ = $damage_ * 0.5;
+          break;
+
+        case EnumActionState::AVOID:
+          //回避成功の場合はダメージを受けない
+          //失敗した場合は回避確率の分ダメージカット
+          //todo: 成功or失敗の情報が必要
+          $avoid = rand(0, 100);
+          if ($avoid <= $this->agility * 100) {
+            $damage_ = 0;
+          } else {
+            $damage_ = $damage_ - $damage_ * $this->agility;
+          }
+          break;
+
+        default:
+          # code...
+          break;
+      }
+
+      //ダメージを受ける
+      $this->hitpoint -= $damage_;
+
+      //状態のリセット
+      $this->actionState = EnumActionState::NEUTRAL;
+
+      //生存判定
+      if($this->hitpoint <= 0) {
+        //HPが0以下の場合は状態を更新
+        $this->actionState = EnumActionState::DEAD;
+      }
+      
+      return $damage_;
     }
 
-    public function getAgility() {
-      return $this->agility;
+    public function defence() {
+      $this->actionState = EnumActionState::DEFENCE;
     }
 
-    public function getLuck() {
-      return $this->luck;
+    public function avoid() {
+      $this->actionState = EnumActionState::AVOID;
     }
-
+    
     public function culcStatus($statusLv) {
       $status = array();
 
       //体力値の計算
-      $status['hihpoint'] = 100 + $statusLv['hitpoint'] * 5;
+      $status['hitpoint'] = 100 + $statusLv['hitpoint'] * 5;
 
       //攻撃力の計算
       $status['attack'] = 20 + $statusLv['attack'];
@@ -96,8 +141,24 @@
       return $status;
     }
 
-    
+    public function getHP() {
+      return $this->hitpoint;
+    }
 
+    public function getATK() {
+      return $this->attack;
+    }
 
+    public function getDEF() {
+      return $this->defence;
+    }
+
+    public function getAGL() {
+      return $this->agility;
+    }
+
+    public function getLUK() {
+      return $this->luck;
+    }
   }
 ?>
