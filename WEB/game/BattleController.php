@@ -135,7 +135,7 @@
     //スキルが発動できるか？
     //状態はPlayerクラスに持たせる
     //TODO:スキル使用状態の更新
-    public function ($playerId) {
+    public function wip($playerId) {
       $player = $this->getPlayerObjectById($playerId);
       $playerLuc = $player->getLUK();
 
