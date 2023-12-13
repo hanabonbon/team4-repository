@@ -31,6 +31,8 @@
 <?php
   $user_id = $_SESSION['user_id']; // $user_id を設定
   require_once('../DAO/dao.php'); // Include the dao.php file
+  require_once('../DAO/Test1.php');
+  $test1 = new Test1();
   $dao = new DAO();
   $pdo = $dao->dbConnect();
   $sql1 = "SELECT * FROM user WHERE user_id = :user_id";
@@ -108,10 +110,12 @@
               <div class="circle-icon">
                 <img class="icon-img" src="../images/<?PHP echo $row1['icon_path'];?>" alt="アイコン画像">
               </div>
-              <h3><?PHP echo $row1['nickname'];?></h3>
+                <h3><?= $test1->selectMyRanking($row1['user_id']) . "位" ?>:<?PHP echo $row1['nickname'];?></h3>
             </div>
+            <?php $sum1 = $row1['hitpoint'] + $row1['attack'] + $row1['agility'] + $row1['defence'] + $row1['luck']; ?>
             <div class="card-body">
               <h3>ステータス</h3>
+              <p>想定パワー：<?php echo $sum1;?></p>
               <p>体力：<?=$H?></p>
               <p>攻撃力：<?=$A?></p>
               <p>防御力：<?=$D?> %</p>
@@ -124,7 +128,7 @@
             </div>
           </div>
         </div>
-        <div class="col-7">
+        <div class="col-7 mt-5">
           <div class="card mb-4 rounded-3 shadow-sm color">
             <div class="card-header text-center">
               <h3>対戦相手一覧</h3>
@@ -132,9 +136,8 @@
             <!-- ここに対戦相手の一覧を表示 -->
             <!-- 仮でランキング上位10人を表示 -->
             <?php foreach ($result2 as $row2): ?>
-            <?php $sum = $row2['hitpoint'] + $row2['attack'] + $row2['agility'] + $row2['defence'] + $row2['luck']; ?> 
+            <?php $sum2 = $row2['hitpoint'] + $row2['attack'] + $row2['agility'] + $row2['defence'] + $row2['luck']; ?> 
             <li class="list-group-item lh-sm color d-flex justify-content-between">
-
               <form action="./game_confirm.php" method="get" class="d-flex align-items-center">
                 <button type="submit">
                   <div class="circle-icon-mini">
@@ -142,10 +145,10 @@
                   </div>
                 </button>
                 <input type="hidden" name="opponent_user_id" value="<?=$row2['user_id']?>">
+                <p class="m-0 ms-2"><?= $test1->selectMyRanking($row2['user_id']) . "位" ?>:</p>
                 <button type="submit"><?=$row2['nickname']?></button>
-                <p class="m-0 ms-2">想定パワー：<?php echo $sum;?></p>
+                <p class="m-0 ms-2">想定パワー：<?php echo $sum2;?></p>
               </form>
-
               <form action="./game_battle_record.php" name="yourhistory" method="post" class="ml-auto d-flex">
                 <input type="hidden" name="record_user_id" value="<?=$row2['user_id']?>">
                 <button type="submit">戦歴を見る</button>
