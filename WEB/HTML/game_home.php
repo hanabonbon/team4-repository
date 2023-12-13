@@ -114,9 +114,9 @@
               <h3>ステータス</h3>
               <p>体力：<?=$H?></p>
               <p>攻撃力：<?=$A?></p>
-              <p>防御力：<?=$D?></p>
-              <p>すばやさ：<?=$S?></p>
-              <p>幸運：<?=$L?></p>
+              <p>防御力：<?=$D?> %</p>
+              <p>すばやさ：<?=$S?> %</p>
+              <p>幸運：<?=$L?> %</p>
               <form action="./game_battle_record.php" method="post">
                 <input type="hidden" name="record_user_id" value="<?=$row1['user_id']?>">
                 <button type="submit">戦歴を見る</button>
@@ -136,9 +136,11 @@
             <li class="list-group-item lh-sm color d-flex justify-content-between">
 
               <form action="./game_confirm.php" method="get" class="d-flex align-items-center">
-                <div class="circle-icon-mini">
-                  <img class="icon-img" src="../images/<?php echo $row2['icon_path']?>" alt="アイコン画像">
-                </div>
+                <button type="submit">
+                  <div class="circle-icon-mini">
+                    <img class="icon-img" src="../images/<?php echo $row2['icon_path']?>" alt="アイコン画像">
+                  </div>
+                </button>
                 <input type="hidden" name="opponent_user_id" value="<?=$row2['user_id']?>">
                 <button type="submit"><?=$row2['nickname']?></button>
                 <p class="m-0 ms-2">想定パワー：<?php echo $sum;?></p>
