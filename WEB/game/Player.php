@@ -88,6 +88,10 @@
       $this->isSkillAvailable = $isSkillAvailable;
     }
 
+    public function isSkillAvailable() {
+      return $this->isSkillAvailable;
+    }
+
     public function getHP() {
       return $this->hitpoint;
     }
@@ -109,6 +113,7 @@
     }
     
     //ステータスの計算
+    //TODO:計算式の修正
     public function culcStatus($statusLv) {
       $status = array();
 
