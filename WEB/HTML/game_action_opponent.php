@@ -86,7 +86,7 @@
   $battle->enabledPlayerAction();
 
   //プレイヤー側：スキルの発動判定
-  $battle->isSkillAvailable($_SESSION['user_id']);
+  $battle->skillAvailable($_SESSION['user_id']);
 
   //セッションの値を更新
   $_SESSION['player'] = serialize($battle->getPlayer());

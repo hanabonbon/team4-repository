@@ -11,6 +11,57 @@
   } else {
     header('location: ./game_home.php');
   }
+
+  require_once('../DAO/GameUser.php');
+  $gameUser = new GameUser();
+  require_once('../game/player.php');
+  require_once('../game/BattleController.php');
+  require_once('../game/EnumActionState.php');
+
+  //プレイヤーの情報を取得
+  $user_id = $_SESSION['user_id'];
+  $userName =  $gameUser->getUserName($user_id);
+  $userStatusLv = $gameUser->fetchUserStatusLv($user_id);
+  //相手の情報を取得
+  $opponentId = $_SESSION['opponentId'];
+  $opponentName =  $gameUser->getUserName($opponentId);
+  $opponentStatusLv = $gameUser->fetchUserStatusLv($opponentId);
+
+  //対戦を開始
+  //対戦中であればセッションからコントローラーを取得
+  $message = '';
+  if(isset($_SESSION['battle'])) {
+    $battle = unserialize($_SESSION['battle']);
+  } else {
+    //echo '対戦を開始します<br>';
+    $message = '対戦を開始します<br>';
+    $battle = new BattleController($user_id, $opponentId);
+    $_SESSION['battle'] = serialize($battle);
+    $_SESSION['player'] = serialize($battle->getPlayer());
+    $_SESSION['opponent'] = serialize($battle->getOpponent());
+  }
+  //コントローラーから、プレイヤー・対戦相手のインスタンスを取得
+  $player = $battle->getPlayer();
+  $opponent = $battle->getOpponent();
+
+  //操作ボタンのON/OFF
+  $actionButton = "";
+  $nextButton = "";
+  $skillButton = "disabled";
+
+  $isControllable = $battle->isControllable();
+  $isSkillAvailable = $battle->isSkillAvailable($user_id);
+  $isEnd = $battle->isEnd();
+
+  $isControllable ? $actionButton = "" : $actionButton = "disabled";
+  $isControllable ? $nextButton = "disabled" : $nextButton = "";
+  $isSkillAvailable ? $skillButton = "" : $skillButton = "disabled";
+
+  //ゲーム終了時はすべての操作ボタンを無効化
+  if($isEnd) {
+    $actionButton = "disabled";
+    $nextButton = "disabled";
+  }
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -27,67 +78,6 @@
   />
   <link rel="stylesheet" href="../CSS/game_battle.css?<?php echo date('YmdHis'); ?>">
 </head>
-<?php
-  require_once('../DAO/GameUser.php');
-  $gameUser = new GameUser();
-  require_once('../game/player.php');
-  require_once('../game/BattleController.php');
-  require_once('../game/EnumActionState.php');
-
-  //自分
-  $user_id = $_SESSION['user_id'];
-  $userName =  $gameUser->getUserName($user_id);
-  $userStatusLv = $gameUser->fetchUserStatusLv($user_id);
-
-  //相手
-  // if(isset($_GET['opponent_user_id'])) {
-  //   $_SESSION['opponentId'] = $_GET['opponent_user_id'];
-  // }
-
-  
-
-  $opponentId = $_SESSION['opponentId'];
-  
-  $opponentName =  $gameUser->getUserName($opponentId);
-  $opponentStatusLv = $gameUser->fetchUserStatusLv($opponentId);
-
-  $message = '';
-  //対戦を開始
-  if(isset($_SESSION['battle'])) {
-    $battle = unserialize($_SESSION['battle']);
-  } else {
-    //echo '対戦を開始します<br>';
-    $message = '対戦を開始します<br>';
-    $battle = new BattleController($user_id, $opponentId);
-    $_SESSION['battle'] = serialize($battle);
-    $_SESSION['player'] = serialize($battle->getPlayer());
-    $_SESSION['opponent'] = serialize($battle->getOpponent());
-  }
-
-  //操作ボタンのON/OFF
-  $isControllable = $battle->isControllable();
-  $isEnd = $battle->isEnd();
-  $actionButton = "";
-  $nextButton = "";
-  $skillButton = "disabled";
-
-  $isControllable ? $actionButton = "" : $actionButton = "disabled";
-  $isControllable ? $nextButton = "disabled" : $nextButton = "";
-
-  if($isEnd) {
-    $actionButton = "disabled";
-    $nextButton = "disabled";
-  }
-
-  //スキルボタンのON/OFF
-  if(isset($_SESSION['isSkillAvailable'])) {
-    $isSkillAvailable = $_SESSION['isSkillAvailable'];
-  }
-
-  $player = $battle->getPlayer();
-  $opponent = $battle->getOpponent();
-
-?>
 <body>
   <div class="container-fluid">
     <h1>対戦画面</h1>
@@ -109,7 +99,7 @@
           <button type="submit" name="attack" <?=$actionButton?>>攻撃する</button>
           <button type="submit" name="defence" <?=$actionButton?>>防御する</button>
           <button type="submit" name="avoid" <?=$actionButton?>>回避する</button>
-          <!-- <button type="submit" name="avoid">回避する</button> -->
+          <button type="submit" name="skill" <?=$skillButton?>>スキルを発動する</button>
         </form>
 
       </div>
