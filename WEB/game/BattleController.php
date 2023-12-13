@@ -135,7 +135,7 @@
     //スキルが発動できるか？
     //状態はPlayerクラスに持たせる
     //TODO:スキル使用状態の更新
-    public function wip($playerId) {
+    public function skillAvailable($playerId) {
       $player = $this->getPlayerObjectById($playerId);
       $playerLuc = $player->getLUK();
 
@@ -143,6 +143,11 @@
       if($rand <= $playerLuc * 100) {
         $player->setIsSkillAvailable(true);
       }
+    }
+
+    public function isSkillAvailable($playerId) {
+      $player = $this->getPlayerObjectById($playerId);
+      return $player->isSkillAvailable();
     }
 
     public function getPlayerObjectById($playerId) {
