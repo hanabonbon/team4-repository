@@ -11,7 +11,7 @@
     private EnumActionState $actionState = EnumActionState::NEUTRAL;
     //スキル発動の可否
     private bool $isSkillAvailable = false;
-
+    private $skill = EnumSkill::NONE;
     
     public function __construct($statusLv = array()) {
       $status =  $this->culcStatus($statusLv);
@@ -86,6 +86,14 @@
     //getter, setter
     public function setIsSkillAvailable(bool $isSkillAvailable) {
       $this->isSkillAvailable = $isSkillAvailable;
+    }
+
+    public function setSkill(EnumSkill $skill) {
+      $this->skill = $skill;
+    }
+
+    public function getSkill() {
+      return $this->skill;
     }
 
     public function isSkillAvailable() {
