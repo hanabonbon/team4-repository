@@ -75,7 +75,7 @@ use task_game\User;
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="battle.php">対戦</a>
+                    <a class="nav-link" href="game_home.php">対戦</a>
                 </li>
 
                 <li class="nav-item">
@@ -86,6 +86,9 @@ use task_game\User;
     </nav>
   </div>
   <!-- メニューバーここまで -->
+  
+    <a href="game_home.php" class="offset-2">←戻る</a>
+
     <h2 class="text-center mt-5">対戦記録</h2>
     <h3 class="text-center mt-4"><?= $recorduser['nickname'] ?></h3>
     <div class="text-center mt-2 totalbattledata">
