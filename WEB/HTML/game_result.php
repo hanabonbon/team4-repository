@@ -70,10 +70,12 @@
   if(isset($_SESSION['isUpdated'])) {
     if($_SESSION['isUpdated'] == false) {
       $gameUser->updateRankPoint($playerId, $rankPoint);
+      $test->insertMatchRecord($battle->getWinnerId() === $playerId ? 1 : 0, $opponentId, $playerId);
       $_SESSION['isUpdated'] = true;
     }
   } else {
     $gameUser->updateRankPoint($playerId, $rankPoint);
+    $test->insertMatchRecord($battle->getWinnerId() === $playerId ? 1 : 0, $opponentId, $playerId);
     $_SESSION['isUpdated'] = true;
   }
   

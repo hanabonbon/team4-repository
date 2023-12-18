@@ -106,6 +106,18 @@
       $ps->execute();
       $result = $ps->fetch(PDO::FETCH_ASSOC);
       return $result['COUNT(*)'];
-    }                          
+  }
+  
+  //対戦記録登録
+  public function insertMatchRecord($n,$opponentId,$playerId){
+    $sql = "INSERT INTO match_record (user_is_win, enemy_user_id, user_id) VALUES (?, ?, ?)";
+    $ps = $this->pdo->prepare($sql);
+    $ps->bindValue(1, $n, PDO::PARAM_INT);
+    $ps->bindValue(2, $opponentId, PDO::PARAM_INT);
+    $ps->bindValue(3, $playerId, PDO::PARAM_INT);
+    $ps->execute();
+    
+
+  }
 }
 ?>
