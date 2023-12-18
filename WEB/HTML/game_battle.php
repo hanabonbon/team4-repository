@@ -120,7 +120,7 @@
       <button type="submit" name="attack" <?=$actionButton?>>攻撃する</button>
       <button type="submit" name="defence" <?=$actionButton?>>防御する</button>
       <button type="submit" name="avoid" <?=$actionButton?>>回避する</button>
-      <button type="submit" name="skill" <?=$skillButton?>>スキルを発動する</button>
+      <button type="submit" name="skill" disabled>スキルを発動する</button>
     </form>
 
     <div id="message">
