@@ -134,13 +134,22 @@
 
     //スキルが発動できるか？
     //状態はPlayerクラスに持たせる
-    //TODO:スキル使用状態の更新
-    public function skillAvailable($playerId) {
+    
+    public function drawSkillLottery($playerId) {
       $player = $this->getPlayerObjectById($playerId);
       $playerLuc = $player->getLUK();
 
-      $rand = rand(0, 100);
-      if($rand <= $playerLuc * 100) {
+      //スキルを持っていればいつでも使用可能にする
+      if($player->getSkill() == EnumSkill::NONE) {
+        //持っていなかった場合
+        $rand = rand(0, 100);
+        if($rand <= $playerLuc * 100) {
+          $player->setIsSkillAvailable(true);
+        } else {
+          $player->setIsSkillAvailable(false);
+        }
+      } else {
+        //持っていた場合
         $player->setIsSkillAvailable(true);
       }
     }

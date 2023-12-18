@@ -33,7 +33,6 @@
   if(isset($_SESSION['battle'])) {
     $battle = unserialize($_SESSION['battle']);
   } else {
-    //echo '対戦を開始します<br>';
     $message = '対戦を開始します<br>';
     $battle = new BattleController($user_id, $opponentId);
     $_SESSION['battle'] = serialize($battle);
@@ -61,7 +60,9 @@
   if($isEnd) {
     $actionButton = "disabled";
     $nextButton = "disabled";
+    $isSkillAvailable = "disabled";
   }
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -95,13 +96,6 @@
           <li>幸運：<?=$player->getLUK() * 100?>%</li>
         </ul>
 
-        <form action="./game_action_player.php" method="get">
-          <button type="submit" name="attack" <?=$actionButton?>>攻撃する</button>
-          <button type="submit" name="defence" <?=$actionButton?>>防御する</button>
-          <button type="submit" name="avoid" <?=$actionButton?>>回避する</button>
-          <button type="submit" name="skill" <?=$skillButton?>>スキルを発動する</button>
-        </form>
-
       </div>
       <div class="col-6">
         <h3>相手：<?=$opponentName?> {id:<?=$opponentId?>}</h3>
@@ -114,6 +108,20 @@
         </ul>
       </div>
     </div>
+
+    <!-- スキル選択 -->
+    <!-- 表示のきりかえ -->
+    <div disabled>
+
+    </div>
+
+
+    <form action="./game_action_player.php" method="get">
+      <button type="submit" name="attack" <?=$actionButton?>>攻撃する</button>
+      <button type="submit" name="defence" <?=$actionButton?>>防御する</button>
+      <button type="submit" name="avoid" <?=$actionButton?>>回避する</button>
+      <button type="submit" name="skill" disabled>スキルを発動する</button>
+    </form>
 
     <div id="message">
       <p><?php

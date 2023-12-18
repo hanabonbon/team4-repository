@@ -11,7 +11,7 @@
     private EnumActionState $actionState = EnumActionState::NEUTRAL;
     //スキル発動の可否
     private bool $isSkillAvailable = false;
-
+    private $skill = EnumSkill::NONE;
     
     public function __construct($statusLv = array()) {
       $status =  $this->culcStatus($statusLv);
@@ -88,6 +88,14 @@
       $this->isSkillAvailable = $isSkillAvailable;
     }
 
+    public function setSkill(EnumSkill $skill) {
+      $this->skill = $skill;
+    }
+
+    public function getSkill() {
+      return $this->skill;
+    }
+
     public function isSkillAvailable() {
       return $this->isSkillAvailable;
     }
@@ -129,10 +137,10 @@
           $status['defence'] = 0.05 + $statusLv['defence'] * 0.004;
           break;
         case $statusLv['defence'] <= 100:
-          $status['defence'] = 0.25 + 50 * 0.004 + ($statusLv['defence'] - 50) * 0.005;
+          $status['defence'] = 0.05 + 50 * 0.004 + ($statusLv['defence'] - 50) * 0.005;
           break;
         case $statusLv['defence'] >=101:
-          $status['defence'] = 0.25 + 50 * 0.004 + 50 * 0.005 + ($statusLv['defence'] - 100) * 0.001;
+          $status['defence'] = 0.05 + 50 * 0.004 + 50 * 0.005 + ($statusLv['defence'] - 100) * 0.001;
           break;
         default:
           # code...
@@ -145,10 +153,10 @@
           $status['agility'] = 0.1 + $statusLv['agility'] * 0.004;
           break;
         case $statusLv['agility'] <= 100:
-          $status['agility'] = 0.3 + 50 * 0.004 + ($statusLv['agility'] - 50) * 0.008;
+          $status['agility'] = 0.1 + 50 * 0.004 + ($statusLv['agility'] - 50) * 0.008;
           break;
         case $statusLv['agility'] >=101:
-          $status['agility'] = 0.3 + 50 * 0.004 + 50 * 0.008 + ($statusLv['agility'] - 100) * 0.001;
+          $status['agility'] = 0.1 + 50 * 0.004 + 50 * 0.008 + ($statusLv['agility'] - 100) * 0.001;
           break;
         default:
           # code...
@@ -161,10 +169,10 @@
           $status['luck'] = 0.006 + $statusLv['luck'] * 0.006;
           break;
         case $statusLv['luck'] <= 100:
-          $status['luck'] = 0.3 + 50 * 0.006 + ($statusLv['luck'] - 50) * 0.004;
+          $status['luck'] = 0.006 + 50 * 0.006 + ($statusLv['luck'] - 50) * 0.004;
           break;
         case $statusLv['luck'] >=101:
-          $status['luck'] = 0.3 + 50 * 0.006 + 50 * 0.004 + ($statusLv['luck'] - 100) * 0.001;
+          $status['luck'] = 0.006 + 50 * 0.006 + 50 * 0.004 + ($statusLv['luck'] - 100) * 0.001;
           break;
         default:
           # code...
