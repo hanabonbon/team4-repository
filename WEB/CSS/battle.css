@@ -1,6 +1,6 @@
 /*アイコン画像*/
 .img-icon{
-    width: 200px;/* 写真の幅 */
+    width: 150px;/* 写真の幅 */
     height: auto; /* 写真の高さ */
     border-radius: 50%; /* 円形の形状 */
     object-fit: cover; /* 画像を中央に配置してクリッピング */

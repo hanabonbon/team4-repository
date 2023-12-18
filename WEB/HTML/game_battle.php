@@ -14,6 +14,8 @@
 
   require_once('../DAO/GameUser.php');
   $gameUser = new GameUser();
+  require_once('../DAO/User.php');
+  $user = new User();
   require_once('../game/player.php');
   require_once('../game/BattleController.php');
   require_once('../game/EnumActionState.php');
@@ -27,6 +29,11 @@
   $opponentName =  $gameUser->getUserName($opponentId);
   $opponentStatusLv = $gameUser->fetchUserStatusLv($opponentId);
 
+  //お互いの最大HPを取得
+  $myuser = $user->getUserDataByUserId($user_id);
+  $enemyuser = $user->getUserDataByUserId($opponentId);
+  $myMaxHP = 100 + 5 * ($myuser['hitpoint']);
+  $enemyMaxHP = 100 + 5 * ($enemyuser['hitpoint']);
   //対戦を開始
   //対戦中であればセッションからコントローラーを取得
   $message = '';
@@ -78,34 +85,46 @@
       crossorigin="anonymous"
   />
   <link rel="stylesheet" href="../CSS/game_battle.css?<?php echo date('YmdHis'); ?>">
+  <link rel="stylesheet" href="../CSS/battle.css?<?php echo date('YmdHis'); ?>">
 </head>
-<body>
+<body style="background-color:#FFEED5;">
   <div class="container-fluid">
-    <h1>対戦画面</h1>
-    <a href="./game_home.php">ホームへ戻る</a>
-    <a href="./clear_battle_session.php">対戦セッションをクリア</a>
+    <!-- <a href="./game_home.php">ホームへ戻る</a> -->
+    <!-- <a href="./clear_battle_session.php">対戦セッションをクリア</a> -->
     <!-- 2人のデータをもとに、インスタンスを作る -->
     <div class="row">
-      <div class="col-6">
-        <h3>あなた：<?=$userName?> {id:<?=$user_id?>}</h3>
-        <ul>
-          <li>体力：<?=$player->getHP()?></li>
-          <li>攻撃力：<?=$player->getATK()?></li>
-          <li>防御力：<?=$player->getDEF() * 100?>%</li>
-          <li>すばやさ：<?=$player->getAGL() * 100?>%</li>
-          <li>幸運：<?=$player->getLUK() * 100?>%</li>
-        </ul>
-
+      <div class="col-6 mt-5">
+        <div class="text-center">
+          <h3>あなた：<?=$userName?></h3>
+          <h3>HP:<?=$player->getHP()?><meter max="<?= $myMaxHP ?>" value="<?= $player->getHP(); ?>"></meter></h3>
+        </div>
+        <div class="d-flex justify-content-center mt-5 mb-5">
+          <img src="../images/<?= $myuser['icon_path'] ?>" class="img-icon">
+          <ul>
+            <li>体力：<?=$player->getHP()?></li>
+            <li>攻撃力：<?=$player->getATK()?></li>
+            <li>防御力：<?=$player->getDEF() * 100?>%</li>
+            <li>すばやさ：<?=$player->getAGL() * 100?>%</li>
+            <li>幸運：<?=$player->getLUK() * 100?>%</li>
+          </ul>  
+        </div>
       </div>
-      <div class="col-6">
-        <h3>相手：<?=$opponentName?> {id:<?=$opponentId?>}</h3>
-        <ul>
-          <li>体力：<?=$opponent->getHP()?></li>
-          <li>攻撃力：<?=$opponent->getATK()?></li>
-          <li>防御力：<?=$opponent->getDEF() * 100?>%</li>
-          <li>すばやさ：<?=$opponent->getAGL() * 100?>%</li>
-          <li>幸運：<?=$opponent->getLUK() * 100?>%</li>
-        </ul>
+
+      <div class="col-6 mt-5">
+        <div class="text-center">
+          <h3>相手：<?=$opponentName?></h3>
+          <h3>HP:<?=$opponent->getHP()?><meter max="<?= $enemyMaxHP ?>" value="<?= $opponent->getHP(); ?>"></meter></h3>
+        </div>
+        <div class="d-flex justify-content-center mt-5 mb-5">
+          <img src="../images/<?= $enemyuser['icon_path'] ?>" class="img-icon">
+          <ul>
+            <li>体力：<?=$opponent->getHP()?></li>
+            <li>攻撃力：<?=$opponent->getATK()?></li>
+            <li>防御力：<?=$opponent->getDEF() * 100?>%</li>
+            <li>すばやさ：<?=$opponent->getAGL() * 100?>%</li>
+            <li>幸運：<?=$opponent->getLUK() * 100?>%</li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -116,41 +135,62 @@
     </div>
 
 
-    <form action="./game_action_player.php" method="get">
-      <button type="submit" name="attack" <?=$actionButton?>>攻撃する</button>
-      <button type="submit" name="defence" <?=$actionButton?>>防御する</button>
-      <button type="submit" name="avoid" <?=$actionButton?>>回避する</button>
-      <button type="submit" name="skill" disabled>スキルを発動する</button>
-    </form>
+    <div class="row">
+        <div class="col-6 mt-5 pt-5">
+            <div class="card">
+                <div class="log-style">
+                  <div id="message">
+                    <p><?php
+                      if(isset($_SESSION['message'])) {
+                        $message = $_SESSION['message'];
+                        unset($_SESSION['message']);
+                      }
+                      
+                      echo $message;
 
-    <div id="message">
-      <p><?php
-        if(isset($_SESSION['message'])) {
-          $message = $_SESSION['message'];
-          unset($_SESSION['message']);
-        }
-        
-        echo $message;
-
-        if($battle->isEnd()) {
-          echo '<br>対戦終了';
-          //TODO: 勝者の表示
-          if($player->getActionState() == EnumActionState::DEAD) {
-            echo '<br>あなたの負けです';
-          } else {
-            echo '<br>あなたの勝ちです';
-          }
-        }
-      ?></p>
+                      if($battle->isEnd()) {
+                        echo '<br>対戦終了';
+                        //TODO: 勝者の表示
+                        if($player->getActionState() == EnumActionState::DEAD) {
+                          echo '<br>あなたの負けです';
+                        } else {
+                          echo '<br>あなたの勝ちです';
+                        }
+                      }
+                    ?></p>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 mt-5 pt-5">
+            <div class="card-style">
+              <div class="d-flex justify-content-center mt-3">
+                <form action="./game_action_player.php" method="get">
+                  <button type="submit" name="attack" <?=$actionButton?>>攻撃する</button>
+                  <button type="submit" name="defence" <?=$actionButton?>>防御する</button>
+                  <button type="submit" name="avoid" <?=$actionButton?>>回避する</button>
+                  <button type="submit" name="skill" disabled>スキルを発動する</button>
+                </form>
+              </div>
+              <div class="d-flex justify-content-center mt-3">
+                <form action="./game_action_opponent.php" method="post">
+                  <input type="submit" value="次のターンへ" <?=$nextButton?>>
+                </form>
+              </div>
+              <div class="d-flex justify-content-center mt-3">
+                <div <?=$isEnd ?  "": "hidden" ?>>
+                  <a href="./game_result.php"><button>対戦結果へ</button></a>
+                </div>
+              </div>
+            </div>
+        </div>
     </div>
 
-    <form action="./game_action_opponent.php" method="post">
-      <input type="submit" value="次のターンへ" <?=$nextButton?>>
-    </form>
     
-    <div <?=$isEnd ?  "": "hidden" ?>>
-      <a href="./game_result.php"><button>対戦結果へ</button></a>
-    </div>
+
+    
+
+    
     
   </div>
   <!-- BootStrap CDN -->

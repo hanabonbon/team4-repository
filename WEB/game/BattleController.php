@@ -32,7 +32,6 @@
 
       $this->isControllable = true;
       
-      echo "コンストラクタ opponentId:$this->opponentId, playerId:$this->playerId";
     }
 
     public function isEnd() {
