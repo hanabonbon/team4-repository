@@ -48,7 +48,7 @@
   </header>
   <div class="container" style="max-width: 600px;">
     <div class="container-fluid">
-      <div class="py-5 text-center">
+      <div class="py-2 text-center">
         <h2>対戦を開始しますか？</h2>
       </div>
       <div class="row">

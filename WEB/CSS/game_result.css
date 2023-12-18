@@ -5,8 +5,13 @@
 
 body {
   font-family: "DotGothic16", sans-serif;
+  overflow-x: hidden;
 }
 
-img {
-  width: 100px;
+button{
+  border-radius: 20px;
+  border: 1px solid #FFF;
+  background: #818181;
+  width: 500px;
+  color:#FFF;
 }

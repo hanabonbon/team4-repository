@@ -6,12 +6,6 @@
   if(!isset($_SESSION['user_id'])){
     header('location: ./login.php');
   }
-  unset($_SESSION['opponentId']);
-  unset($_SESSION['player']);
-  unset($_SESSION['opponent']);
-  unset($_SESSION['battle']);
-  unset($_SESSION['isUpdated']);
-  unset($_SESSION['message']);
 ?>
 <!DOCTYPE html>
 <html lang="ja">

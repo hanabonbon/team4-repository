@@ -19,8 +19,8 @@
 
     return $result;
   }
-  //自分のランク順位
-  public function selectMyRanking($user_id){
+  //自分のランク順位 使わない関数
+  public function selectMyRanking1($user_id){
     $sql = "SELECT user_id, rank_point,
           (SELECT COUNT(DISTINCT rank_point) FROM user WHERE rank_point > u.rank_point) + 1 AS rank
           FROM user u
@@ -55,6 +55,23 @@
     $ps->execute();
   }
 
+  // 自分のランク順位 修正版
+  public function selectMyRanking($user_id){
+    $sql = "SELECT user_id, rank_point,
+        (SELECT COUNT(*) FROM user WHERE rank_point > u.rank_point OR (rank_point = u.rank_point AND user_id < u.user_id)) + 1 AS rank
+        FROM user u
+        WHERE user_id = :user_id";
+    $ps = $this->pdo->prepare($sql);
+    $ps->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $ps->execute();
+    $result = $ps->fetch(PDO::FETCH_ASSOC);
+
+    if ($result) {
+        echo $result['rank'];
+    } else {
+        echo "User not found or an error occurred.";
+    }
+}
   //対戦記録対戦相手取得
   public function getBattlerecordByUserId($user_id){
     $sql = "SELECT m.match_id,m.user_is_win,m.enemy_user_id,m.user_id,u.user_id,u.nickname,u.icon_path
@@ -89,6 +106,18 @@
       $ps->execute();
       $result = $ps->fetch(PDO::FETCH_ASSOC);
       return $result['COUNT(*)'];
-    }                          
+  }
+  
+  //対戦記録登録
+  public function insertMatchRecord($n,$opponentId,$playerId){
+    $sql = "INSERT INTO match_record (user_is_win, enemy_user_id, user_id) VALUES (?, ?, ?)";
+    $ps = $this->pdo->prepare($sql);
+    $ps->bindValue(1, $n, PDO::PARAM_INT);
+    $ps->bindValue(2, $opponentId, PDO::PARAM_INT);
+    $ps->bindValue(3, $playerId, PDO::PARAM_INT);
+    $ps->execute();
+    
+
+  }
 }
 ?>

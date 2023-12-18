@@ -122,7 +122,7 @@
 
   <div class="text-center mt-3">
   <!-- タイトル -->
-  <input type="text" value="<?=$title?>" name="title" form="task-edit-form" style="background-color: inherit; border: none; width: 100%; text-align: center;">
+  <input type="text" value="<?=$title?>" name="title" form="task-edit-form" placeholder="タイトルを入力" style="background-color: inherit; border: none; width: 100%; text-align: center;">
 
 </div>
 
@@ -139,11 +139,11 @@
   <hr>
   <div class="text-center">
   <!--詳細-->
-  <textarea name="detail" autocomplete="off" form="task-edit-form" style="width: 100%; min-height: 130px; background-color: inherit; border: none;"><?=$detail?></textarea>
+  <textarea name="detail" placeholder="詳細を入力" autocomplete="off" form="task-edit-form" style="width: 100%; min-height: 130px; background-color: inherit; border: none;"><?=$detail?></textarea>
   </div>
   <hr>
   <div class="button">
-  <br><button onclick="history.back()">キャンセル</button>　　　　　　　　　　
+  <br><button onclick="history.back()">キャンセル</button>　　　　　　　　　　　
   <button type="submit" form="task-edit-form">作成する</button>
   </div>
   </div>
