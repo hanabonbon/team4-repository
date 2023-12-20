@@ -4,6 +4,30 @@
   if(isset($_SESSION['user_id'])){
     header('location: ./task_list.php');
   }
+
+  require_once '../DAO/User.php';
+  $user = new User();
+
+  //メールアドレスの入力形式が正しいか判定
+  if (!filter_var($_POST['mailaddress'], FILTER_VALIDATE_EMAIL)) {//入力形式が不正
+    
+  }
+
+  //入力されたメールアドレスのアカウントが存在するか調べる
+  $userData = $user->getUserDataByMail($_POST['mailaddress']);
+  if(!isset($userData)) {//アカウントが無い
+    
+  } else {//アカウント有り
+    //パスワードが一致するか確認
+    if(password_verify($_POST['password'],$userData['password'])) {//パスワード一致
+      //セッションにメールアドレスを入力（ログイン済みの証明とする）
+      $_SESSION['user_id'] = $userData['user_id'];
+      //ホームに遷移
+      header('location: ./task_list.php');
+    } else {//パスワードが一致しない
+    } 
+  }
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
